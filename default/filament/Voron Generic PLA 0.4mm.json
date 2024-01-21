@@ -1,0 +1,31 @@
+{
+    "enable_pressure_advance": [
+        "1"
+    ],
+    "fan_cooling_layer_time": [
+        "45"
+    ],
+    "filament_max_volumetric_speed": [
+        "11"
+    ],
+    "filament_settings_id": [
+        "Voron Generic PLA 0.4mm"
+    ],
+    "from": "User",
+    "full_fan_speed_layer": [
+        "3"
+    ],
+    "inherits": "Voron Generic PLA",
+    "is_custom_defined": "0",
+    "name": "Voron Generic PLA 0.4mm",
+    "overhang_fan_threshold": [
+        "25%"
+    ],
+    "pressure_advance": [
+        "0.05"
+    ],
+    "slow_down_layer_time": [
+        "5"
+    ],
+    "version": "1.5.1.2"
+}

@@ -1,0 +1,9 @@
+{
+    "from": "User",
+    "inherits": "0.20mm Standard @Voron",
+    "is_custom_defined": "0",
+    "name": "test",
+    "only_one_wall_top": "1",
+    "print_settings_id": "test",
+    "version": "1.9.0.2"
+}

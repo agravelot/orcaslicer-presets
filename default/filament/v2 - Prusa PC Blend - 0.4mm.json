@@ -1,0 +1,34 @@
+{
+    "chamber_temperature": [
+        "55"
+    ],
+    "close_fan_the_first_x_layers": [
+        "7"
+    ],
+    "enable_pressure_advance": [
+        "1"
+    ],
+    "filament_settings_id": [
+        "v2 - Prusa PC Blend - 0.4mm"
+    ],
+    "from": "User",
+    "full_fan_speed_layer": [
+        "20"
+    ],
+    "inherits": "Voron Generic PC",
+    "is_custom_defined": "0",
+    "name": "v2 - Prusa PC Blend - 0.4mm",
+    "nozzle_temperature": [
+        "275"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "275"
+    ],
+    "overhang_fan_speed": [
+        "90"
+    ],
+    "pressure_advance": [
+        "0.07"
+    ],
+    "version": "1.9.0.2"
+}

@@ -1,0 +1,9 @@
+{
+    "enable_arc_fitting": "1",
+    "from": "User",
+    "inherits": "0.20mm Standard @MK3S",
+    "is_custom_defined": "0",
+    "name": "0.20mm Standard @MK3S - arc",
+    "print_settings_id": "0.20mm Standard @MK3S - arc",
+    "version": "1.5.4.0"
+}
