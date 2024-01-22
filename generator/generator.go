@@ -18,19 +18,20 @@ type Process struct {
 	InfoFile          string `json:"-"`
 
 	// Optional
-	SkirtLoops          string `json:"skirt_loops"`
-	TravelSpeed         string `json:"travel_speed"`
-	BrimType            string `json:"brim_type"`
-	OnlyOneWallTop      string `json:"only_one_wall_top,omitempty"`
-	WallLoops           string `json:"wall_loops,omitempty"`
-	BottomShellLayers   string `json:"bottom_shell_layers,omitempty"`
-	PrintSettingsId     string `json:"print_settings_id,omitempty"`
-	SparseInfillDensity string `json:"sparse_infill_density,omitempty"`
-	SparseInfillPattern string `json:"sparse_infill_pattern,omitempty"`
-	TopShellLayers      string `json:"top_shell_layers,omitempty"`
-	Resolution          string `json:"resolution,omitempty"`
-	RaftContactDistance string `json:"raft_contact_distance,omitempty"`
-	RaftLayers          string `json:"raft_layers,omitempty"`
+	SkirtLoops              string `json:"skirt_loops"`
+	TravelSpeed             string `json:"travel_speed"`
+	BrimType                string `json:"brim_type"`
+	OnlyOneWallTop          string `json:"only_one_wall_top,omitempty"`
+	WallLoops               string `json:"wall_loops,omitempty"`
+	BottomShellLayers       string `json:"bottom_shell_layers,omitempty"`
+	PrintSettingsId         string `json:"print_settings_id,omitempty"`
+	SparseInfillDensity     string `json:"sparse_infill_density,omitempty"`
+	SparseInfillPattern     string `json:"sparse_infill_pattern,omitempty"`
+	TopShellLayers          string `json:"top_shell_layers,omitempty"`
+	Resolution              string `json:"resolution,omitempty"`
+	RaftContactDistance     string `json:"raft_contact_distance,omitempty"`
+	RaftLayers              string `json:"raft_layers,omitempty"`
+	ElefantFootCompensation string `json:"elefant_foot_compensation,omitempty"`
 
 	// Infill
 	InfillAnchor    string `json:"infill_anchor,omitempty"`
@@ -146,9 +147,9 @@ func GenerateProcess() ([]Process, error) {
 				Resolution:         "0.008",
 				TravelAcceleration: "10000",
 				// TODO Yes ? No ?
-				// Footstep
-				BottomShellThickness: "0.6",
-				TopShellThickness:    "0.8",
+				ElefantFootCompensation: "0.2",
+				BottomShellThickness:    "0.6",
+				TopShellThickness:       "0.8",
 			}
 
 			if t == "STRUCTURAL" {
