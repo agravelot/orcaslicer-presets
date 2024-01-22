@@ -13,10 +13,10 @@
 	"nozzle_type": "brass",
 	"print_host": "https://192.168.0.35",
 	"retract_lift_above": [
-		"0.25"
+		"0"
 	],
 	"retraction_length": [
-		"0.6"
+		"0.7"
 	],
 	"thumbnails": [
 		"32x32",
@@ -27,5 +27,9 @@
 	],
 	"z_hop_types": [
 		"Auto Lift"
+	],
+	"support_multi_bed_types": "1",
+	"wipe": [
+		"0"
 	]
 }

@@ -95,6 +95,13 @@ type Machine struct {
 	Thumbnails             []string `json:"thumbnails,omitempty"`
 	ZHop                   []string `json:"z_hop,omitempty"`
 	ZHopTypes              []string `json:"z_hop_types,omitempty"`
+	SupportMultiBedTypes   string   `json:"support_multi_bed_types,omitempty"`
+
+	// Retraction
+	RetractionMinimumTravel []string `json:"retraction_minimum_travel,omitempty"`
+	WipeDistance            []string `json:"wipe_distance,omitempty"`
+	RetractBeforeWipe       []string `json:"retract_before_wipe,omitempty"`
+	Wipe                    []string `json:"wipe,omitempty"`
 }
 
 func GenerateProcess() ([]Process, error) {
@@ -147,9 +154,12 @@ func GenerateProcess() ([]Process, error) {
 				Resolution:         "0.008",
 				TravelAcceleration: "10000",
 				// TODO Yes ? No ?
-				ElefantFootCompensation: "0.2",
-				BottomShellThickness:    "0.6",
-				TopShellThickness:       "0.8",
+				//ElefantFootCompensation: "0.2",
+				BottomShellThickness: "0.5",
+				TopShellThickness:    "0.7",
+				SparseInfillPattern:  "grid",
+
+				TreeSupportAngleSlow: "25",
 			}
 
 			if t == "STRUCTURAL" {
@@ -171,7 +181,19 @@ func GenerateProcess() ([]Process, error) {
 				m.InfillAnchor = "2"
 				m.InfillAnchorMax = "12"
 
-				m.TreeSupportAngleSlow = "20"
+				// Width
+				m.OuterWallLineWidth = "0.45"
+				m.LineWidth = "0.45"
+				m.InitialLayerLineWidth = "0.5"
+				m.SparseInfillLineWidth = "0.45"
+				m.InnerWallLineWidth = "0.45"
+				m.InternalSolidInfillLineWidth = "0.45"
+				m.SupportLineWidth = "0.36"
+				m.TopSurfaceLineWidth = "0.42"
+
+				if layerHeigth <= 0.15 {
+					m.TopSurfaceLineWidth = "0.4"
+				}
 			}
 
 			// define on nozzle size
@@ -186,34 +208,24 @@ func GenerateProcess() ([]Process, error) {
 				m.InfillAnchorMax = "20"
 
 				m.TreeSupportBranchDiameterDoubleWall = "5"
-			}
 
-			if t == "STRUCTURAL" && nozzleSize == 0.6 {
+				// Width
 				m.OuterWallLineWidth = "0.6"
 				m.LineWidth = "0.68"
-				// TODO check first layer ?
 				m.InitialLayerLineWidth = "0.68"
-				// TODO Infill ?
-				m.SparseInfillLineWidth = "0.68"
 				m.InnerWallLineWidth = "0.6"
-				// TODO Top solid infill ?
 				m.InternalSolidInfillLineWidth = "0.6"
-				m.SupportLineWidth = "0.6"
 				m.TopSurfaceLineWidth = "0.5"
-			}
 
-			if t == "STRUCTURAL" && nozzleSize == 0.4 {
-				m.OuterWallLineWidth = "0.45"
-				m.LineWidth = "0.45"
-				// TODO check first layer ?
-				m.InitialLayerLineWidth = "0.5"
-				// TODO Infill ?
-				m.SparseInfillLineWidth = "0.45"
-				m.InnerWallLineWidth = "0.45"
-				// TODO Top solid infill ?
-				m.InternalSolidInfillLineWidth = "0.45"
-				m.SupportLineWidth = "0.36"
-				m.TopSurfaceLineWidth = "0.42"
+				if t == "SPEED" {
+					m.SparseInfillLineWidth = "0.68"
+					m.SupportLineWidth = "0.6"
+				} else if t == "STRUCTURAL" {
+					m.SparseInfillLineWidth = "0.6"
+					m.SupportLineWidth = "0.55"
+				} else {
+					panic("unsupported type")
+				}
 			}
 
 			process = append(process, m)
@@ -258,6 +270,8 @@ func GenerateMachines() ([]Machine, error) {
 	for _, inherit := range inherits {
 		name := fmt.Sprintf("%s - %s", "Gen", inherit)
 
+		nozzleSize := getNozzleSize(inherit)
+
 		m := Machine{
 			From:              "User",
 			Inherits:          inherit,
@@ -268,19 +282,28 @@ func GenerateMachines() ([]Machine, error) {
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
-			RetractionLength:    []string{"0.6"},
-			ZHop:                []string{"0.2"},
-			ZHopTypes:           []string{"Auto Lift"},
-			Thumbnails:          []string{"32x32", "400x300"},
-			RetractLiftAbove:    []string{"0.25"},
-			NozzleType:          "brass",
-			PrintHost:           "https://192.168.0.35",
-			ChangeFilamentGcode: "M600",
+			RetractionLength:     []string{"0.7"},
+			ZHop:                 []string{"0.2"},
+			ZHopTypes:            []string{"Auto Lift"},
+			Thumbnails:           []string{"32x32", "400x300"},
+			RetractLiftAbove:     []string{"0"},
+			NozzleType:           "brass",
+			PrintHost:            "https://192.168.0.35",
+			ChangeFilamentGcode:  "M600",
+			SupportMultiBedTypes: "1",
 
 			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
 			MachineEndGcode:        "PRINT_END\n; total layers count = [total_layer_count]",
 			BeforeLayerChangeGcode: ";BEFORE_LAYER_CHANGE\n;[layer_z]\nG92 E0\nON_LAYER_CHANGE\n",
 			LayerChangeGcode:       ";AFTER_LAYER_CHANGE\n;[layer_z]\nAFTER_LAYER_CHANGE\nSET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}",
+		}
+
+		if nozzleSize <= 0.4 {
+			m.Wipe = []string{"0"}
+		} else {
+			m.Wipe = []string{"1"}
+			m.RetractBeforeWipe = []string{"80%"}
+			// TODO Add wipe distance?
 		}
 
 		machines = append(machines, m)

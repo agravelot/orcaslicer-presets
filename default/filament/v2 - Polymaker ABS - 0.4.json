@@ -48,5 +48,11 @@
     "slow_down_layer_time": [
         "5"
     ],
+    "textured_plate_temp": [
+        "110"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "110"
+    ],
     "version": "1.5.1.2"
 }
