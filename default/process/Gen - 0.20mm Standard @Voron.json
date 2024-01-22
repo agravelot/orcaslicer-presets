@@ -1,12 +1,12 @@
 {
-    "brim_type": "no_brim",
-    "from": "User",
-    "inherits": "0.20mm Standard @Voron",
-    "is_custom_defined": "0",
-    "name": "Gen - 0.20mm Standard @Voron",
-    "only_one_wall_top": "1",
-    "print_settings_id": "Gen - 0.20mm Standard @Voron",
-    "skirt_loops": "2",
-    "travel_speed": "450",
-    "version": "1.9.0.2"
+	"name": "Gen - 0.20mm Standard @Voron",
+	"from": "User",
+	"inherits": "0.20mm Standard @Voron",
+	"printer_settings_id": "Gen - 0.20mm Standard @Voron",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"skirt_loops": "2",
+	"travel_speed": "450",
+	"brim_type": "no_brim",
+	"only_one_wall_top": "1"
 }

@@ -7,5 +7,6 @@
 	"is_custom_defined": "0",
 	"skirt_loops": "2",
 	"travel_speed": "450",
-	"brim_type": "no_brim"
+	"brim_type": "no_brim",
+	"only_one_wall_top": "1"
 }
