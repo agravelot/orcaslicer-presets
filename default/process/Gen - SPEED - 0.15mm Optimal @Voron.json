@@ -8,11 +8,5 @@
 	"skirt_loops": "2",
 	"travel_speed": "450",
 	"brim_type": "no_brim",
-	"only_one_wall_top": "1",
-	"wall_loops": "",
-	"bottom_shell_layers": "",
-	"print_settings_id": "",
-	"sparse_infill_density": "",
-	"sparse_infill_pattern": "",
-	"top_shell_layers": ""
+	"only_one_wall_top": "1"
 }

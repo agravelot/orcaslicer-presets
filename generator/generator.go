@@ -19,12 +19,12 @@ type Process struct {
 	TravelSpeed         string `json:"travel_speed"`
 	BrimType            string `json:"brim_type"`
 	OnlyOneWallTop      string `json:"only_one_wall_top,omitempty"`
-	WallLoops           string `json:"wall_loops"`
-	BottomShellLayers   string `json:"bottom_shell_layers"`
-	PrintSettingsId     string `json:"print_settings_id"`
-	SparseInfillDensity string `json:"sparse_infill_density"`
-	SparseInfillPattern string `json:"sparse_infill_pattern"`
-	TopShellLayers      string `json:"top_shell_layers"`
+	WallLoops           string `json:"wall_loops,omitempty"`
+	BottomShellLayers   string `json:"bottom_shell_layers,omitempty"`
+	PrintSettingsId     string `json:"print_settings_id,omitempty"`
+	SparseInfillDensity string `json:"sparse_infill_density,omitempty"`
+	SparseInfillPattern string `json:"sparse_infill_pattern,omitempty"`
+	TopShellLayers      string `json:"top_shell_layers,omitempty"`
 }
 
 type Machine struct {
