@@ -42,6 +42,15 @@ type Process struct {
 	SupportBottomZDistance        string `json:"support_bottom_z_distance,omitempty"`
 	SupportInterfaceSpacing       string `json:"support_interface_spacing,omitempty"`
 	SupportTopZDistance           string `json:"support_top_z_distance,omitempty"`
+	// Preferred Branch Angle
+	TreeSupportAngleSlow                string `json:"tree_support_angle_slow,omitempty"`
+	TreeSupportBranchAngleOrganic       string `json:"tree_support_branch_angle_organic,omitempty"`
+	TreeSupportBranchDiameterAngle      string `json:"tree_support_branch_diameter_angle,omitempty"`
+	TreeSupportBranchDiameterDoubleWall string `json:"tree_support_branch_diameter_double_wall,omitempty"`
+	TreeSupportBranchDiameterOrganic    string `json:"tree_support_branch_diameter_organic,omitempty"`
+	TreeSupportBranchDistanceOrganic    string `json:"tree_support_branch_distance_organic,omitempty"`
+	TreeSupportTipDiameter              string `json:"tree_support_tip_diameter,omitempty"`
+	TreeSupportTopRate                  string `json:"tree_support_top_rate,omitempty"`
 
 	// Layer width
 	InitialLayerLineWidth        string `json:"initial_layer_line_width,omitempty"`
@@ -137,7 +146,7 @@ func GenerateProcess() ([]Process, error) {
 				Resolution:         "0.008",
 				TravelAcceleration: "10000",
 				// TODO Yes ? No ?
-				XyHoleCompensation:   "0.2",
+				// Footstep
 				BottomShellThickness: "0.6",
 				TopShellThickness:    "0.8",
 			}
@@ -160,6 +169,8 @@ func GenerateProcess() ([]Process, error) {
 				// Infill anchor
 				m.InfillAnchor = "2"
 				m.InfillAnchorMax = "12"
+
+				m.TreeSupportAngleSlow = "20"
 			}
 
 			// define on nozzle size
@@ -172,6 +183,8 @@ func GenerateProcess() ([]Process, error) {
 				// Infill anchor
 				m.InfillAnchor = "2.5"
 				m.InfillAnchorMax = "20"
+
+				m.TreeSupportBranchDiameterDoubleWall = "5"
 			}
 
 			if t == "STRUCTURAL" && nozzleSize == 0.6 {

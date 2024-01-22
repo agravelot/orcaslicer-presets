@@ -15,8 +15,8 @@
 	"infill_anchor_max": "20",
 	"support_interface_spacing": "0.25",
 	"support_top_z_distance": "0.22",
+	"tree_support_branch_diameter_double_wall": "5",
 	"travel_acceleration": "10000",
-	"xy_hole_compensation": "0.2",
 	"bottom_shell_thickness": "0.6",
 	"top_shell_thickness": "0.8"
 }
