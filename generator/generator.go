@@ -15,9 +15,10 @@ type Process struct {
 	InfoFile          string `json:"-"`
 
 	// Optional
-	SkirtLoops  string `json:"skirt_loops"`
-	TravelSpeed string `json:"travel_speed"`
-	BrimType    string `json:"brim_type"`
+	SkirtLoops     string `json:"skirt_loops"`
+	TravelSpeed    string `json:"travel_speed"`
+	BrimType       string `json:"brim_type"`
+	OnlyOneWallTop string `json:"only_one_wall_top,omitempty"`
 }
 
 type Machine struct {
@@ -31,7 +32,6 @@ type Machine struct {
 	InfoFile          string `json:"-"`
 
 	// Optional
-	OnlyOneWallTop         string   `json:"only_one_wall_top,omitempty"`
 	BeforeLayerChangeGcode string   `json:"before_layer_change_gcode,omitempty"`
 	ChangeFilamentGcode    string   `json:"change_filament_gcode,omitempty"`
 	LayerChangeGcode       string   `json:"layer_change_gcode,omitempty"`
@@ -84,9 +84,10 @@ func GenerateProcess() ([]Process, error) {
 
 			InfoFile: "sync_info = \nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
-			SkirtLoops:  "2",
-			TravelSpeed: "450",
-			BrimType:    "no_brim",
+			SkirtLoops:     "2",
+			TravelSpeed:    "450",
+			BrimType:       "no_brim",
+			OnlyOneWallTop: "1",
 		}
 
 		process = append(process, m)
