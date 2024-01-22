@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Process struct {
@@ -25,6 +26,16 @@ type Process struct {
 	SparseInfillDensity string `json:"sparse_infill_density,omitempty"`
 	SparseInfillPattern string `json:"sparse_infill_pattern,omitempty"`
 	TopShellLayers      string `json:"top_shell_layers,omitempty"`
+
+	// Layer width
+	InitialLayerLineWidth        string `json:"initial_layer_line_width,omitempty"`
+	InnerWallLineWidth           string `json:"inner_wall_line_width,omitempty"`
+	InternalSolidInfillLineWidth string `json:"internal_solid_infill_line_width,omitempty"`
+	LineWidth                    string `json:"line_width,omitempty"`
+	OuterWallLineWidth           string `json:"outer_wall_line_width,omitempty"`
+	SparseInfillLineWidth        string `json:"sparse_infill_line_width,omitempty"`
+	SupportLineWidth             string `json:"support_line_width,omitempty"`
+	TopSurfaceLineWidth          string `json:"top_surface_line_width,omitempty"`
 }
 
 type Machine struct {
@@ -81,7 +92,7 @@ func GenerateProcess() ([]Process, error) {
 
 	for _, t := range types {
 		for _, inherit := range inherits {
-			//nozzleSize := getNozzleSize(inherit)
+			nozzleSize := getNozzleSize(inherit)
 			//if nozzleSize != 0.4 {
 			//	nozzleName = fmt.Sprintf("%.2f nozzle", nozzleSize)
 			//}
@@ -110,6 +121,35 @@ func GenerateProcess() ([]Process, error) {
 				m.BottomShellLayers = "5"
 				m.SparseInfillPattern = "gyroid"
 				m.SparseInfillDensity = "40%"
+
+			}
+
+			if t == "STRUCTURAL" && nozzleSize == 0.6 {
+				m.OuterWallLineWidth = "0.6"
+				m.LineWidth = "0.68"
+				// TODO check first layer ?
+				m.InitialLayerLineWidth = "0.68"
+				// TODO Infill ?
+				m.SparseInfillLineWidth = "0.68"
+				m.InnerWallLineWidth = "0.6"
+				// TODO Top solid infill ?
+				m.InternalSolidInfillLineWidth = "0.6"
+				m.SupportLineWidth = "0.6"
+				m.TopSurfaceLineWidth = "0.5"
+			}
+
+			if t == "STRUCTURAL" && nozzleSize == 0.4 {
+				m.OuterWallLineWidth = "0.45"
+				m.LineWidth = "0.45"
+				// TODO check first layer ?
+				m.InitialLayerLineWidth = "0.5"
+				// TODO Infill ?
+				m.SparseInfillLineWidth = "0.45"
+				m.InnerWallLineWidth = "0.45"
+				// TODO Top solid infill ?
+				m.InternalSolidInfillLineWidth = "0.45"
+				m.SupportLineWidth = "0.36"
+				m.TopSurfaceLineWidth = "0.42"
 			}
 
 			process = append(process, m)
@@ -117,6 +157,20 @@ func GenerateProcess() ([]Process, error) {
 	}
 
 	return process, nil
+}
+
+func getNozzleSize(inheritString string) float32 {
+
+	if strings.Contains(inheritString, " 0.6 ") {
+		return 0.6
+	}
+
+	if strings.Contains(inheritString, " 0.8 ") {
+		return 0.8
+	}
+
+	return 0.4
+
 }
 
 func GenerateMachines() ([]Machine, error) {
