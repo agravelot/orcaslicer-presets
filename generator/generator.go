@@ -12,6 +12,23 @@ type Process struct {
 	PrinterSettingsID string `json:"printer_settings_id"`
 	Version           string `json:"version"`
 	IsCustomDefined   string `json:"is_custom_defined"`
+	InfoFile          string `json:"-"`
+
+	// Optional
+	SkirtLoops  string `json:"skirt_loops"`
+	TravelSpeed string `json:"travel_speed"`
+	BrimType    string `json:"brim_type"`
+}
+
+type Machine struct {
+	// Mandatory
+	Name              string `json:"name"`
+	From              string `json:"from"`
+	Inherits          string `json:"inherits"`
+	PrinterSettingsID string `json:"printer_settings_id"`
+	Version           string `json:"version"`
+	IsCustomDefined   string `json:"is_custom_defined"`
+	InfoFile          string `json:"-"`
 
 	// Optional
 	OnlyOneWallTop         string   `json:"only_one_wall_top,omitempty"`
@@ -33,20 +50,24 @@ type Process struct {
 	ZHopTypes              []string `json:"z_hop_types,omitempty"`
 }
 
-type Machine struct {
-	// Mandatory
-	Name              string `json:"name"`
-	From              string `json:"from"`
-	Inherits          string `json:"inherits"`
-	PrinterSettingsID string `json:"printer_settings_id"`
-	Version           string `json:"version"`
-	IsCustomDefined   string `json:"is_custom_defined"`
-
-	RetractionLength []string `json:"retraction_length,omitempty"`
-}
-
 func GenerateProcess() ([]Process, error) {
-	inherits := []string{"0.20mm Standard @Voron"}
+	// TODO Matrix nozzle -> height -> data
+	inherits := []string{
+		// 0.4
+		"0.08mm Extra Fine @Voron",
+		"0.12mm Fine @Voron",
+		"0.15mm Optimal @Voron",
+		"0.20mm Standard @Voron",
+		"0.24mm Draft @Voron",
+		"0.28mm Extra Draft @Voron",
+		// 0.6
+		"0.18mm Fine 0.6 nozzle @Voron",
+		"0.24mm Optimal 0.6 nozzle @Voron",
+		"0.30mm Standard 0.6 nozzle @Voron",
+		"0.36mm Draft 0.6 nozzle @Voron",
+		"0.42mm Extra Draft 0.6 nozzle @Voron",
+		// TODO 0.8
+	}
 
 	var process []Process
 
@@ -60,6 +81,12 @@ func GenerateProcess() ([]Process, error) {
 			Name:              name,
 			PrinterSettingsID: name,
 			Version:           "1.9.0.2",
+
+			InfoFile: "sync_info = \nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
+
+			SkirtLoops:  "2",
+			TravelSpeed: "450",
+			BrimType:    "no_brim",
 		}
 
 		process = append(process, m)
@@ -69,7 +96,11 @@ func GenerateProcess() ([]Process, error) {
 }
 
 func GenerateMachines() ([]Machine, error) {
-	inherits := []string{"Voron 2.4 300 0.4 nozzle"}
+	inherits := []string{
+		"Voron 2.4 300 0.4 nozzle",
+		"Voron 2.4 300 0.6 nozzle",
+		"Voron 2.4 300 0.8 nozzle",
+	}
 
 	var machines []Machine
 
@@ -83,23 +114,16 @@ func GenerateMachines() ([]Machine, error) {
 			IsCustomDefined:   "0",
 			Version:           "1.9.0.2",
 			PrinterSettingsID: name,
+			InfoFile:          "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM003\nupdated_time = 1682282966\n",
 
-			RetractionLength: []string{"0.4"},
-			//"nozzle_type": "brass",
-			//"print_host": "https://192.168.0.35",
-			//  "retract_lift_above": [
-			//        "0.25"
-			//    ], ??
-			//   "thumbnails": [
-			//        "32x32",
-			//        "400x300"
-			//    ],
-			// "z_hop": [
-			//        "0.2"
-			//    ],
-			//    "z_hop_types": [
-			//        "Auto Lift"
-			//    ]
+			RetractionLength:    []string{"0.4"},
+			ZHop:                []string{"0.2"},
+			ZHopTypes:           []string{"Auto Lift"},
+			Thumbnails:          []string{"32x32", "400x400"},
+			RetractLiftAbove:    []string{"0.25"},
+			NozzleType:          "brass",
+			PrintHost:           "https://192.168.0.35",
+			ChangeFilamentGcode: "M600",
 		}
 
 		machines = append(machines, m)
