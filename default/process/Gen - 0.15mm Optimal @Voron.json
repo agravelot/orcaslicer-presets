@@ -1,0 +1,11 @@
+{
+	"name": "Gen - 0.15mm Optimal @Voron",
+	"from": "User",
+	"inherits": "0.15mm Optimal @Voron",
+	"printer_settings_id": "Gen - 0.15mm Optimal @Voron",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"skirt_loops": "2",
+	"travel_speed": "450",
+	"brim_type": "no_brim"
+}

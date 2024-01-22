@@ -1,0 +1,27 @@
+{
+	"name": "Gen - Voron 2.4 300 0.4 nozzle",
+	"from": "User",
+	"inherits": "Voron 2.4 300 0.4 nozzle",
+	"printer_settings_id": "Gen - Voron 2.4 300 0.4 nozzle",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"change_filament_gcode": "M600",
+	"nozzle_type": "brass",
+	"print_host": "https://192.168.0.35",
+	"retract_lift_above": [
+		"0.25"
+	],
+	"retraction_length": [
+		"0.4"
+	],
+	"thumbnails": [
+		"32x32",
+		"400x400"
+	],
+	"z_hop": [
+		"0.2"
+	],
+	"z_hop_types": [
+		"Auto Lift"
+	]
+}

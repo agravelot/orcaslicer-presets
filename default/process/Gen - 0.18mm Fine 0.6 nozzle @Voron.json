@@ -1,0 +1,11 @@
+{
+	"name": "Gen - 0.18mm Fine 0.6 nozzle @Voron",
+	"from": "User",
+	"inherits": "0.18mm Fine 0.6 nozzle @Voron",
+	"printer_settings_id": "Gen - 0.18mm Fine 0.6 nozzle @Voron",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"skirt_loops": "2",
+	"travel_speed": "450",
+	"brim_type": "no_brim"
+}

@@ -7,6 +7,9 @@ import (
 	"os"
 )
 
+// const exportPath = ""
+const exportPath = "../default/"
+
 func main() {
 	processes, err := generator.GenerateProcess()
 
@@ -45,13 +48,13 @@ func writeMachine(machine generator.Machine) error {
 
 	pretty.Log(string(jsonMachine))
 
-	err = os.WriteFile("machine/"+machine.Name+".json", jsonMachine, 0644)
+	err = os.WriteFile(exportPath+"machine/"+machine.Name+".json", jsonMachine, 0644)
 
 	if err != nil {
 		return err
 	}
 
-	err = os.WriteFile("machine/"+machine.Name+".info", []byte(machine.InfoFile), 0644)
+	err = os.WriteFile(exportPath+"machine/"+machine.Name+".info", []byte(machine.InfoFile), 0644)
 
 	return err
 }
@@ -64,13 +67,13 @@ func writeProcess(process generator.Process) error {
 
 	pretty.Log(string(jsonProcess))
 
-	err = os.WriteFile("process/"+process.Name+".json", jsonProcess, 0644)
+	err = os.WriteFile(exportPath+"process/"+process.Name+".json", jsonProcess, 0644)
 
 	if err != nil {
 		return err
 	}
 
-	err = os.WriteFile("process/"+process.Name+".info", []byte(process.InfoFile), 0644)
+	err = os.WriteFile(exportPath+"process/"+process.Name+".info", []byte(process.InfoFile), 0644)
 
 	return err
 }
