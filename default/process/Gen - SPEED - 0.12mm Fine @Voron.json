@@ -8,5 +8,9 @@
 	"skirt_loops": "2",
 	"travel_speed": "450",
 	"brim_type": "no_brim",
-	"only_one_wall_top": "1"
+	"only_one_wall_top": "1",
+	"resolution": "0.008",
+	"raft_contact_distance": "0.15",
+	"infill_anchor": "2",
+	"infill_anchor_max": "12"
 }

@@ -2,6 +2,8 @@ package generator
 
 import (
 	"fmt"
+	"math"
+	"strconv"
 	"strings"
 )
 
@@ -26,6 +28,20 @@ type Process struct {
 	SparseInfillDensity string `json:"sparse_infill_density,omitempty"`
 	SparseInfillPattern string `json:"sparse_infill_pattern,omitempty"`
 	TopShellLayers      string `json:"top_shell_layers,omitempty"`
+	Resolution          string `json:"resolution,omitempty"`
+	RaftContactDistance string `json:"raft_contact_distance,omitempty"`
+	RaftLayers          string `json:"raft_layers,omitempty"`
+
+	// Infill
+	InfillAnchor    string `json:"infill_anchor,omitempty"`
+	InfillAnchorMax string `json:"infill_anchor_max,omitempty"`
+
+	// Support
+	SupportBasePatternSpacing     string `json:"support_base_pattern_spacing,omitempty"`
+	SupportBottomInterfaceSpacing string `json:"support_bottom_interface_spacing,omitempty"`
+	SupportBottomZDistance        string `json:"support_bottom_z_distance,omitempty"`
+	SupportInterfaceSpacing       string `json:"support_interface_spacing,omitempty"`
+	SupportTopZDistance           string `json:"support_top_z_distance,omitempty"`
 
 	// Layer width
 	InitialLayerLineWidth        string `json:"initial_layer_line_width,omitempty"`
@@ -93,6 +109,7 @@ func GenerateProcess() ([]Process, error) {
 	for _, t := range types {
 		for _, inherit := range inherits {
 			nozzleSize := getNozzleSize(inherit)
+			layerHeigth := getLayerHeight(inherit)
 			//if nozzleSize != 0.4 {
 			//	nozzleName = fmt.Sprintf("%.2f nozzle", nozzleSize)
 			//}
@@ -113,15 +130,36 @@ func GenerateProcess() ([]Process, error) {
 				TravelSpeed:    "450",
 				BrimType:       "no_brim",
 				OnlyOneWallTop: "1",
+				Resolution:     "0.008",
 			}
 
 			if t == "STRUCTURAL" {
-				m.WallLoops = "4"
-				m.TopShellLayers = "5"
-				m.BottomShellLayers = "5"
+				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
+				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
+				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
 				m.SparseInfillPattern = "gyroid"
 				m.SparseInfillDensity = "40%"
+			}
 
+			// define on nozzle size
+			if nozzleSize == 0.4 {
+				m.RaftContactDistance = "0.15"
+
+				// Infill anchor
+				m.InfillAnchor = "2"
+				m.InfillAnchorMax = "12"
+			}
+
+			// define on nozzle size
+			if nozzleSize == 0.6 {
+				m.RaftContactDistance = "0.25"
+				// Support
+				m.SupportTopZDistance = "0.22"
+				m.SupportInterfaceSpacing = "0.25"
+
+				// Infill anchor
+				m.InfillAnchor = "2.5"
+				m.InfillAnchorMax = "20"
 			}
 
 			if t == "STRUCTURAL" && nozzleSize == 0.6 {
@@ -159,7 +197,17 @@ func GenerateProcess() ([]Process, error) {
 	return process, nil
 }
 
-func getNozzleSize(inheritString string) float32 {
+func getLayerHeight(inheritString string) float64 {
+	// Extract 4 first digit of string and convert it to float32
+	// 0.08
+	layerHeight, err := strconv.ParseFloat(inheritString[:4], 32)
+	if err != nil {
+		panic(err)
+	}
+	return layerHeight
+}
+
+func getNozzleSize(inheritString string) float64 {
 
 	if strings.Contains(inheritString, " 0.6 ") {
 		return 0.6
@@ -170,7 +218,6 @@ func getNozzleSize(inheritString string) float32 {
 	}
 
 	return 0.4
-
 }
 
 func GenerateMachines() ([]Machine, error) {
