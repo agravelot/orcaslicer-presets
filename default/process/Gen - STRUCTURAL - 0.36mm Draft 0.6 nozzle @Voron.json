@@ -1,0 +1,18 @@
+{
+	"name": "Gen - STRUCTURAL - 0.36mm Draft 0.6 nozzle @Voron",
+	"from": "User",
+	"inherits": "0.36mm Draft 0.6 nozzle @Voron",
+	"printer_settings_id": "Gen - STRUCTURAL - 0.36mm Draft 0.6 nozzle @Voron",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"skirt_loops": "2",
+	"travel_speed": "450",
+	"brim_type": "no_brim",
+	"only_one_wall_top": "1",
+	"wall_loops": "4",
+	"bottom_shell_layers": "5",
+	"print_settings_id": "",
+	"sparse_infill_density": "40%",
+	"sparse_infill_pattern": "gyroid",
+	"top_shell_layers": "5"
+}

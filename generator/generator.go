@@ -15,10 +15,16 @@ type Process struct {
 	InfoFile          string `json:"-"`
 
 	// Optional
-	SkirtLoops     string `json:"skirt_loops"`
-	TravelSpeed    string `json:"travel_speed"`
-	BrimType       string `json:"brim_type"`
-	OnlyOneWallTop string `json:"only_one_wall_top,omitempty"`
+	SkirtLoops          string `json:"skirt_loops"`
+	TravelSpeed         string `json:"travel_speed"`
+	BrimType            string `json:"brim_type"`
+	OnlyOneWallTop      string `json:"only_one_wall_top,omitempty"`
+	WallLoops           string `json:"wall_loops"`
+	BottomShellLayers   string `json:"bottom_shell_layers"`
+	PrintSettingsId     string `json:"print_settings_id"`
+	SparseInfillDensity string `json:"sparse_infill_density"`
+	SparseInfillPattern string `json:"sparse_infill_pattern"`
+	TopShellLayers      string `json:"top_shell_layers"`
 }
 
 type Machine struct {
@@ -69,28 +75,45 @@ func GenerateProcess() ([]Process, error) {
 		// TODO 0.8
 	}
 
+	types := []string{"STRUCTURAL", "SPEED"}
+
 	var process []Process
 
-	for _, inherit := range inherits {
-		name := fmt.Sprintf("%s - %s", "Gen", inherit)
+	for _, t := range types {
+		for _, inherit := range inherits {
+			//nozzleSize := getNozzleSize(inherit)
+			//if nozzleSize != 0.4 {
+			//	nozzleName = fmt.Sprintf("%.2f nozzle", nozzleSize)
+			//}
+			name := fmt.Sprintf("%s - %s - %s", "Gen", t, inherit)
 
-		m := Process{
-			From:              "User",
-			Inherits:          inherit,
-			IsCustomDefined:   "0",
-			Name:              name,
-			PrinterSettingsID: name,
-			Version:           "1.9.0.2",
+			m := Process{
+				From:              "User",
+				Inherits:          inherit,
+				IsCustomDefined:   "0",
+				Name:              name,
+				PrinterSettingsID: name,
+				Version:           "1.9.0.2",
 
-			InfoFile: "sync_info = \nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
+				// TODO dynamic update_time ?
+				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
-			SkirtLoops:     "2",
-			TravelSpeed:    "450",
-			BrimType:       "no_brim",
-			OnlyOneWallTop: "1",
+				SkirtLoops:     "2",
+				TravelSpeed:    "450",
+				BrimType:       "no_brim",
+				OnlyOneWallTop: "1",
+			}
+
+			if t == "STRUCTURAL" {
+				m.WallLoops = "4"
+				m.TopShellLayers = "5"
+				m.BottomShellLayers = "5"
+				m.SparseInfillPattern = "gyroid"
+				m.SparseInfillDensity = "40%"
+			}
+
+			process = append(process, m)
 		}
-
-		process = append(process, m)
 	}
 
 	return process, nil
@@ -115,7 +138,8 @@ func GenerateMachines() ([]Machine, error) {
 			IsCustomDefined:   "0",
 			Version:           "1.9.0.2",
 			PrinterSettingsID: name,
-			InfoFile:          "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM003\nupdated_time = 1682282966\n",
+			// TODO dynamic update_time ?
+			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
 			RetractionLength:    []string{"0.4"},
 			ZHop:                []string{"0.2"},

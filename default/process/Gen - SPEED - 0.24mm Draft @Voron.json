@@ -1,0 +1,18 @@
+{
+	"name": "Gen - SPEED - 0.24mm Draft @Voron",
+	"from": "User",
+	"inherits": "0.24mm Draft @Voron",
+	"printer_settings_id": "Gen - SPEED - 0.24mm Draft @Voron",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"skirt_loops": "2",
+	"travel_speed": "450",
+	"brim_type": "no_brim",
+	"only_one_wall_top": "1",
+	"wall_loops": "",
+	"bottom_shell_layers": "",
+	"print_settings_id": "",
+	"sparse_infill_density": "",
+	"sparse_infill_pattern": "",
+	"top_shell_layers": ""
+}
