@@ -27,5 +27,9 @@
 	"outer_wall_line_width": "0.6",
 	"sparse_infill_line_width": "0.68",
 	"support_line_width": "0.6",
-	"top_surface_line_width": "0.5"
+	"top_surface_line_width": "0.5",
+	"travel_acceleration": "10000",
+	"xy_hole_compensation": "0.2",
+	"bottom_shell_thickness": "1.0",
+	"top_shell_thickness": "1.0"
 }

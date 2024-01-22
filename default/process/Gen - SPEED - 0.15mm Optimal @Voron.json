@@ -12,5 +12,9 @@
 	"resolution": "0.008",
 	"raft_contact_distance": "0.15",
 	"infill_anchor": "2",
-	"infill_anchor_max": "12"
+	"infill_anchor_max": "12",
+	"travel_acceleration": "10000",
+	"xy_hole_compensation": "0.2",
+	"bottom_shell_thickness": "0.6",
+	"top_shell_thickness": "0.8"
 }

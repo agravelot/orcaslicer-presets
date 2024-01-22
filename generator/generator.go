@@ -52,6 +52,10 @@ type Process struct {
 	SparseInfillLineWidth        string `json:"sparse_infill_line_width,omitempty"`
 	SupportLineWidth             string `json:"support_line_width,omitempty"`
 	TopSurfaceLineWidth          string `json:"top_surface_line_width,omitempty"`
+	TravelAcceleration           string `json:"travel_acceleration,omitempty"`
+	XyHoleCompensation           string `json:"xy_hole_compensation,omitempty"`
+	BottomShellThickness         string `json:"bottom_shell_thickness,omitempty"`
+	TopShellThickness            string `json:"top_shell_thickness,omitempty"`
 }
 
 type Machine struct {
@@ -126,17 +130,25 @@ func GenerateProcess() ([]Process, error) {
 				// TODO dynamic update_time ?
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
-				SkirtLoops:     "2",
-				TravelSpeed:    "450",
-				BrimType:       "no_brim",
-				OnlyOneWallTop: "1",
-				Resolution:     "0.008",
+				SkirtLoops:         "2",
+				TravelSpeed:        "450",
+				BrimType:           "no_brim",
+				OnlyOneWallTop:     "1",
+				Resolution:         "0.008",
+				TravelAcceleration: "10000",
+				// TODO Yes ? No ?
+				XyHoleCompensation:   "0.2",
+				BottomShellThickness: "0.6",
+				TopShellThickness:    "0.8",
 			}
 
 			if t == "STRUCTURAL" {
 				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
-				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
+				m.TopSh ellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
 				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
+				m.BottomShellThickness = "1.0"
+				m.TopShellThickness = "1.0"
+
 				m.SparseInfillPattern = "gyroid"
 				m.SparseInfillDensity = "40%"
 			}
@@ -242,10 +254,10 @@ func GenerateMachines() ([]Machine, error) {
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
-			RetractionLength:    []string{"0.4"},
+			RetractionLength:    []string{"0.6"},
 			ZHop:                []string{"0.2"},
 			ZHopTypes:           []string{"Auto Lift"},
-			Thumbnails:          []string{"32x32", "400x400"},
+			Thumbnails:          []string{"32x32", "400x300"},
 			RetractLiftAbove:    []string{"0.25"},
 			NozzleType:          "brass",
 			PrintHost:           "https://192.168.0.35",
