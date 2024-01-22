@@ -144,7 +144,7 @@ func GenerateProcess() ([]Process, error) {
 
 			if t == "STRUCTURAL" {
 				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
-				m.TopSh ellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
+				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
 				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
 				m.BottomShellThickness = "1.0"
 				m.TopShellThickness = "1.0"
