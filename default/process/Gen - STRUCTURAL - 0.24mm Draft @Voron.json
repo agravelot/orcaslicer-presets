@@ -16,6 +16,7 @@
 	"top_shell_layers": "5",
 	"resolution": "0.008",
 	"raft_contact_distance": "0.15",
+	"elefant_foot_compensation": "0.2",
 	"infill_anchor": "2",
 	"infill_anchor_max": "12",
 	"tree_support_angle_slow": "25",

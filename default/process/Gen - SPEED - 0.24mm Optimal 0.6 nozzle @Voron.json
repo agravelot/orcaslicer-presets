@@ -12,6 +12,7 @@
 	"sparse_infill_pattern": "grid",
 	"resolution": "0.008",
 	"raft_contact_distance": "0.25",
+	"elefant_foot_compensation": "0.2",
 	"infill_anchor": "2.5",
 	"infill_anchor_max": "20",
 	"support_interface_spacing": "0.25",

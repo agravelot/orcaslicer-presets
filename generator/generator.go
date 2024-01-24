@@ -154,10 +154,10 @@ func GenerateProcess() ([]Process, error) {
 				Resolution:         "0.008",
 				TravelAcceleration: "10000",
 				// TODO Yes ? No ?
-				//ElefantFootCompensation: "0.2",
-				BottomShellThickness: "0.5",
-				TopShellThickness:    "0.7",
-				SparseInfillPattern:  "grid",
+				ElefantFootCompensation: "0.2",
+				BottomShellThickness:    "0.5",
+				TopShellThickness:       "0.7",
+				SparseInfillPattern:     "grid",
 
 				TreeSupportAngleSlow: "25",
 			}
