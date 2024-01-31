@@ -148,11 +148,11 @@ func GenerateProcess() ([]Process, error) {
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
 				SkirtLoops:         "2",
-				TravelSpeed:        "450",
+				TravelSpeed:        "500",
 				BrimType:           "no_brim",
 				OnlyOneWallTop:     "1",
 				Resolution:         "0.008",
-				TravelAcceleration: "10000",
+				TravelAcceleration: "20000",
 				// TODO Yes ? No ?
 				ElefantFootCompensation: "0.2",
 				BottomShellThickness:    "0.5",
