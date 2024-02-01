@@ -66,6 +66,27 @@ type Process struct {
 	XyHoleCompensation           string `json:"xy_hole_compensation,omitempty"`
 	BottomShellThickness         string `json:"bottom_shell_thickness,omitempty"`
 	TopShellThickness            string `json:"top_shell_thickness,omitempty"`
+
+	OuterWallAcceleration           string `json:"outer_wall_acceleration,omitempty"`
+	OuterWallJerk                   string `json:"outer_wall_jerk,omitempty"`
+	OuterWallSpeed                  string `json:"outer_wall_speed,omitempty"`
+	InitialLayerAcceleration        string `json:"initial_layer_acceleration,omitempty"`
+	InitialLayerJerk                string `json:"initial_layer_jerk,omitempty"`
+	InnerWallAcceleration           string `json:"inner_wall_acceleration,omitempty"`
+	InnerWallJerk                   string `json:"inner_wall_jerk,omitempty"`
+	InnerWallSpeed                  string `json:"inner_wall_speed,omitempty"`
+	InternalSolidInfillSpeed        string `json:"internal_solid_infill_speed,omitempty"`
+	DefaultAcceleration             string `json:"default_acceleration,omitempty"`
+	SparseInfillSpeed               string `json:"sparse_infill_speed,omitempty"`
+	TopSurfaceAcceleration          string `json:"top_surface_acceleration,omitempty"`
+	TopSurfaceJerk                  string `json:"top_surface_jerk,omitempty"`
+	TopSurfaceSpeed                 string `json:"top_surface_speed,omitempty"`
+	DefaultJerk                     string `json:"default_jerk,omitempty"`
+	GapInfillSpeed                  string `json:"gap_infill_speed,omitempty"`
+	InfillJerk                      string `json:"infill_jerk,omitempty"`
+	TravelJerk                      string `json:"travel_jerk,omitempty"`
+	SparseInfillAcceleration        string `json:"sparse_infill_acceleration,omitempty"`
+	InternalSolidInfillAcceleration string `json:"internal_solid_infill_acceleration,omitempty"`
 }
 
 type Machine struct {
@@ -123,7 +144,7 @@ func GenerateProcess() ([]Process, error) {
 		// TODO 0.8
 	}
 
-	types := []string{"STRUCTURAL", "SPEED"}
+	types := []string{"STANDARD", "STRUCTURAL", "SPEED", "STRUCTURAL SPEED"}
 
 	var process []Process
 
@@ -152,7 +173,7 @@ func GenerateProcess() ([]Process, error) {
 				BrimType:           "no_brim",
 				OnlyOneWallTop:     "1",
 				Resolution:         "0.008",
-				TravelAcceleration: "20000",
+				TravelAcceleration: "15000",
 				// TODO Yes ? No ?
 				ElefantFootCompensation: "0.2",
 				BottomShellThickness:    "0.5",
@@ -162,7 +183,37 @@ func GenerateProcess() ([]Process, error) {
 				TreeSupportAngleSlow: "25",
 			}
 
-			if t == "STRUCTURAL" {
+			if strings.Contains(t, "SPEED") {
+				// Velocity
+				m.OuterWallSpeed = "150"
+				m.InnerWallSpeed = "250"
+				m.TravelSpeed = "500"
+				m.SparseInfillSpeed = "300"
+				m.InternalSolidInfillSpeed = "300"
+				m.TopSurfaceSpeed = "150"
+				m.GapInfillSpeed = "150"
+
+				// Accel
+				m.DefaultAcceleration = "8000"
+				m.TravelAcceleration = "20000"
+				m.OuterWallAcceleration = "5000"
+				m.InnerWallAcceleration = "8000"
+				m.SparseInfillAcceleration = "8000"
+				m.InternalSolidInfillAcceleration = "8000"
+				m.InitialLayerAcceleration = "1000"
+				m.TopSurfaceAcceleration = "5000"
+
+				// Jerks
+				m.DefaultJerk = "12"
+				m.OuterWallJerk = "10"
+				m.InnerWallJerk = "10"
+				m.InfillJerk = "17"
+				m.TopSurfaceJerk = "12"
+				m.InitialLayerJerk = "12"
+				m.TravelJerk = "17"
+			}
+
+			if strings.Contains(t, "STRUCTURAL") {
 				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
 				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
 				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
@@ -217,10 +268,10 @@ func GenerateProcess() ([]Process, error) {
 				m.InternalSolidInfillLineWidth = "0.6"
 				m.TopSurfaceLineWidth = "0.5"
 
-				if t == "SPEED" {
+				if strings.Contains(t, "STANDARD") || strings.Contains(t, "SPEED") {
 					m.SparseInfillLineWidth = "0.68"
 					m.SupportLineWidth = "0.6"
-				} else if t == "STRUCTURAL" {
+				} else if strings.Contains(t, "STRUCTURAL") {
 					m.SparseInfillLineWidth = "0.6"
 					m.SupportLineWidth = "0.55"
 				} else {

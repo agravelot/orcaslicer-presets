@@ -31,7 +31,7 @@
 	"sparse_infill_line_width": "0.6",
 	"support_line_width": "0.55",
 	"top_surface_line_width": "0.5",
-	"travel_acceleration": "20000",
+	"travel_acceleration": "15000",
 	"bottom_shell_thickness": "1.0",
 	"top_shell_thickness": "1.0"
 }
