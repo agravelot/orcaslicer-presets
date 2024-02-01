@@ -347,6 +347,8 @@ func GenerateMachines() ([]Machine, error) {
 			MachineEndGcode:        "PRINT_END\n; total layers count = [total_layer_count]",
 			BeforeLayerChangeGcode: ";BEFORE_LAYER_CHANGE\n;[layer_z]\nG92 E0\nON_LAYER_CHANGE\n",
 			LayerChangeGcode:       ";AFTER_LAYER_CHANGE\n;[layer_z]\nAFTER_LAYER_CHANGE\nSET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}",
+			MachineMaxJerkX:        []string{"20", "12"}, // 20
+			MachineMaxJerkY:        []string{"20", "12"}, // 20
 		}
 
 		if nozzleSize <= 0.4 {
