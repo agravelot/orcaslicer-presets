@@ -117,6 +117,7 @@ type Machine struct {
 	ZHop                   []string `json:"z_hop,omitempty"`
 	ZHopTypes              []string `json:"z_hop_types,omitempty"`
 	SupportMultiBedTypes   string   `json:"support_multi_bed_types,omitempty"`
+	PrintableHeight        string   `json:"printable_height,omitempty"`
 
 	// Retraction
 	RetractionMinimumTravel []string `json:"retraction_minimum_travel,omitempty"`

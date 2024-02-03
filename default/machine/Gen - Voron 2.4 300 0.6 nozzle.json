@@ -37,6 +37,7 @@
 		"Auto Lift"
 	],
 	"support_multi_bed_types": "1",
+	"printable_height": "255",
 	"retract_before_wipe": [
 		"80%"
 	],
