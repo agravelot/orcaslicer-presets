@@ -183,6 +183,17 @@ func GenerateProcess() ([]Process, error) {
 				TreeSupportAngleSlow: "25",
 			}
 
+			if strings.Contains(t, "STRUCTURAL") {
+				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
+				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
+				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
+				m.BottomShellThickness = "1.0"
+				m.TopShellThickness = "1.0"
+
+				m.SparseInfillPattern = "gyroid"
+				m.SparseInfillDensity = "40%"
+			}
+
 			if strings.Contains(t, "SPEED") {
 				// Velocity
 				m.OuterWallSpeed = "150"
@@ -211,17 +222,7 @@ func GenerateProcess() ([]Process, error) {
 				m.TopSurfaceJerk = "12"
 				m.InitialLayerJerk = "12"
 				m.TravelJerk = "17"
-			}
-
-			if strings.Contains(t, "STRUCTURAL") {
-				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
-				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
-				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
-				m.BottomShellThickness = "1.0"
-				m.TopShellThickness = "1.0"
-
-				m.SparseInfillPattern = "gyroid"
-				m.SparseInfillDensity = "40%"
+				m.SparseInfillPattern = "triangle"
 			}
 
 			// define on nozzle size
@@ -342,6 +343,7 @@ func GenerateMachines() ([]Machine, error) {
 			PrintHost:            "https://192.168.0.35",
 			ChangeFilamentGcode:  "M600",
 			SupportMultiBedTypes: "1",
+			PrintableHeight:      "255",
 
 			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
 			MachineEndGcode:        "PRINT_END\n; total layers count = [total_layer_count]",

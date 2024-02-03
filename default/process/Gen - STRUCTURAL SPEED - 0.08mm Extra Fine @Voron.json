@@ -12,7 +12,7 @@
 	"wall_loops": "4",
 	"bottom_shell_layers": "13",
 	"sparse_infill_density": "40%",
-	"sparse_infill_pattern": "gyroid",
+	"sparse_infill_pattern": "triangle",
 	"top_shell_layers": "13",
 	"resolution": "0.008",
 	"raft_contact_distance": "0.15",

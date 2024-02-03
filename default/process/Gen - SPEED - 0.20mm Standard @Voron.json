@@ -9,7 +9,7 @@
 	"travel_speed": "500",
 	"brim_type": "no_brim",
 	"only_one_wall_top": "1",
-	"sparse_infill_pattern": "grid",
+	"sparse_infill_pattern": "triangle",
 	"resolution": "0.008",
 	"raft_contact_distance": "0.15",
 	"elefant_foot_compensation": "0.2",
