@@ -87,6 +87,8 @@ type Process struct {
 	TravelJerk                      string `json:"travel_jerk,omitempty"`
 	SparseInfillAcceleration        string `json:"sparse_infill_acceleration,omitempty"`
 	InternalSolidInfillAcceleration string `json:"internal_solid_infill_acceleration,omitempty"`
+
+	TopSurfacePattern string `json:"top_surface_pattern,omitempty"`
 }
 
 type Machine struct {
@@ -181,7 +183,7 @@ func GenerateProcess() ([]Process, error) {
 				TopShellThickness:       "0.7",
 				SparseInfillPattern:     "grid",
 
-				TreeSupportAngleSlow: "25",
+				TopSurfacePattern: "monotonicline",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
@@ -346,6 +348,7 @@ func GenerateMachines() ([]Machine, error) {
 			SupportMultiBedTypes: "1",
 			PrintableHeight:      "255",
 
+			// TODO Extract it in file?
 			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
 			MachineEndGcode:        "PRINT_END\n; total layers count = [total_layer_count]",
 			BeforeLayerChangeGcode: ";BEFORE_LAYER_CHANGE\n;[layer_z]\nG92 E0\nON_LAYER_CHANGE\n",

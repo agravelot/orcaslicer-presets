@@ -19,7 +19,6 @@
 	"elefant_foot_compensation": "0.2",
 	"infill_anchor": "2",
 	"infill_anchor_max": "12",
-	"tree_support_angle_slow": "25",
 	"initial_layer_line_width": "0.5",
 	"inner_wall_line_width": "0.45",
 	"internal_solid_infill_line_width": "0.45",
@@ -50,5 +49,6 @@
 	"infill_jerk": "17",
 	"travel_jerk": "17",
 	"sparse_infill_acceleration": "8000",
-	"internal_solid_infill_acceleration": "8000"
+	"internal_solid_infill_acceleration": "8000",
+	"top_surface_pattern": "monotonicline"
 }

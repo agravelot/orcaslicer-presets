@@ -17,7 +17,6 @@
 	"infill_anchor_max": "20",
 	"support_interface_spacing": "0.25",
 	"support_top_z_distance": "0.22",
-	"tree_support_angle_slow": "25",
 	"tree_support_branch_diameter_double_wall": "5",
 	"initial_layer_line_width": "0.68",
 	"inner_wall_line_width": "0.6",
@@ -49,5 +48,6 @@
 	"infill_jerk": "17",
 	"travel_jerk": "17",
 	"sparse_infill_acceleration": "8000",
-	"internal_solid_infill_acceleration": "8000"
+	"internal_solid_infill_acceleration": "8000",
+	"top_surface_pattern": "monotonicline"
 }
