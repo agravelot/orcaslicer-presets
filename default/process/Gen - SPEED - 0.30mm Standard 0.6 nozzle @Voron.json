@@ -49,5 +49,7 @@
 	"travel_jerk": "17",
 	"sparse_infill_acceleration": "8000",
 	"internal_solid_infill_acceleration": "8000",
+	"initial_layer_speed": "85",
+	"initial_layer_infill_speed": "110",
 	"top_surface_pattern": "monotonicline"
 }

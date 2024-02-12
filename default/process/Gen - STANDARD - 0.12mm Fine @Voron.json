@@ -26,5 +26,7 @@
 	"travel_acceleration": "15000",
 	"bottom_shell_thickness": "0.5",
 	"top_shell_thickness": "0.7",
+	"initial_layer_speed": "85",
+	"initial_layer_infill_speed": "110",
 	"top_surface_pattern": "monotonicline"
 }

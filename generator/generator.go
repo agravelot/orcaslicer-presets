@@ -87,6 +87,8 @@ type Process struct {
 	TravelJerk                      string `json:"travel_jerk,omitempty"`
 	SparseInfillAcceleration        string `json:"sparse_infill_acceleration,omitempty"`
 	InternalSolidInfillAcceleration string `json:"internal_solid_infill_acceleration,omitempty"`
+	InitialLayerSpeed               string `json:"initial_layer_speed,omitempty"`
+	InitialLayerInfillSpeed         string `json:"initial_layer_infill_speed,omitempty"`
 
 	TopSurfacePattern string `json:"top_surface_pattern,omitempty"`
 }
@@ -178,12 +180,15 @@ func GenerateProcess() ([]Process, error) {
 				Resolution:         "0.008",
 				TravelAcceleration: "15000",
 				// TODO Yes ? No ?
-				ElefantFootCompensation: "0.2",
+				ElefantFootCompensation: "0", // Will break overhang on 2 layer
 				BottomShellThickness:    "0.5",
 				TopShellThickness:       "0.7",
 				SparseInfillPattern:     "grid",
 
 				TopSurfacePattern: "monotonicline",
+
+				InitialLayerSpeed:       "85",
+				InitialLayerInfillSpeed: "110",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
@@ -225,7 +230,7 @@ func GenerateProcess() ([]Process, error) {
 				m.TopSurfaceJerk = "12"
 				m.InitialLayerJerk = "12"
 				m.TravelJerk = "17"
-				m.SparseInfillPattern = "triangle"
+				m.SparseInfillPattern = "grid"
 			}
 
 			// define on nozzle size
