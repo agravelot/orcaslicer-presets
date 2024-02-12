@@ -90,7 +90,13 @@ type Process struct {
 	InitialLayerSpeed               string `json:"initial_layer_speed,omitempty"`
 	InitialLayerInfillSpeed         string `json:"initial_layer_infill_speed,omitempty"`
 
-	TopSurfacePattern string `json:"top_surface_pattern,omitempty"`
+	TopSurfacePattern   string `json:"top_surface_pattern,omitempty"`
+	InternalBridgeSpeed string `json:"internal_bridge_speed,omitempty"`
+
+	Overhang14Speed string `json:"overhang_1_4_speed,omitempty"`
+	Overhang24Speed string `json:"overhang_2_4_speed,omitempty"`
+	Overhang34Speed string `json:"overhang_3_4_speed,omitempty"`
+	Overhang44Speed string `json:"overhang_4_4_speed,omitempty"`
 }
 
 type Machine struct {
@@ -189,6 +195,11 @@ func GenerateProcess() ([]Process, error) {
 
 				InitialLayerSpeed: "62",
 				//InitialLayerInfillSpeed: "110",
+				InternalBridgeSpeed: "62",
+				Overhang14Speed:     "80%",
+				Overhang24Speed:     "62",
+				Overhang34Speed:     "30",
+				Overhang44Speed:     "10",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
