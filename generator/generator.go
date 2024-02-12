@@ -187,8 +187,8 @@ func GenerateProcess() ([]Process, error) {
 
 				TopSurfacePattern: "monotonicline",
 
-				InitialLayerSpeed:       "85",
-				InitialLayerInfillSpeed: "110",
+				InitialLayerSpeed: "62",
+				//InitialLayerInfillSpeed: "110",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
