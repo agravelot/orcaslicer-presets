@@ -2,7 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	generator "github.com/agravelot/genrator"
+	"github.com/agravelot/genrator/machine"
+	"github.com/agravelot/genrator/process"
 	"github.com/kr/pretty"
 	"os"
 )
@@ -11,28 +12,28 @@ import (
 const exportPath = "../default/"
 
 func main() {
-	processes, err := generator.GenerateProcess()
+	processes, err := process.GenerateProcess()
 
 	if err != nil {
 		panic(err)
 	}
 
-	for _, process := range processes {
-		err = writeProcess(process)
+	for _, p := range processes {
+		err = writeProcess(p)
 		if err != nil {
 			panic(err)
 		}
 	}
 
 	// Machine
-	machines, err := generator.GenerateMachines()
+	machines, err := machine.GenerateMachines()
 
 	if err != nil {
 		panic(err)
 	}
 
-	for _, machine := range machines {
-		err = writeMachine(machine)
+	for _, m := range machines {
+		err = writeMachine(m)
 
 		if err != nil {
 			panic(err)
@@ -40,7 +41,7 @@ func main() {
 	}
 }
 
-func writeMachine(machine generator.Machine) error {
+func writeMachine(machine machine.Machine) error {
 	jsonMachine, err := json.MarshalIndent(machine, "", "	")
 	if err != nil {
 		return err
@@ -59,7 +60,7 @@ func writeMachine(machine generator.Machine) error {
 	return err
 }
 
-func writeProcess(process generator.Process) error {
+func writeProcess(process process.Process) error {
 	jsonProcess, err := json.MarshalIndent(process, "", "	")
 	if err != nil {
 		return err

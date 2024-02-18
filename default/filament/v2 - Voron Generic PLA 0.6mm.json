@@ -15,14 +15,14 @@
     "inherits": "Voron Generic PLA",
     "is_custom_defined": "0",
     "name": "v2 - Voron Generic PLA 0.6mm",
-    "overhang_fan_threshold": [
-        "25%"
-    ],
     "pressure_advance": [
         "0.03"
     ],
     "slow_down_layer_time": [
-        "30"
+        "4"
+    ],
+    "slow_down_min_speed": [
+        "20"
     ],
     "version": "1.5.1.2"
 }

@@ -16,7 +16,7 @@
 	"top_shell_layers": "9",
 	"resolution": "0.008",
 	"raft_contact_distance": "0.15",
-	"elefant_foot_compensation": "0",
+	"elefant_foot_compensation": "0.15",
 	"infill_anchor": "2",
 	"infill_anchor_max": "12",
 	"initial_layer_line_width": "0.5",
@@ -33,7 +33,7 @@
 	"initial_layer_speed": "62",
 	"top_surface_pattern": "monotonicline",
 	"internal_bridge_speed": "62",
-	"overhang_1_4_speed": "80%",
+	"overhang_1_4_speed": "0",
 	"overhang_2_4_speed": "62",
 	"overhang_3_4_speed": "30",
 	"overhang_4_4_speed": "10"
