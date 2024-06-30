@@ -2,11 +2,13 @@ package process
 
 import (
 	"fmt"
-	"github.com/agravelot/genrator/utils"
 	"math"
 	"strings"
+
+	"github.com/agravelot/genrator/utils"
 )
 
+// Process is the struct for the process
 type Process struct {
 	// Mandatory
 	Name              string `json:"name"`
@@ -103,6 +105,7 @@ type Process struct {
 	SupportAngle                 string `json:"support_angle,omitempty"`
 }
 
+// GenerateProcess generate the process
 func GenerateProcess() ([]Process, error) {
 	// TODO Matrix nozzle -> height -> data
 	inherits := []string{
@@ -164,7 +167,7 @@ func GenerateProcess() ([]Process, error) {
 				TopSurfacePattern: "monotonicline",
 
 				InitialLayerSpeed: "62",
-				//InitialLayerInfillSpeed: "110",
+				// InitialLayerInfillSpeed: "110",
 				InternalBridgeSpeed: "62",
 				Overhang14Speed:     "0",
 				Overhang24Speed:     "62",
