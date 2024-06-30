@@ -35,5 +35,8 @@
 	"overhang_1_4_speed": "0",
 	"overhang_2_4_speed": "62",
 	"overhang_3_4_speed": "30",
-	"overhang_4_4_speed": "10"
+	"overhang_4_4_speed": "12",
+	"support_interface_bottom_layers": "0",
+	"support_interface_top_layers": "5",
+	"support_angle": "45"
 }
