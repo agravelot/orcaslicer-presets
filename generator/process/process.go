@@ -169,7 +169,7 @@ func GenerateProcess() ([]Process, error) {
 				Overhang14Speed:     "0",
 				Overhang24Speed:     "62",
 				Overhang34Speed:     "30",
-				Overhang44Speed:     "10",
+				Overhang44Speed:     "12",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
