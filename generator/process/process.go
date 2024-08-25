@@ -156,7 +156,7 @@ func GenerateProcess() ([]Process, error) {
 				Resolution:         "0.008",
 				TravelAcceleration: "15000",
 				// TODO Yes ? No ?
-				ElefantFootCompensation:      "0.15", // /!\ Can break overhang on second layer
+				ElefantFootCompensation:      "0.1", // /!\ Can break overhang on second layer
 				BottomShellThickness:         "0.5",
 				TopShellThickness:            "0.7",
 				SparseInfillPattern:          "grid",
@@ -168,11 +168,11 @@ func GenerateProcess() ([]Process, error) {
 
 				InitialLayerSpeed: "65",
 				// InitialLayerInfillSpeed: "110",
-				InternalBridgeSpeed: "65",
-				Overhang14Speed:     "0",
-				Overhang24Speed:     "62",
-				Overhang34Speed:     "30",
-				Overhang44Speed:     "12",
+				InternalBridgeSpeed: "55",
+				Overhang14Speed:     "80%",
+				Overhang24Speed:     "30",
+				Overhang34Speed:     "25",
+				Overhang44Speed:     "15",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {

@@ -10,7 +10,7 @@
     ],
     "from": "User",
     "full_fan_speed_layer": [
-        "3"
+        "8"
     ],
     "inherits": "Voron Generic PLA",
     "is_custom_defined": "0",

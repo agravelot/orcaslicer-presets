@@ -21,9 +21,6 @@
     "overhang_fan_threshold": [
         "25%"
     ],
-    "pressure_advance": [
-        "0.05"
-    ],
     "slow_down_layer_time": [
         "5"
     ],

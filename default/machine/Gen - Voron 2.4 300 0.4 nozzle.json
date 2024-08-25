@@ -40,10 +40,7 @@
         "35"
     ],
     "support_multi_bed_types": "1",
-    "thumbnails": [
-        "32x32",
-        "400x300"
-    ],
+    "thumbnails": "32x32/PNG, 400x300/PNG",
     "version": "1.9.0.2",
     "z_hop": [
         "0.2"
