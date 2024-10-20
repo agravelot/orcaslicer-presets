@@ -15,9 +15,6 @@
     "inherits": "Voron Generic PLA",
     "is_custom_defined": "0",
     "name": "v2 - Voron Generic PLA 0.6mm",
-    "pressure_advance": [
-        "0.03"
-    ],
     "slow_down_layer_time": [
         "4"
     ],

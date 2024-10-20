@@ -24,12 +24,6 @@
     "full_fan_speed_layer": [
         "8"
     ],
-    "hot_plate_temp": [
-        "110"
-    ],
-    "hot_plate_temp_initial_layer": [
-        "110"
-    ],
     "inherits": "Voron Generic ABS",
     "is_custom_defined": "0",
     "name": "v2 - Polymaker ASA - 0.4",
