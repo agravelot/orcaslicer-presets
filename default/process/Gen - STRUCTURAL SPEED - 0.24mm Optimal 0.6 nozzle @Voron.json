@@ -12,7 +12,7 @@
 	"wall_loops": "3",
 	"bottom_shell_layers": "5",
 	"sparse_infill_density": "40%",
-	"sparse_infill_pattern": "grid",
+	"sparse_infill_pattern": "3dhoneycomb",
 	"top_shell_layers": "5",
 	"resolution": "0.008",
 	"raft_contact_distance": "0.25",

@@ -222,6 +222,10 @@ func GenerateProcess() ([]Process, error) {
 				m.SparseInfillPattern = "grid"
 			}
 
+			if strings.Contains(t, "STRUCTURAL SPEED") {
+				m.SparseInfillPattern = "3dhoneycomb"
+			}
+
 			// define on nozzle size
 			if nozzleSize == 0.4 {
 				m.RaftContactDistance = "0.15"
