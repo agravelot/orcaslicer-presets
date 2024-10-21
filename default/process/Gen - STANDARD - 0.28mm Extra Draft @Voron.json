@@ -13,6 +13,7 @@
 	"resolution": "0.008",
 	"raft_contact_distance": "0.15",
 	"elefant_foot_compensation": "0.1",
+	"seam_slope_type": "all",
 	"infill_anchor": "2",
 	"infill_anchor_max": "12",
 	"initial_layer_line_width": "0.5",
