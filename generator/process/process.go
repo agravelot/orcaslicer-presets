@@ -136,7 +136,7 @@ func GenerateProcess() ([]Process, error) {
 	for _, t := range types {
 		for _, inherit := range inherits {
 			nozzleSize := utils.GetNozzleSize(inherit)
-			layerHeigth := utils.GetLayerHeight(inherit)
+			layerHeight := utils.GetLayerHeight(inherit)
 			//if nozzleSize != 0.4 {
 			//	nozzleName = fmt.Sprintf("%.2f nozzle", nozzleSize)
 			//}
@@ -187,8 +187,8 @@ func GenerateProcess() ([]Process, error) {
 
 			if strings.Contains(t, "STRUCTURAL") {
 				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
-				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth))    // 1mm
-				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeigth)) // 1mm
+				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeight))    // 1mm
+				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeight)) // 1mm
 				m.BottomShellThickness = "1.0"
 				m.TopShellThickness = "1.0"
 
@@ -251,7 +251,7 @@ func GenerateProcess() ([]Process, error) {
 				m.SupportLineWidth = "0.36"
 				m.TopSurfaceLineWidth = "0.42"
 
-				if layerHeigth <= 0.15 {
+				if layerHeight <= 0.15 {
 					m.TopSurfaceLineWidth = "0.4"
 				}
 			}
