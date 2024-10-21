@@ -211,6 +211,8 @@ func GenerateProcess() ([]Process, error) {
 				m.InitialLayerAcceleration = "500"
 				m.TopSurfaceAcceleration = "2000"
 
+				m.SparseInfillPattern = "grid"
+
 				// Jerks
 				m.DefaultJerk = "0"
 				m.OuterWallJerk = "9"
@@ -219,7 +221,6 @@ func GenerateProcess() ([]Process, error) {
 				m.TopSurfaceJerk = "9"
 				m.InitialLayerJerk = "9"
 				m.TravelJerk = "12"
-				m.SparseInfillPattern = "grid"
 			}
 
 			if strings.Contains(t, "STRUCTURAL SPEED") {
