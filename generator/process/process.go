@@ -20,7 +20,9 @@ type Process struct {
 	InfoFile          string `json:"-"`
 
 	// Optional
-	SkirtLoops              string `json:"skirt_loops"`
+	SkirtLoops string `json:"skirt_loops"`
+	SkirtSpeed string `json:"skirt_speed"`
+
 	TravelSpeed             string `json:"travel_speed"`
 	BrimType                string `json:"brim_type"`
 	OnlyOneWallTop          string `json:"only_one_wall_top,omitempty"`
@@ -171,6 +173,7 @@ func GenerateProcess() ([]Process, error) {
 				TopSurfacePattern: "monotonicline",
 
 				InitialLayerSpeed: "62",
+				SkirtSpeed:        "62",
 				// InitialLayerInfillSpeed: "110",
 				InternalBridgeSpeed: "45", // Avoid 50 speed noise spike
 				BridgeSpeed:         "150%",
