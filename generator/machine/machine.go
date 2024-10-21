@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// Machine represents a 3D printer machine
 type Machine struct {
 	// Mandatory
 	Name              string `json:"name"`
@@ -59,7 +60,7 @@ func GenerateMachines() ([]Machine, error) {
 	for _, inherit := range inherits {
 		name := fmt.Sprintf("%s - %s", "Gen", inherit)
 
-		//nozzleSize := getNozzleSize(inherit)
+		// nozzleSize := getNozzleSize(inherit)
 
 		m := Machine{
 			From:              "User",
@@ -85,7 +86,7 @@ func GenerateMachines() ([]Machine, error) {
 			PrintableHeight:         "255",
 			RetractionMinimumTravel: []string{"1.5"},
 			Wipe:                    []string{"1"},
-			RetractBeforeWipe:       []string{"80%"},
+			RetractBeforeWipe:       []string{"70%"},
 
 			// TODO Extract it in file?
 			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
@@ -95,7 +96,7 @@ func GenerateMachines() ([]Machine, error) {
 			MachineMaxJerkX:        []string{"20", "12"}, // 20
 			MachineMaxJerkY:        []string{"20", "12"}, // 20
 			MachineMaxJerkZ:        []string{"3", "0.4"},
-			//MachineMaxJerkE:        []string{"2.5", "2.5"},
+			MachineMaxJerkE:        []string{"2.5", "2.5"},
 		}
 
 		printableHeight, _ := strconv.Atoi(m.PrintableHeight)

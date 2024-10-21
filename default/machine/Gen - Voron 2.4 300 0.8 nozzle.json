@@ -17,6 +17,10 @@
 		"20",
 		"12"
 	],
+	"machine_max_jerk_e": [
+		"2.5",
+		"2.5"
+	],
 	"machine_max_jerk_z": [
 		"3",
 		"0.4"
@@ -46,7 +50,7 @@
 		"1.5"
 	],
 	"retract_before_wipe": [
-		"80%"
+		"70%"
 	],
 	"wipe": [
 		"1"
