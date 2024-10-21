@@ -197,19 +197,19 @@ func GenerateProcess() ([]Process, error) {
 			if strings.Contains(t, "SPEED") {
 				// Velocity
 				m.OuterWallSpeed = "200"
-				m.InnerWallSpeed = "250"
+				m.InnerWallSpeed = "300"
 				m.TravelSpeed = "500"
-				m.SparseInfillSpeed = "270"
-				m.InternalSolidInfillSpeed = "250"
+				m.SparseInfillSpeed = "300"
+				m.InternalSolidInfillSpeed = "300"
 				m.TopSurfaceSpeed = "150"
-				m.GapInfillSpeed = "250"
+				m.GapInfillSpeed = "300"
 
 				// Accel
 				m.DefaultAcceleration = "12000"
 				m.TravelAcceleration = "15000"
 				m.OuterWallAcceleration = "5000"
 				m.InnerWallAcceleration = "10000"
-				m.BridgeAcceleration = "50%"
+				m.BridgeAcceleration = "40%"
 				m.SparseInfillAcceleration = "100%"
 				m.InternalSolidInfillAcceleration = "100%"
 				m.InitialLayerAcceleration = "500"
