@@ -34,7 +34,9 @@ type Process struct {
 	RaftContactDistance     string `json:"raft_contact_distance,omitempty"`
 	RaftLayers              string `json:"raft_layers,omitempty"`
 	ElefantFootCompensation string `json:"elefant_foot_compensation,omitempty"`
-	SeamSlopeType           string `json:"seam_slope_type,omitempty"`
+	// Used for scarf joint
+	SeamSlopeType      string `json:"seam_slope_type,omitempty"`
+	AccelToDecelEnable string `json:"accel_to_decel_enable,omitempty"`
 
 	// Infill
 	InfillAnchor    string `json:"infill_anchor,omitempty"`
@@ -177,6 +179,8 @@ func GenerateProcess() ([]Process, error) {
 
 				// Scarf joint
 				SeamSlopeType: "all",
+
+				AccelToDecelEnable: "0",
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
