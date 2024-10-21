@@ -201,7 +201,7 @@ func GenerateProcess() ([]Process, error) {
 				m.GapInfillSpeed = "250"
 
 				// Accel
-				m.DefaultAcceleration = "10000"
+				m.DefaultAcceleration = "12000"
 				m.TravelAcceleration = "15000"
 				m.OuterWallAcceleration = "5000"
 				m.InnerWallAcceleration = "10000"
