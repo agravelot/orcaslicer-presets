@@ -96,6 +96,7 @@ type Process struct {
 	InitialLayerInfillSpeed         string `json:"initial_layer_infill_speed,omitempty"`
 
 	TopSurfacePattern   string `json:"top_surface_pattern,omitempty"`
+	BridgeSpeed         string `json:"bridge_speed,omitempty"`
 	InternalBridgeSpeed string `json:"internal_bridge_speed,omitempty"`
 	BridgeAcceleration  string `json:"bridge_acceleration,omitempty"`
 
@@ -171,11 +172,12 @@ func GenerateProcess() ([]Process, error) {
 
 				InitialLayerSpeed: "62",
 				// InitialLayerInfillSpeed: "110",
-				InternalBridgeSpeed: "55",
-				Overhang14Speed:     "80%",
-				Overhang24Speed:     "30",
-				Overhang34Speed:     "25",
-				Overhang44Speed:     "15",
+				InternalBridgeSpeed: "45", // Avoid 50 speed noise spike
+				BridgeSpeed:         "150%",
+				Overhang14Speed:     "0",
+				Overhang24Speed:     "60", // Avoid 50 speed noise spike
+				Overhang34Speed:     "30",
+				Overhang44Speed:     "10",
 
 				// Scarf joint
 				SeamSlopeType: "all",
