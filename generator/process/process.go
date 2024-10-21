@@ -212,10 +212,10 @@ func GenerateProcess() ([]Process, error) {
 				m.TopSurfaceAcceleration = "2000"
 
 				// Jerks
-				m.DefaultJerk = "9"
+				m.DefaultJerk = "0"
 				m.OuterWallJerk = "9"
 				m.InnerWallJerk = "9"
-				m.InfillJerk = "9"
+				m.InfillJerk = "12"
 				m.TopSurfaceJerk = "9"
 				m.InitialLayerJerk = "9"
 				m.TravelJerk = "12"
