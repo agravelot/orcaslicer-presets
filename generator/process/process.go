@@ -229,7 +229,7 @@ func GenerateProcess() ([]Process, error) {
 				m.TravelJerk = "12"
 			}
 
-			if strings.Contains(t, "STRUCTURAL SPEED") {
+			if strings.Contains(t, "STRUCTURAL") && strings.Contains(t, "SPEED") {
 				m.SparseInfillPattern = "3dhoneycomb"
 			}
 
