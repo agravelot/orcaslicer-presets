@@ -3,7 +3,7 @@
 	"from": "User",
 	"inherits": "0.30mm Standard 0.6 nozzle @Voron",
 	"printer_settings_id": "Gen - STRUCTURAL - 0.30mm Standard 0.6 nozzle @Voron",
-	"version": "1.9.0.2",
+	"version": "2.2.0.1",
 	"is_custom_defined": "0",
 	"skirt_loops": "2",
 	"travel_speed": "500",

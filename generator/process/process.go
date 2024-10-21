@@ -148,7 +148,7 @@ func GenerateProcess() ([]Process, error) {
 				IsCustomDefined:   "0",
 				Name:              name,
 				PrinterSettingsID: name,
-				Version:           "1.9.0.2",
+				Version:           "2.2.0.1",
 
 				// TODO dynamic update_time ?
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
