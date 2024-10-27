@@ -172,13 +172,13 @@ func GenerateProcess() ([]Process, error) {
 
 				TopSurfacePattern: "monotonicline",
 
-				InitialLayerSpeed: "62",
-				SkirtSpeed:        "62",
+				InitialLayerSpeed: "46",
+				SkirtSpeed:        "46",
 				// InitialLayerInfillSpeed: "110",
-				InternalBridgeSpeed: "45", // Avoid 50 speed noise spike
+				InternalBridgeSpeed: "46", // Avoid 50 speed noise spike
 				BridgeSpeed:         "150%",
 				Overhang14Speed:     "0",
-				Overhang24Speed:     "60", // Avoid 50 speed noise spike
+				Overhang24Speed:     "45", // Avoid 50 speed noise spike
 				Overhang34Speed:     "30",
 				Overhang44Speed:     "10",
 
