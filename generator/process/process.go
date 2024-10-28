@@ -155,13 +155,12 @@ func GenerateProcess() ([]Process, error) {
 				// TODO dynamic update_time ?
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
-				SkirtLoops:         "2",
-				TravelSpeed:        "500",
-				BrimType:           "no_brim",
-				OnlyOneWallTop:     "1",
-				Resolution:         "0.008",
-				TravelAcceleration: "15000",
-				// TODO Yes ? No ?
+				SkirtLoops:                   "2",
+				TravelSpeed:                  "300",
+				BrimType:                     "no_brim",
+				OnlyOneWallTop:               "1",
+				Resolution:                   "0.008",
+				TravelAcceleration:           "10000",
 				ElefantFootCompensation:      "0.1", // /!\ Can break overhang on second layer
 				BottomShellThickness:         "0.5",
 				TopShellThickness:            "0.7",
