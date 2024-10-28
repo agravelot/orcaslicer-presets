@@ -172,15 +172,15 @@ func GenerateProcess() ([]Process, error) {
 
 				TopSurfacePattern: "monotonicline",
 
-				InitialLayerSpeed: "46",
-				SkirtSpeed:        "46",
-				// InitialLayerInfillSpeed: "110",
-				InternalBridgeSpeed: "46", // Avoid 50 speed noise spike
-				BridgeSpeed:         "150%",
-				Overhang14Speed:     "0",
-				Overhang24Speed:     "45", // Avoid 50 speed noise spike
-				Overhang34Speed:     "30",
-				Overhang44Speed:     "10",
+				InitialLayerSpeed:       "46",
+				SkirtSpeed:              "46",
+				InitialLayerInfillSpeed: "100",
+				InternalBridgeSpeed:     "46", // Avoid 50 speed noise spike
+				BridgeSpeed:             "100",
+				Overhang14Speed:         "0",
+				Overhang24Speed:         "45", // Avoid 50 speed noise spike
+				Overhang34Speed:         "30",
+				Overhang44Speed:         "10",
 
 				// Scarf joint
 				SeamSlopeType: "all",
