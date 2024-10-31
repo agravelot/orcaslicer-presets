@@ -22,9 +22,5 @@ func GetNozzleSize(inheritString string) float64 {
 		return 0.8
 	}
 
-	if strings.Contains(inheritString, " 0.4 ") {
-		return 0.4
-	}
-
-	panic("Nozzle size not found")
+	return 0.4
 }
