@@ -68,5 +68,9 @@
 	"overhang_4_4_speed": "10",
 	"support_interface_bottom_layers": "0",
 	"support_interface_top_layers": "5",
-	"support_angle": "45"
+	"support_angle": "45",
+	"post_process": [
+		"/Users/agravelot/test.sh PERFORMANCE"
+	],
+	"filename_format": "{input_filename_base}_{filament_type[initial_tool]}_{print_time}_PERFORMANCE.gcode"
 }

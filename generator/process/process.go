@@ -109,6 +109,24 @@ type Process struct {
 	SupportInterfaceBottomLayers string `json:"support_interface_bottom_layers,omitempty"`
 	SupportInterfaceTopLayers    string `json:"support_interface_top_layers,omitempty"`
 	SupportAngle                 string `json:"support_angle,omitempty"`
+
+	PostProcess    []string `json:"post_process,omitempty"`
+	FilenameFormat string   `json:"filename_format,omitempty"`
+}
+
+func getMode(t string) string {
+	mode := "SILENT"
+	if strings.Contains(t, "SPEED") {
+		mode = "PERFORMANCE"
+	}
+	return mode
+}
+
+func getPostProcess(t string) []string {
+	return []string{
+		// TODO Change path
+		fmt.Sprintf("/Users/agravelot/test.sh %s", getMode(t)),
+	}
 }
 
 // GenerateProcess generate the process
@@ -185,6 +203,9 @@ func GenerateProcess() ([]Process, error) {
 				SeamSlopeType: "all",
 
 				AccelToDecelEnable: "0",
+
+				PostProcess:    getPostProcess(t),
+				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", getMode(t)),
 			}
 
 			if strings.Contains(t, "STRUCTURAL") {
