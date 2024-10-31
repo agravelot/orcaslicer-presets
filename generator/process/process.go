@@ -157,10 +157,10 @@ func GenerateProcess() ([]Process, error) {
 
 				SkirtLoops:                   "2",
 				TravelSpeed:                  "300",
+				TravelAcceleration:           "10000",
 				BrimType:                     "no_brim",
 				OnlyOneWallTop:               "1",
 				Resolution:                   "0.008",
-				TravelAcceleration:           "10000",
 				ElefantFootCompensation:      "0.1", // /!\ Can break overhang on second layer
 				BottomShellThickness:         "0.5",
 				TopShellThickness:            "0.7",
