@@ -32,7 +32,7 @@
 	"initial_layer_speed": "46",
 	"initial_layer_infill_speed": "100",
 	"top_surface_pattern": "monotonicline",
-	"bridge_speed": "100",
+	"bridge_speed": "46",
 	"internal_bridge_speed": "46",
 	"overhang_1_4_speed": "0",
 	"overhang_2_4_speed": "45",

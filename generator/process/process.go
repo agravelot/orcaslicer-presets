@@ -193,7 +193,7 @@ func GenerateProcess() ([]Process, error) {
 				SkirtSpeed:              "46",
 				InitialLayerInfillSpeed: "100",
 				InternalBridgeSpeed:     "46", // Avoid 50 speed noise spike
-				BridgeSpeed:             "100",
+				BridgeSpeed:             "46",
 				Overhang14Speed:         "0",
 				Overhang24Speed:         "45", // Avoid 50 speed noise spike
 				Overhang34Speed:         "30",
