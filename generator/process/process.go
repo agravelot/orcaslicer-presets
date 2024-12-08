@@ -226,7 +226,7 @@ func GenerateProcess() ([]Process, error) {
 				AccelToDecelEnable: "0",
 
 				PostProcess:    getPostProcess(profile),
-				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", getMode(profile)),
+				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", profile),
 			}
 
 			if strings.Contains(profile, "SILENT") {

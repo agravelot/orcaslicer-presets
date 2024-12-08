@@ -41,5 +41,5 @@
 	"support_interface_bottom_layers": "0",
 	"support_interface_top_layers": "5",
 	"support_angle": "45",
-	"filename_format": "{input_filename_base}_{filament_type[initial_tool]}_{print_time}_.gcode"
+	"filename_format": "{input_filename_base}_{filament_type[initial_tool]}_{print_time}_STANDARD.gcode"
 }
