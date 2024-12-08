@@ -221,7 +221,7 @@ func GenerateProcess() ([]Process, error) {
 				Overhang44Speed:         "10",
 
 				// Scarf joint
-				SeamSlopeType: "all",
+				// SeamSlopeType: "all",
 
 				AccelToDecelEnable: "0",
 

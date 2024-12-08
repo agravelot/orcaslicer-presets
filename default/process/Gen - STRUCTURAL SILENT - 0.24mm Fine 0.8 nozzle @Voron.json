@@ -17,7 +17,6 @@
 	"top_shell_layers": "5",
 	"resolution": "0.008",
 	"elefant_foot_compensation": "0.1",
-	"seam_slope_type": "all",
 	"accel_to_decel_enable": "0",
 	"tree_support_branch_diameter_double_wall": "0",
 	"travel_acceleration": "10000",

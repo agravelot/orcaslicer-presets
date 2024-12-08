@@ -18,7 +18,6 @@
 	"resolution": "0.008",
 	"raft_contact_distance": "0.25",
 	"elefant_foot_compensation": "0.1",
-	"seam_slope_type": "all",
 	"accel_to_decel_enable": "0",
 	"infill_anchor": "2.5",
 	"infill_anchor_max": "20",
