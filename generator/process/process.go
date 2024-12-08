@@ -115,19 +115,36 @@ type Process struct {
 }
 
 func getMode(t string) string {
-	mode := "SILENT"
-	if strings.Contains(t, "SPEED") {
-		mode = "PERFORMANCE"
+	if strings.Contains(t, "SILENT") {
+		return "SILENT"
 	}
-	return mode
+
+	if strings.Contains(t, "SPEED") {
+		return "PERFORMANCE"
+	}
+
+	return ""
 }
 
 func getPostProcess(t string) []string {
+	mode := getMode(t)
+
+	if len(mode) == 0 {
+		return []string{}
+	}
+
 	return []string{
 		// TODO Change path
-		fmt.Sprintf("/Users/agravelot/test.sh %s", getMode(t)),
+		fmt.Sprintf("/Users/agravelot/test.sh %s", mode),
 	}
 }
+
+const (
+	silentMaxSpeed       = "200"
+	silentMaxAccel       = "10000"
+	silentSCV            = "5"
+	silentMinCruiseRatio = "0.4"
+)
 
 // GenerateProcess generate the process
 func GenerateProcess() ([]Process, error) {
@@ -146,21 +163,25 @@ func GenerateProcess() ([]Process, error) {
 		"0.30mm Standard 0.6 nozzle @Voron",
 		"0.36mm Draft 0.6 nozzle @Voron",
 		"0.42mm Extra Draft 0.6 nozzle @Voron",
-		// TODO 0.8
+		// 0.8
+		"0.24mm Fine 0.8 nozzle @Voron",
+		"0.40mm Standard 0.8 nozzle @Voron",
+		"0.48mm Draft 0.8 nozzle @Voron",
+		"0.56mm Extra Draft 0.8 nozzle @Voron",
 	}
 
-	types := []string{"STANDARD", "STRUCTURAL", "SPEED", "STRUCTURAL SPEED"}
+	profiles := []string{"STANDARD", "STRUCTURAL", "STRUCTURAL SILENT", "STANDARD SILENT", "STANDARD SPEED", "STRUCTURAL SPEED"}
 
 	var process []Process
 
-	for _, t := range types {
+	for _, profile := range profiles {
 		for _, inherit := range inherits {
 			nozzleSize := utils.GetNozzleSize(inherit)
 			layerHeight := utils.GetLayerHeight(inherit)
 			//if nozzleSize != 0.4 {
 			//	nozzleName = fmt.Sprintf("%.2f nozzle", nozzleSize)
 			//}
-			name := fmt.Sprintf("%s - %s - %s", "Gen", t, inherit)
+			name := fmt.Sprintf("%s - %s - %s", "Gen", profile, inherit)
 
 			m := Process{
 				From:              "User",
@@ -204,11 +225,40 @@ func GenerateProcess() ([]Process, error) {
 
 				AccelToDecelEnable: "0",
 
-				PostProcess:    getPostProcess(t),
-				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", getMode(t)),
+				PostProcess:    getPostProcess(profile),
+				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", getMode(profile)),
 			}
 
-			if strings.Contains(t, "STRUCTURAL") {
+			if strings.Contains(profile, "SILENT") {
+				m.OuterWallSpeed = min(m.OuterWallSpeed, silentMaxSpeed)
+				m.InnerWallSpeed = min(m.InnerWallSpeed, silentMaxSpeed)
+				m.TravelSpeed = min(m.TravelSpeed, silentMaxSpeed)
+				m.SparseInfillSpeed = min(m.SparseInfillSpeed, silentMaxSpeed)
+				m.InternalSolidInfillSpeed = min(m.InternalSolidInfillSpeed, silentMaxSpeed)
+				m.TopSurfaceSpeed = min(m.TopSurfaceSpeed, silentMaxSpeed)
+				m.GapInfillSpeed = min(m.GapInfillSpeed, silentMaxSpeed)
+
+				m.TravelAcceleration = min(m.TravelAcceleration, silentMaxAccel)
+				m.BridgeAcceleration = min(m.BridgeAcceleration, silentMaxAccel)
+				m.DefaultAcceleration = min(m.DefaultAcceleration, silentMaxAccel)
+				m.InnerWallAcceleration = min(m.InnerWallAcceleration, silentMaxAccel)
+				m.OuterWallAcceleration = min(m.OuterWallAcceleration, silentMaxAccel)
+				m.InitialLayerAcceleration = min(m.InitialLayerAcceleration, silentMaxAccel)
+				m.SparseInfillAcceleration = min(m.SparseInfillAcceleration, silentMaxAccel)
+				m.TopSurfaceAcceleration = min(m.TopSurfaceAcceleration, silentMaxAccel)
+				m.InternalSolidInfillAcceleration = min(m.InternalSolidInfillAcceleration, silentMaxAccel)
+
+				// m.PostProcess
+				m.DefaultJerk = min(m.DefaultJerk, silentSCV)
+				m.InfillJerk = min(m.InfillJerk, silentSCV)
+				m.InitialLayerJerk = min(m.InitialLayerJerk, silentSCV)
+				m.InnerWallJerk = min(m.InitialLayerJerk, silentSCV)
+				m.OuterWallJerk = min(m.OuterWallJerk, silentSCV)
+				m.TopSurfaceJerk = min(m.TopSurfaceJerk, silentSCV)
+				m.TravelJerk = min(m.TravelJerk, silentSCV)
+			}
+
+			if strings.Contains(profile, "STRUCTURAL") {
 				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
 				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeight))    // 1mm
 				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeight)) // 1mm
@@ -219,7 +269,7 @@ func GenerateProcess() ([]Process, error) {
 				m.SparseInfillDensity = "40%"
 			}
 
-			if strings.Contains(t, "SPEED") {
+			if strings.Contains(profile, "SPEED") {
 				// Velocity
 				m.OuterWallSpeed = "200"
 				m.InnerWallSpeed = "300"
@@ -252,7 +302,7 @@ func GenerateProcess() ([]Process, error) {
 				m.TravelJerk = "12"
 			}
 
-			if strings.Contains(t, "STRUCTURAL") && strings.Contains(t, "SPEED") {
+			if strings.Contains(profile, "STRUCTURAL") && strings.Contains(profile, "SPEED") {
 				m.SparseInfillPattern = "3dhoneycomb"
 			}
 
@@ -304,10 +354,10 @@ func GenerateProcess() ([]Process, error) {
 				m.InternalSolidInfillLineWidth = "0.6"
 				m.TopSurfaceLineWidth = "0.5"
 
-				if strings.Contains(t, "STANDARD") || strings.Contains(t, "SPEED") {
+				if strings.Contains(profile, "STANDARD") || strings.Contains(profile, "SPEED") {
 					m.SparseInfillLineWidth = "0.68"
 					m.SupportLineWidth = "0.6"
-				} else if strings.Contains(t, "STRUCTURAL") {
+				} else if strings.Contains(profile, "STRUCTURAL") {
 					m.SparseInfillLineWidth = "0.6"
 					m.SupportLineWidth = "0.55"
 				} else {
