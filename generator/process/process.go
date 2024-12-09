@@ -114,6 +114,10 @@ type Process struct {
 
 	PostProcess    []string `json:"post_process,omitempty"`
 	FilenameFormat string   `json:"filename_format,omitempty"`
+
+	PreciseOuterWall  string `json:"precise_outer_wall,omitempty"`
+	ReverseOnEven     string `json:"overhang_reverse,omitempty"`
+	InfillWallOverlap string `json:"infill_wall_overlap,omitempty"`
 }
 
 func getMode(t string) string {
@@ -290,6 +294,9 @@ func GenerateProcess() ([]Process, error) {
 
 				// Scarf joint
 				// SeamSlopeType: "all",
+				PreciseOuterWall:  "1",
+				ReverseOnEven:     "1",
+				InfillWallOverlap: "15%",
 
 				AccelToDecelEnable: "0",
 
