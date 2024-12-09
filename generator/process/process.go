@@ -123,7 +123,7 @@ func getMode(t string) string {
 		return "PERFORMANCE"
 	}
 
-	return ""
+	return "NORMAL"
 }
 
 func getPostProcess(t string) []string {
