@@ -2,7 +2,9 @@ package process
 
 import (
 	"fmt"
+	"log"
 	"math"
+	"strconv"
 	"strings"
 
 	"github.com/agravelot/genrator/utils"
@@ -137,6 +139,72 @@ func getPostProcess(t string) []string {
 		// TODO Change path
 		fmt.Sprintf("/Users/agravelot/test.sh %s", mode),
 	}
+}
+
+type NoisyRange struct {
+	low  int
+	high int
+}
+
+var noisyRanges = []NoisyRange{
+	{
+		low:  16,
+		high: 31,
+	},
+	{
+		low:  34,
+		high: 44,
+	},
+	{
+		low:  48,
+		high: 63,
+	},
+	{
+		low:  70,
+		high: 83,
+	},
+	{
+		low:  100,
+		high: 120,
+	},
+}
+
+func findNearest(speed int, rang NoisyRange) string {
+	d1 := speed - rang.low
+	d2 := rang.low - speed
+
+	if d1 == d2 || d1 > d2 {
+		return strconv.Itoa(rang.low)
+	}
+
+	return strconv.Itoa(rang.high)
+}
+
+// avoidNoisySpeeds take into account registered noisy speed to avoid and pick closedt match
+func avoidNoisySpeeds(speed string) (string, error) {
+	if strings.HasSuffix(speed, "%") {
+		return speed, nil
+	}
+
+	speedInt, err := strconv.Atoi(speed)
+	if err != nil {
+		log.Printf("speed %s is not a number", speed)
+		return speed, fmt.Errorf("speed %s is not a number", speed)
+	}
+
+	for _, r := range noisyRanges {
+		if speedInt < r.low {
+			break
+		}
+		if speedInt > r.high {
+			continue
+		}
+
+		log.Printf("speed %d noisy, find nearest", speedInt)
+		return findNearest(speedInt, r), nil
+	}
+
+	return speed, nil
 }
 
 const (
@@ -367,6 +435,24 @@ func GenerateProcess() ([]Process, error) {
 
 			process = append(process, m)
 		}
+	}
+
+	for i := range process {
+		// TODO Error group
+		process[i].TravelSpeed, _ = avoidNoisySpeeds(process[i].TravelSpeed)
+		process[i].BridgeSpeed, _ = avoidNoisySpeeds(process[i].BridgeSpeed)
+		process[i].InternalBridgeSpeed, _ = avoidNoisySpeeds(process[i].InternalBridgeSpeed)
+		process[i].Overhang14Speed, _ = avoidNoisySpeeds(process[i].Overhang14Speed)
+		process[i].Overhang24Speed, _ = avoidNoisySpeeds(process[i].Overhang24Speed)
+		process[i].Overhang34Speed, _ = avoidNoisySpeeds(process[i].Overhang34Speed)
+		process[i].Overhang44Speed, _ = avoidNoisySpeeds(process[i].Overhang44Speed)
+		process[i].SparseInfillSpeed, _ = avoidNoisySpeeds(process[i].SparseInfillSpeed)
+		process[i].InternalSolidInfillSpeed, _ = avoidNoisySpeeds(process[i].InternalSolidInfillSpeed)
+		process[i].TopSurfaceSpeed, _ = avoidNoisySpeeds(process[i].TopSurfaceSpeed)
+		process[i].GapInfillSpeed, _ = avoidNoisySpeeds(process[i].GapInfillSpeed)
+		process[i].InitialLayerSpeed, _ = avoidNoisySpeeds(process[i].InitialLayerSpeed)
+		process[i].SkirtSpeed, _ = avoidNoisySpeeds(process[i].SkirtSpeed)
+		process[i].InitialLayerInfillSpeed, _ = avoidNoisySpeeds(process[i].InitialLayerInfillSpeed)
 	}
 
 	return process, nil

@@ -59,7 +59,7 @@
 	"bridge_acceleration": "40%",
 	"overhang_1_4_speed": "0",
 	"overhang_2_4_speed": "45",
-	"overhang_3_4_speed": "30",
+	"overhang_3_4_speed": "16",
 	"overhang_4_4_speed": "10",
 	"support_interface_bottom_layers": "0",
 	"support_interface_top_layers": "5",
