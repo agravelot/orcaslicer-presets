@@ -178,10 +178,10 @@ func findNearest(speed int, rang NoisyRange) string {
 	d2 := rang.low - speed
 
 	if d1 == d2 || d1 > d2 {
-		return strconv.Itoa(rang.low)
+		return strconv.Itoa(rang.low - 1)
 	}
 
-	return strconv.Itoa(rang.high)
+	return strconv.Itoa(rang.high + 1)
 }
 
 // avoidNoisySpeeds take into account registered noisy speed to avoid and pick closedt match
