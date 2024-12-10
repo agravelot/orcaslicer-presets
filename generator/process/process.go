@@ -278,17 +278,17 @@ func GenerateProcess() ([]Process, error) {
 				SparseInfillPattern:          "grid",
 				SupportInterfaceBottomLayers: "0",
 				SupportInterfaceTopLayers:    "5",
-				SupportAngle:                 "45", // Reduce first layer motor noise
+				SupportAngle:                 "50",
 
 				TopSurfacePattern: "monotonicline",
 
-				InitialLayerSpeed:       "46",
-				SkirtSpeed:              "46",
+				InitialLayerSpeed:       "50",
+				SkirtSpeed:              "50",
 				InitialLayerInfillSpeed: "100",
-				InternalBridgeSpeed:     "46", // Avoid 50 speed noise spike
-				BridgeSpeed:             "46",
+				InternalBridgeSpeed:     "50",
+				BridgeSpeed:             "35",
 				Overhang14Speed:         "0",
-				Overhang24Speed:         "45", // Avoid 50 speed noise spike
+				Overhang24Speed:         "50",
 				Overhang34Speed:         "30",
 				Overhang44Speed:         "10",
 
