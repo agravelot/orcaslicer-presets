@@ -1,6 +1,7 @@
 package process
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"math"
@@ -224,6 +225,64 @@ const (
 	silentMinCruiseRatio = "0.4"
 )
 
+func withInherits(p *Process) error {
+	tree := make([]map[string]any, 0)
+
+	fmt.Printf("%s", p.Name)
+
+	tt := make(map[string]any)
+
+	// TODO error
+	q, _ := json.Marshal(p)
+	_ = json.Unmarshal(q, &tt)
+
+	tree = append(tree, tt)
+
+	if len(p.Inherits) == 0 {
+		return nil
+	}
+
+	next := p.Inherits
+
+	for {
+		parent, err := getSystemProcessRaw(next)
+		if err != nil {
+			return fmt.Errorf("error reading system process %s: %w", p.Inherits, err)
+		}
+
+		tree = append(tree, parent)
+		v, ok := parent["inherits"].(string)
+		if v == "" || !ok {
+			break
+		}
+		next = v
+	}
+
+	for _, e := range tree {
+		fmt.Printf(" -> %s", e["name"])
+	}
+	fmt.Println()
+
+	newMap := make(map[string]any)
+
+	for i := len(tree) - 1; i >= 0; i-- {
+		for k, v := range tree[i] {
+			newMap[k] = v
+		}
+	}
+
+	jsonStr, _ := json.Marshal(newMap)
+	err := json.Unmarshal(jsonStr, p)
+	if err != nil {
+		log.Println(err)
+		// return nil, err
+	}
+
+	// fmt.Printf("🖨️ p: %+v\n", p)
+
+	return nil
+}
+
 // GenerateProcess generate the process
 func GenerateProcess() ([]Process, error) {
 	// TODO Matrix nozzle -> height -> data
@@ -306,6 +365,12 @@ func GenerateProcess() ([]Process, error) {
 				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", profile),
 			}
 
+			err := withInherits(&m)
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+
 			if strings.Contains(profile, "SILENT") {
 				m.OuterWallSpeed = min(m.OuterWallSpeed, silentMaxSpeed)
 				m.InnerWallSpeed = min(m.InnerWallSpeed, silentMaxSpeed)
@@ -333,6 +398,8 @@ func GenerateProcess() ([]Process, error) {
 				m.OuterWallJerk = min(m.OuterWallJerk, silentSCV)
 				m.TopSurfaceJerk = min(m.TopSurfaceJerk, silentSCV)
 				m.TravelJerk = min(m.TravelJerk, silentSCV)
+			}
+
 			if !strings.Contains(profile, "SPEED") {
 				m.SeamSlopeType = "all" // Scarf joint
 			}
@@ -466,6 +533,7 @@ func GenerateProcess() ([]Process, error) {
 		process[i].InitialLayerInfillSpeed, _ = avoidNoisySpeeds(process[i].InitialLayerInfillSpeed)
 	}
 
+	// ERS
 	for _, p := range process {
 		p.Name = fmt.Sprintf("ERS - %s", p.Name)
 		// p.OuterWallSpeed
@@ -504,6 +572,64 @@ func GenerateProcess() ([]Process, error) {
 
 		p.ExtrusionRateSmoothing = strconv.FormatFloat(math.Floor(-extrusionRateChange*0.8), 'f', 0, 64)
 
+		process = append(process, p)
 	}
+
+	// for i, p := range process {
+	// 	tree := make([]map[string]any, 0)
+	//
+	// 	fmt.Printf("%s", p.Name)
+	//
+	// 	tt := make(map[string]any)
+	//
+	// 	// TODO error
+	// 	q, _ := json.Marshal(p)
+	// 	_ = json.Unmarshal(q, &tt)
+	//
+	// 	tree = append(tree, tt)
+	//
+	// 	if len(p.Inherits) == 0 {
+	// 		continue
+	// 	}
+	//
+	// 	next := p.Inherits
+	//
+	// 	for {
+	// 		parent, err := getSystemProcessRaw(next)
+	// 		if err != nil {
+	// 			return nil, fmt.Errorf("error reading system process %s: %w", p.Inherits, err)
+	// 		}
+	//
+	// 		tree = append(tree, parent)
+	// 		v, ok := parent["inherits"].(string)
+	// 		if v == "" || !ok {
+	// 			break
+	// 		}
+	// 		next = v
+	// 	}
+	//
+	// 	for _, e := range tree {
+	// 		fmt.Printf(" -> %s", e["name"])
+	// 	}
+	// 	fmt.Println()
+	//
+	// 	newMap := make(map[string]any)
+	//
+	// 	for i := len(tree) - 1; i >= 0; i-- {
+	// 		for k, v := range tree[i] {
+	// 			newMap[k] = v
+	// 		}
+	// 	}
+	//
+	// 	jsonStr, _ := json.Marshal(newMap)
+	// 	err := json.Unmarshal(jsonStr, &process[i])
+	// 	if err != nil {
+	// 		log.Println(err)
+	// 		// return nil, err
+	// 	}
+	//
+	// 	fmt.Printf("🖨️ p: %+v\n", p)
+	// }
+
 	return process, nil
 }
