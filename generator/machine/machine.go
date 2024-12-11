@@ -72,9 +72,9 @@ func GenerateMachines() ([]Machine, error) {
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
-			RetractionLength:        []string{"0.7"},
-			RetractionSpeed:         []string{"35"},
-			DeretractionSpeed:       []string{"30"},
+			RetractionLength:        []string{"0.4"},
+			RetractionSpeed:         []string{"60"},
+			DeretractionSpeed:       []string{"40"},
 			ZHop:                    []string{"0.2"}, // TODO Maybe *2 or = layer height
 			ZHopTypes:               []string{"Auto Lift"},
 			Thumbnails:              []string{"32x32", "400x300"},
@@ -87,6 +87,9 @@ func GenerateMachines() ([]Machine, error) {
 			RetractionMinimumTravel: []string{"1.5"},
 			Wipe:                    []string{"1"},
 			RetractBeforeWipe:       []string{"70%"},
+
+			MachineMaxSpeedE: []string{"30", "25"},
+			MachineMaxSpeedZ: []string{"20", "12"},
 
 			// TODO Extract it in file?
 			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
