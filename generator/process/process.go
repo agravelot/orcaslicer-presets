@@ -281,7 +281,7 @@ func GenerateProcess() ([]Process, error) {
 				SparseInfillPattern:          "grid",
 				SupportInterfaceBottomLayers: "0",
 				SupportInterfaceTopLayers:    "5",
-				SupportAngle:                 "50",
+				SupportAngle:                 "45",
 				SupportBasePattern:           "default",
 
 				TopSurfacePattern: "monotonicline",
