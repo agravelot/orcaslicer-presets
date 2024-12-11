@@ -219,7 +219,7 @@ func avoidNoisySpeeds(speed string) (string, error) {
 
 const (
 	silentMaxSpeed       = "200"
-	silentMaxAccel       = "10000"
+	silentMaxAccel       = "8000"
 	silentSCV            = "5"
 	silentMinCruiseRatio = "0.4"
 )
