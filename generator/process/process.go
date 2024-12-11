@@ -55,6 +55,7 @@ type Process struct {
 	SupportBottomZDistance        string `json:"support_bottom_z_distance,omitempty"`
 	SupportInterfaceSpacing       string `json:"support_interface_spacing,omitempty"`
 	SupportTopZDistance           string `json:"support_top_z_distance,omitempty"`
+	SupportBasePattern            string `json:"support_base_pattern,omitempty"`
 	// Preferred Branch Angle
 	TreeSupportAngleSlow                string `json:"tree_support_angle_slow,omitempty"`
 	TreeSupportBranchAngleOrganic       string `json:"tree_support_branch_angle_organic,omitempty"`
@@ -281,6 +282,7 @@ func GenerateProcess() ([]Process, error) {
 				SupportInterfaceBottomLayers: "0",
 				SupportInterfaceTopLayers:    "5",
 				SupportAngle:                 "50",
+				SupportBasePattern:           "default",
 
 				TopSurfacePattern: "monotonicline",
 
