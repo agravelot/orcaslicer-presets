@@ -12,6 +12,9 @@ import (
 
 // Process is the struct for the process
 type Process struct {
+	NozzleSize  float64 `json:"-"`
+	LayerHeight float64 `json:"-"`
+
 	// Mandatory
 	Name              string `json:"name"`
 	From              string `json:"from"`
@@ -118,6 +121,8 @@ type Process struct {
 	PreciseOuterWall  string `json:"precise_outer_wall,omitempty"`
 	ReverseOnEven     string `json:"overhang_reverse,omitempty"`
 	InfillWallOverlap string `json:"infill_wall_overlap,omitempty"`
+
+	ExtrusionRateSmoothing string `json:"max_volumetric_extrusion_rate_slope,omitempty"`
 }
 
 func getMode(t string) string {
@@ -248,11 +253,6 @@ func GenerateProcess() ([]Process, error) {
 
 	for _, profile := range profiles {
 		for _, inherit := range inherits {
-			nozzleSize := utils.GetNozzleSize(inherit)
-			layerHeight := utils.GetLayerHeight(inherit)
-			//if nozzleSize != 0.4 {
-			//	nozzleName = fmt.Sprintf("%.2f nozzle", nozzleSize)
-			//}
 			name := fmt.Sprintf("%s - %s - %s", "Gen", profile, inherit)
 
 			m := Process{
@@ -266,6 +266,8 @@ func GenerateProcess() ([]Process, error) {
 				// TODO dynamic update_time ?
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
+				LayerHeight:                  utils.GetLayerHeight(inherit),
+				NozzleSize:                   utils.GetNozzleSize(inherit),
 				SkirtLoops:                   "2",
 				TravelSpeed:                  "300",
 				TravelAcceleration:           "10000",
@@ -334,9 +336,9 @@ func GenerateProcess() ([]Process, error) {
 			}
 
 			if strings.Contains(profile, "STRUCTURAL") {
-				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/nozzleSize))        // 1.6mm
-				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeight))    // 1mm
-				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/layerHeight)) // 1mm
+				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/m.NozzleSize))        // 1.6mm
+				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/m.LayerHeight))    // 1mm
+				m.BottomShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/m.LayerHeight)) // 1mm
 				m.BottomShellThickness = "1.0"
 				m.TopShellThickness = "1.0"
 
@@ -382,7 +384,7 @@ func GenerateProcess() ([]Process, error) {
 			}
 
 			// define on nozzle size
-			if nozzleSize == 0.4 {
+			if m.NozzleSize == 0.4 {
 				m.RaftContactDistance = "0.15"
 
 				// Infill anchor
@@ -399,17 +401,17 @@ func GenerateProcess() ([]Process, error) {
 				m.SupportLineWidth = "0.36"
 				m.TopSurfaceLineWidth = "0.42"
 
-				if layerHeight <= 0.15 {
+				if m.LayerHeight <= 0.15 {
 					m.TopSurfaceLineWidth = "0.4"
 				}
 			}
 
-			if nozzleSize == 0.8 {
+			if m.NozzleSize == 0.8 {
 				m.TreeSupportBranchDiameterDoubleWall = "0"
 			}
 
 			// define on nozzle size
-			if nozzleSize == 0.6 {
+			if m.NozzleSize == 0.6 {
 				m.RaftContactDistance = "0.25"
 				// Support
 				m.SupportTopZDistance = "0.22"
@@ -462,5 +464,44 @@ func GenerateProcess() ([]Process, error) {
 		process[i].InitialLayerInfillSpeed, _ = avoidNoisySpeeds(process[i].InitialLayerInfillSpeed)
 	}
 
+	for _, p := range process {
+		p.Name = fmt.Sprintf("ERS - %s", p.Name)
+		// p.OuterWallSpeed
+		var vf float64 = 10
+		vi, err := strconv.ParseFloat(p.OuterWallSpeed, 64)
+		if err != nil {
+			log.Printf("OuterWallSpeed '%s' is not a number profile=%s", p.OuterWallSpeed, p.Name)
+			continue
+		}
+		// TODO divide?
+		a, err := strconv.ParseFloat("-"+p.OuterWallAcceleration, 64)
+		if err != nil {
+			log.Println(p.Name)
+			log.Printf("OuterWallAcceleration '%s' is not a number profile=%s", p.OuterWallAcceleration, p.Name)
+			continue
+		}
+
+		t := (vf - vi) / a
+
+		// log.Printf("(%f - %f) / %f = %f", vf, vi, a, t)
+
+		w, err := strconv.ParseFloat(p.OuterWallLineWidth, 64)
+		if err != nil {
+			log.Println(p.Name)
+			log.Printf("OuterWallLineWidth %s is not a number", p.OuterWallLineWidth)
+			continue
+		}
+
+		h := p.LayerHeight
+
+		// ext := (w-h)*h + math.Pi*math.Pow(h/2, 2)
+		initialExtrusion := utils.EllipticalExtrusionRate(w, h, vi)
+		finalExtrusion := utils.EllipticalExtrusionRate(w, h, vf)
+		deltaExtrusion := finalExtrusion - initialExtrusion
+		extrusionRateChange := deltaExtrusion / t
+
+		p.ExtrusionRateSmoothing = strconv.FormatFloat(math.Floor(-extrusionRateChange*0.8), 'f', 0, 64)
+
+	}
 	return process, nil
 }

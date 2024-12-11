@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"math"
 	"strconv"
 	"strings"
 )
@@ -23,4 +24,17 @@ func GetNozzleSize(inheritString string) float64 {
 	}
 
 	return 0.4
+}
+
+// EllipticalExtrusionRate computate precise extrusion in mm^3/s
+func EllipticalExtrusionRate(lineWidth float64, layerHeight float64, printSpeed float64) float64 {
+	// Calculate the cross-sectional area of the oval
+	semiMajorAxis := lineWidth / 2.0   // Half of the line width
+	semiMinorAxis := layerHeight / 2.0 // Half of the layer height
+
+	// Area of an ellipse: π * a * b
+	crossSectionalArea := math.Pi * semiMajorAxis * semiMinorAxis
+
+	// Calculate the volumetric extrusion rate
+	return crossSectionalArea * printSpeed
 }
