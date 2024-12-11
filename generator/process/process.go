@@ -296,8 +296,6 @@ func GenerateProcess() ([]Process, error) {
 				Overhang34Speed:         "30",
 				Overhang44Speed:         "10",
 
-				// Scarf joint
-				// SeamSlopeType: "all",
 				PreciseOuterWall:  "1",
 				ReverseOnEven:     "1",
 				InfillWallOverlap: "15%",
@@ -335,6 +333,8 @@ func GenerateProcess() ([]Process, error) {
 				m.OuterWallJerk = min(m.OuterWallJerk, silentSCV)
 				m.TopSurfaceJerk = min(m.TopSurfaceJerk, silentSCV)
 				m.TravelJerk = min(m.TravelJerk, silentSCV)
+			if !strings.Contains(profile, "SPEED") {
+				m.SeamSlopeType = "all" // Scarf joint
 			}
 
 			if strings.Contains(profile, "STRUCTURAL") {
