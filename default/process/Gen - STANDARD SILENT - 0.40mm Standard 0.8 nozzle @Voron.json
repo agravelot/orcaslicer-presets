@@ -13,7 +13,9 @@
 	"sparse_infill_pattern": "grid",
 	"resolution": "0.008",
 	"elefant_foot_compensation": "0.1",
+	"seam_slope_type": "all",
 	"accel_to_decel_enable": "0",
+	"support_base_pattern": "default",
 	"tree_support_branch_diameter_double_wall": "0",
 	"travel_acceleration": "10000",
 	"bottom_shell_thickness": "0.5",
@@ -29,7 +31,7 @@
 	"overhang_4_4_speed": "10",
 	"support_interface_bottom_layers": "0",
 	"support_interface_top_layers": "5",
-	"support_angle": "50",
+	"support_angle": "45",
 	"post_process": [
 		"/Users/agravelot/test.sh SILENT"
 	],
