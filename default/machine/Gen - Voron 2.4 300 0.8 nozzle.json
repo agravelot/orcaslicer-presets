@@ -25,6 +25,14 @@
 		"3",
 		"0.4"
 	],
+	"machine_max_speed_e": [
+		"30",
+		"25"
+	],
+	"machine_max_speed_z": [
+		"20",
+		"12"
+	],
 	"machine_start_gcode": "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
 	"nozzle_type": "brass",
 	"print_host": "https://192.168.0.35",
@@ -32,7 +40,7 @@
 		"0"
 	],
 	"retraction_length": [
-		"0.7"
+		"0.4"
 	],
 	"thumbnails": [
 		"32x32",
@@ -56,10 +64,10 @@
 		"1"
 	],
 	"deretraction_speed": [
-		"30"
+		"40"
 	],
 	"retraction_speed": [
-		"35"
+		"60"
 	],
 	"retract_lift_below": [
 		"255"
