@@ -283,6 +283,34 @@ func withInherits(p *Process) error {
 	return nil
 }
 
+func minSpeed(a string, b string) string {
+	if strings.HasSuffix(a, "%") {
+		return a
+	}
+
+	if strings.HasSuffix(b, "%") {
+		return b
+	}
+
+	ai, err := strconv.Atoi(a)
+	if err != nil {
+		log.Printf("speed %s is not a number", a)
+		return a
+	}
+
+	bi, err := strconv.Atoi(b)
+	if err != nil {
+		log.Printf("speed %s is not a number", b)
+		return b
+	}
+
+	if ai < bi {
+		return a
+	}
+
+	return b
+}
+
 // GenerateProcess generate the process
 func GenerateProcess() ([]Process, error) {
 	// TODO Matrix nozzle -> height -> data
@@ -372,32 +400,31 @@ func GenerateProcess() ([]Process, error) {
 			}
 
 			if strings.Contains(profile, "SILENT") {
-				m.OuterWallSpeed = min(m.OuterWallSpeed, silentMaxSpeed)
-				m.InnerWallSpeed = min(m.InnerWallSpeed, silentMaxSpeed)
-				m.TravelSpeed = min(m.TravelSpeed, silentMaxSpeed)
-				m.SparseInfillSpeed = min(m.SparseInfillSpeed, silentMaxSpeed)
-				m.InternalSolidInfillSpeed = min(m.InternalSolidInfillSpeed, silentMaxSpeed)
-				m.TopSurfaceSpeed = min(m.TopSurfaceSpeed, silentMaxSpeed)
-				m.GapInfillSpeed = min(m.GapInfillSpeed, silentMaxSpeed)
+				m.OuterWallSpeed = minSpeed(m.OuterWallSpeed, silentMaxSpeed)
+				m.InnerWallSpeed = minSpeed(m.InnerWallSpeed, silentMaxSpeed)
+				m.TravelSpeed = minSpeed(m.TravelSpeed, silentMaxSpeed)
+				m.SparseInfillSpeed = minSpeed(m.SparseInfillSpeed, silentMaxSpeed)
+				m.InternalSolidInfillSpeed = minSpeed(m.InternalSolidInfillSpeed, silentMaxSpeed)
+				m.TopSurfaceSpeed = minSpeed(m.TopSurfaceSpeed, silentMaxSpeed)
+				m.GapInfillSpeed = minSpeed(m.GapInfillSpeed, silentMaxSpeed)
 
-				m.TravelAcceleration = min(m.TravelAcceleration, silentMaxAccel)
-				m.BridgeAcceleration = min(m.BridgeAcceleration, silentMaxAccel)
-				m.DefaultAcceleration = min(m.DefaultAcceleration, silentMaxAccel)
-				m.InnerWallAcceleration = min(m.InnerWallAcceleration, silentMaxAccel)
-				m.OuterWallAcceleration = min(m.OuterWallAcceleration, silentMaxAccel)
-				m.InitialLayerAcceleration = min(m.InitialLayerAcceleration, silentMaxAccel)
-				m.SparseInfillAcceleration = min(m.SparseInfillAcceleration, silentMaxAccel)
-				m.TopSurfaceAcceleration = min(m.TopSurfaceAcceleration, silentMaxAccel)
-				m.InternalSolidInfillAcceleration = min(m.InternalSolidInfillAcceleration, silentMaxAccel)
+				m.TravelAcceleration = minSpeed(m.TravelAcceleration, silentMaxAccel)
+				m.BridgeAcceleration = minSpeed(m.BridgeAcceleration, silentMaxAccel)
+				m.DefaultAcceleration = minSpeed(m.DefaultAcceleration, silentMaxAccel)
+				m.InnerWallAcceleration = minSpeed(m.InnerWallAcceleration, silentMaxAccel)
+				m.OuterWallAcceleration = minSpeed(m.OuterWallAcceleration, silentMaxAccel)
+				m.InitialLayerAcceleration = minSpeed(m.InitialLayerAcceleration, silentMaxAccel)
+				m.SparseInfillAcceleration = minSpeed(m.SparseInfillAcceleration, silentMaxAccel)
+				m.TopSurfaceAcceleration = minSpeed(m.TopSurfaceAcceleration, silentMaxAccel)
+				m.InternalSolidInfillAcceleration = minSpeed(m.InternalSolidInfillAcceleration, silentMaxAccel)
 
-				// m.PostProcess
-				m.DefaultJerk = min(m.DefaultJerk, silentSCV)
-				m.InfillJerk = min(m.InfillJerk, silentSCV)
-				m.InitialLayerJerk = min(m.InitialLayerJerk, silentSCV)
-				m.InnerWallJerk = min(m.InitialLayerJerk, silentSCV)
-				m.OuterWallJerk = min(m.OuterWallJerk, silentSCV)
-				m.TopSurfaceJerk = min(m.TopSurfaceJerk, silentSCV)
-				m.TravelJerk = min(m.TravelJerk, silentSCV)
+				m.DefaultJerk = minSpeed(m.DefaultJerk, silentSCV)
+				m.InfillJerk = minSpeed(m.InfillJerk, silentSCV)
+				m.InitialLayerJerk = minSpeed(m.InitialLayerJerk, silentSCV)
+				m.InnerWallJerk = minSpeed(m.InitialLayerJerk, silentSCV)
+				m.OuterWallJerk = minSpeed(m.OuterWallJerk, silentSCV)
+				m.TopSurfaceJerk = minSpeed(m.TopSurfaceJerk, silentSCV)
+				m.TravelJerk = minSpeed(m.TravelJerk, silentSCV)
 			}
 
 			if !strings.Contains(profile, "SPEED") {
