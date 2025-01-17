@@ -20,6 +20,7 @@
 	"raft_layers": "0",
 	"elefant_foot_compensation": "0.1",
 	"seam_slope_type": "all",
+	"seam_slope_conditional": "1",
 	"accel_to_decel_enable": "0",
 	"infill_anchor": "2.5",
 	"infill_anchor_max": "20",
