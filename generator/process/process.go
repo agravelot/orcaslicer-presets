@@ -417,13 +417,13 @@ func GenerateProcess() ([]Process, error) {
 				m.TopSurfaceAcceleration = minSpeed(m.TopSurfaceAcceleration, silentMaxAccel)
 				m.InternalSolidInfillAcceleration = minSpeed(m.InternalSolidInfillAcceleration, silentMaxAccel)
 
-				m.DefaultJerk = minSpeed(m.DefaultJerk, silentSCV)
-				m.InfillJerk = minSpeed(m.InfillJerk, silentSCV)
-				m.InitialLayerJerk = minSpeed(m.InitialLayerJerk, silentSCV)
-				m.InnerWallJerk = minSpeed(m.InitialLayerJerk, silentSCV)
-				m.OuterWallJerk = minSpeed(m.OuterWallJerk, silentSCV)
-				m.TopSurfaceJerk = minSpeed(m.TopSurfaceJerk, silentSCV)
-				m.TravelJerk = minSpeed(m.TravelJerk, silentSCV)
+				// m.DefaultJerk = minSpeed(m.DefaultJerk, silentSCV)
+				// m.InfillJerk = minSpeed(m.InfillJerk, silentSCV)
+				// m.InitialLayerJerk = minSpeed(m.InitialLayerJerk, silentSCV)
+				// m.InnerWallJerk = minSpeed(m.InitialLayerJerk, silentSCV)
+				// m.OuterWallJerk = minSpeed(m.OuterWallJerk, silentSCV)
+				// m.TopSurfaceJerk = minSpeed(m.TopSurfaceJerk, silentSCV)
+				// m.TravelJerk = minSpeed(m.TravelJerk, silentSCV)
 			}
 
 			if !strings.Contains(profile, "SPEED") {
