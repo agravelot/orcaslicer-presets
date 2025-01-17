@@ -6,7 +6,7 @@
         "1"
     ],
     "fan_max_speed": [
-        "30"
+        "70"
     ],
     "fan_min_speed": [
         "30"
@@ -38,9 +38,6 @@
     ],
     "pressure_advance": [
         "0.03"
-    ],
-    "slow_down_layer_time": [
-        "5"
     ],
     "version": "1.5.1.2"
 }

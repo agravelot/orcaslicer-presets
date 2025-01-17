@@ -30,13 +30,16 @@
         "30"
     ],
     "filament_flow_ratio": [
-        "0.965"
+        "0.96"
     ],
     "filament_max_volumetric_speed": [
         "32"
     ],
     "filament_settings_id": [
         "v2 - ABS 0.6mm"
+    ],
+    "filament_shrink": [
+        "99.5334%"
     ],
     "filament_type": [
         "ABS"
@@ -54,11 +57,11 @@
     "inherits": "Voron Generic ASA",
     "is_custom_defined": "0",
     "name": "v2 - ABS 0.6mm",
-    "nozzle_temperature_initial_layer": [
-        "250"
-    ],
     "overhang_fan_speed": [
         "70"
+    ],
+    "pressure_advance": [
+        "0.017"
     ],
     "slow_down_layer_time": [
         "15"
