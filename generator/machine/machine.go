@@ -30,6 +30,8 @@ type Machine struct {
 	MachineStartGcode      string   `json:"machine_start_gcode,omitempty"`
 	NozzleType             string   `json:"nozzle_type,omitempty"`
 	PrintHost              string   `json:"print_host,omitempty"`
+	PrintHostWebui         string   `json:"print_host_webui,omitempty"`
+	PrintHostAPIKey        string   `json:"printhost_apikey,omitempty"`
 	RetractLiftAbove       []string `json:"retract_lift_above,omitempty"`
 	RetractionLength       []string `json:"retraction_length,omitempty"`
 	Thumbnails             []string `json:"thumbnails,omitempty"`
@@ -80,7 +82,9 @@ func GenerateMachines() ([]Machine, error) {
 			Thumbnails:              []string{"32x32", "400x300"},
 			RetractLiftAbove:        []string{"0"},
 			NozzleType:              "brass",
-			PrintHost:               "https://192.168.0.35",
+			PrintHost:               "https://192.168.0.35:7130",
+			PrintHostWebui:          "https://fluidd.agravelot.eu",
+			PrintHostAPIKey:         "", // TODO
 			ChangeFilamentGcode:     "M600",
 			SupportMultiBedTypes:    "1",
 			PrintableHeight:         "255",
