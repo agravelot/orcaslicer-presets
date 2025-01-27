@@ -160,24 +160,12 @@ type NoisyRange struct {
 
 var noisyRanges = []NoisyRange{
 	{
-		low:  16,
-		high: 31,
+		low:  25,
+		high: 40,
 	},
 	{
-		low:  34,
-		high: 44,
-	},
-	{
-		low:  48,
-		high: 63,
-	},
-	{
-		low:  70,
-		high: 83,
-	},
-	{
-		low:  100,
-		high: 120,
+		low:  95,
+		high: 175,
 	},
 }
 
@@ -356,7 +344,7 @@ func GenerateProcess() ([]Process, error) {
 				LayerHeight:                  utils.GetLayerHeight(inherit),
 				NozzleSize:                   utils.GetNozzleSize(inherit),
 				SkirtLoops:                   "2",
-				TravelSpeed:                  "300",
+				TravelSpeed:                  "400",
 				TravelAcceleration:           "10000",
 				BrimType:                     "no_brim",
 				OnlyOneWallTop:               "1",
@@ -383,7 +371,7 @@ func GenerateProcess() ([]Process, error) {
 				Overhang44Speed:         "10",
 
 				PreciseOuterWall:  "1",
-				ReverseOnEven:     "1",
+				ReverseOnEven:     "0",
 				InfillWallOverlap: "15%",
 
 				AccelToDecelEnable: "0",
@@ -445,18 +433,18 @@ func GenerateProcess() ([]Process, error) {
 			if strings.Contains(profile, "SPEED") {
 				// Velocity
 				m.OuterWallSpeed = "200"
-				m.InnerWallSpeed = "300"
+				m.InnerWallSpeed = "500"
 				m.TravelSpeed = "500"
-				m.SparseInfillSpeed = "300"
-				m.InternalSolidInfillSpeed = "300"
+				m.SparseInfillSpeed = "400"
+				m.InternalSolidInfillSpeed = "400"
 				m.TopSurfaceSpeed = "150"
-				m.GapInfillSpeed = "300"
+				m.GapInfillSpeed = "400"
 
 				// Accel
-				m.DefaultAcceleration = "12000"
-				m.TravelAcceleration = "15000"
+				m.DefaultAcceleration = "20000"
+				m.TravelAcceleration = "20000"
 				m.OuterWallAcceleration = "5000"
-				m.InnerWallAcceleration = "10000"
+				m.InnerWallAcceleration = "20000"
 				m.BridgeAcceleration = "40%"
 				m.SparseInfillAcceleration = "100%"
 				m.InternalSolidInfillAcceleration = "100%"
