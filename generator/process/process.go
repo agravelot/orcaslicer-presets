@@ -121,9 +121,10 @@ type Process struct {
 	PostProcess    []string `json:"post_process,omitempty"`
 	FilenameFormat string   `json:"filename_format,omitempty"`
 
-	PreciseOuterWall  string `json:"precise_outer_wall,omitempty"`
-	ReverseOnEven     string `json:"overhang_reverse,omitempty"`
-	InfillWallOverlap string `json:"infill_wall_overlap,omitempty"`
+	PreciseOuterWall           string `json:"precise_outer_wall,omitempty"`
+	ReverseOnEven              string `json:"overhang_reverse,omitempty"`
+	InfillWallOverlap          string `json:"infill_wall_overlap,omitempty"`
+	TopBottomInfillWallOverlap string `json:"top_bottom_infill_wall_overlap,omitempty"`
 
 	ExtrusionRateSmoothing string `json:"max_volumetric_extrusion_rate_slope,omitempty"`
 }
@@ -346,6 +347,9 @@ func GenerateProcess() ([]Process, error) {
 				SkirtLoops:                   "2",
 				TravelSpeed:                  "400",
 				TravelAcceleration:           "10000",
+				TopSurfaceAcceleration:       "2000",
+				InnerWallAcceleration:        "4000",
+				DefaultAcceleration:          "4000",
 				BrimType:                     "no_brim",
 				OnlyOneWallTop:               "1",
 				Resolution:                   "0.008",
@@ -365,14 +369,15 @@ func GenerateProcess() ([]Process, error) {
 				InitialLayerInfillSpeed: "100",
 				InternalBridgeSpeed:     "50",
 				BridgeSpeed:             "35",
-				Overhang14Speed:         "0",
+				Overhang14Speed:         "65",
 				Overhang24Speed:         "50",
 				Overhang34Speed:         "30",
 				Overhang44Speed:         "10",
 
-				PreciseOuterWall:  "1",
-				ReverseOnEven:     "0",
-				InfillWallOverlap: "15%",
+				PreciseOuterWall:           "1",
+				ReverseOnEven:              "0",
+				InfillWallOverlap:          "20%",
+				TopBottomInfillWallOverlap: "20%",
 
 				AccelToDecelEnable: "0",
 
