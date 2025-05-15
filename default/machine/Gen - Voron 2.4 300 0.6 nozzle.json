@@ -55,6 +55,7 @@
 	],
 	"support_multi_bed_types": "1",
 	"printable_height": "255",
+	"fan_speedup_time": "0.6",
 	"retraction_minimum_travel": [
 		"1.5"
 	],

@@ -39,6 +39,7 @@ type Machine struct {
 	ZHopTypes              []string `json:"z_hop_types,omitempty"`
 	SupportMultiBedTypes   string   `json:"support_multi_bed_types,omitempty"`
 	PrintableHeight        string   `json:"printable_height,omitempty"`
+	FanSpeedupTime         string   `json:"fan_speedup_time,omitempty"`
 
 	// Extruder
 	RetractionMinimumTravel []string `json:"retraction_minimum_travel,omitempty"`
@@ -91,6 +92,7 @@ func GenerateMachines() ([]Machine, error) {
 			RetractionMinimumTravel: []string{"1.5"},
 			Wipe:                    []string{"1"},
 			RetractBeforeWipe:       []string{"70%"},
+			FanSpeedupTime:          "0.6",
 
 			MachineMaxSpeedE: []string{"30", "25"},
 			MachineMaxSpeedZ: []string{"20", "12"},

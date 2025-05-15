@@ -17,7 +17,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	// TODO Assert processes is not printing with noisy speeds
 
 	for _, p := range processes {
 		err = writeProcess(p)
@@ -43,17 +42,17 @@ func main() {
 func writeMachine(machine machine.Machine) error {
 	jsonMachine, err := json.MarshalIndent(machine, "", "	")
 	if err != nil {
-		return fmt.Errorf("Error marshalling machine: %w", err)
+		return fmt.Errorf("error marshalling machine: %w", err)
 	}
 
 	err = os.WriteFile(exportPath+"machine/"+machine.Name+".json", jsonMachine, 0644)
 	if err != nil {
-		return fmt.Errorf("Error writing machine: %w", err)
+		return fmt.Errorf("error writing machine: %w", err)
 	}
 
 	err = os.WriteFile(exportPath+"machine/"+machine.Name+".info", []byte(machine.InfoFile), 0644)
 	if err != nil {
-		return fmt.Errorf("Error writing machine info: %w", err)
+		return fmt.Errorf("error writing machine info: %w", err)
 	}
 
 	return nil
@@ -62,17 +61,17 @@ func writeMachine(machine machine.Machine) error {
 func writeProcess(process process.Process) error {
 	jsonProcess, err := json.MarshalIndent(process, "", "	")
 	if err != nil {
-		return fmt.Errorf("Error marshalling process: %w", err)
+		return fmt.Errorf("error marshalling process: %w", err)
 	}
 
 	err = os.WriteFile(exportPath+"process/"+process.Name+".json", jsonProcess, 0644)
 	if err != nil {
-		return fmt.Errorf("Error writing process: %w", err)
+		return fmt.Errorf("error writing process: %w", err)
 	}
 
 	err = os.WriteFile(exportPath+"process/"+process.Name+".info", []byte(process.InfoFile), 0644)
 	if err != nil {
-		return fmt.Errorf("Error writing process info: %w", err)
+		return fmt.Errorf("error writing process info: %w", err)
 	}
 
 	return nil

@@ -3,6 +3,7 @@
     "change_filament_gcode": "M600\nG1 E0.4 F1500 ; prime after color change",
     "from": "User",
     "gcode_flavor": "klipper",
+    "host_type": "octoprint",
     "inherits": "Prusa MK3S 0.4 nozzle",
     "is_custom_defined": "0",
     "layer_change_gcode": ";AFTER_LAYER_CHANGE\n;[layer_z]\nSET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}",
@@ -10,7 +11,7 @@
     "machine_pause_gcode": "PAUSE",
     "machine_start_gcode": "; M190 S0\n; M109 S0 ; uncomment to remove set&wait temp gcode added automatically after this start gcode\n\nSET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\nprint_start EXTRUDER=[first_layer_temperature[initial_tool]] BED=[first_layer_bed_temperature]\n\n",
     "name": "Prusa MK3S 0.4 nozzle - klipper",
-    "print_host": "http://192.168.0.64",
+    "print_host": "http://192.168.0.37",
     "printer_settings_id": "Prusa MK3S 0.4 nozzle - klipper",
     "version": "1.5.4.0"
 }
