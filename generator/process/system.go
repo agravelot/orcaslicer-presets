@@ -5,19 +5,36 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path"
+	"path/filepath"
+	"runtime"
 	"strings"
 )
 
-const sysDir = "/Applications/OrcaSlicer.app/Contents/Resources/profiles/Voron"
+var sysDir string
 
-var (
-	systemProcesses    = make(map[string]Process)
-	systemProcessesRaw = make(map[string]map[string]any)
-)
+// systemProcesses    = make(map[string]Process)
+var systemProcessesRaw = make(map[string]map[string]any)
+
+func init() {
+	// if runtime.GOOS == "windows" {
+	// }
+
+	// TODO find a better solution for this
+	if runtime.GOOS == "linux" {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			panic(err)
+		}
+		sysDir = homeDir + "/lab/OrcaSlicer/resources/profiles/Voron"
+	}
+
+	if runtime.GOOS == "darwin" {
+		sysDir = "/Applications/OrcaSlicer.app/Contents/Resources/profiles/Voron"
+	}
+}
 
 func listSystemProcesses() ([]string, error) {
-	files, err := os.ReadDir(path.Join(sysDir, "/process"))
+	files, err := os.ReadDir(filepath.Join(sysDir, "/process"))
 	if err != nil {
 		return []string{}, fmt.Errorf("error reading process dire: %w", err)
 	}
@@ -40,7 +57,7 @@ func listSystemProcesses() ([]string, error) {
 }
 
 func readSystemProcess(filename string) (Process, error) {
-	file, err := os.Open(path.Join(sysDir, "process", filename+".json"))
+	file, err := os.Open(filepath.Join(sysDir, "process", filename+".json"))
 	if err != nil {
 		return Process{}, fmt.Errorf("error opening file: %w", err)
 	}
@@ -62,7 +79,7 @@ func readSystemProcess(filename string) (Process, error) {
 }
 
 func readSystemProcessRaw(filename string) (map[string]any, error) {
-	file, err := os.Open(path.Join(sysDir, "process", filename+".json"))
+	file, err := os.Open(filepath.Join(sysDir, "process", filename+".json"))
 	if err != nil {
 		return nil, fmt.Errorf("error opening file: %w", err)
 	}
