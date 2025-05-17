@@ -376,8 +376,8 @@ func GenerateProcess() ([]Process, error) {
 
 				PreciseOuterWall:           "1",
 				ReverseOnEven:              "0",
-				InfillWallOverlap:          "20%",
-				TopBottomInfillWallOverlap: "20%",
+				InfillWallOverlap:          "15%",
+				TopBottomInfillWallOverlap: "15%",
 
 				AccelToDecelEnable: "0",
 
