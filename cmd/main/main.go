@@ -13,7 +13,7 @@ import (
 // const exportPath = ""
 var exportPath = ""
 
-var generatedFolder = "../user/default"
+var generatedFolder = "./user/default"
 
 // func init() {
 // 	generatedFolder = filepath.Join(".", "generated")
