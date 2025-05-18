@@ -12,8 +12,10 @@ import (
 
 var sysDir string
 
-// systemProcesses    = make(map[string]Process)
-var systemProcessesRaw = make(map[string]map[string]any)
+var (
+	systemProcesses    = make(map[string]Process)
+	systemProcessesRaw = make(map[string]map[string]any)
+)
 
 func init() {
 	// if runtime.GOOS == "windows" {
