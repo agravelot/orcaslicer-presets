@@ -8,13 +8,12 @@ import (
 // Machine represents a 3D printer machine
 type Machine struct {
 	// Mandatory
-	Name              string `json:"name"`
-	From              string `json:"from"`
-	Inherits          string `json:"inherits"`
-	PrinterSettingsID string `json:"printer_settings_id"`
-	Version           string `json:"version"`
-	IsCustomDefined   string `json:"is_custom_defined"`
-	InfoFile          string `json:"-"`
+	Name            string `json:"name"`
+	From            string `json:"from"`
+	Inherits        string `json:"inherits"`
+	Version         string `json:"version"`
+	IsCustomDefined string `json:"is_custom_defined"`
+	InfoFile        string `json:"-"`
 
 	// Optional
 	BeforeLayerChangeGcode string   `json:"before_layer_change_gcode,omitempty"`
@@ -66,12 +65,11 @@ func GenerateMachines() ([]Machine, error) {
 		// nozzleSize := getNozzleSize(inherit)
 
 		m := Machine{
-			From:              "User",
-			Inherits:          inherit,
-			Name:              name,
-			IsCustomDefined:   "0",
-			Version:           "1.9.0.2",
-			PrinterSettingsID: name,
+			From:            "User",
+			Inherits:        inherit,
+			Name:            name,
+			IsCustomDefined: "0",
+			Version:         "1.9.0.2",
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
