@@ -48,6 +48,9 @@ type Machine struct {
 	DeretractionSpeed       []string `json:"deretraction_speed,omitempty"`
 	RetractionSpeed         []string `json:"retraction_speed,omitempty"`
 	RetractLiftBelow        []string `json:"retract_lift_below,omitempty"`
+	ResonanceAvoidance      string   `json:"resonance_avoidance,omitempty"`
+	MaxResonanceAvoidance   string   `json:"max_resonance_avoidance,omitempty"`
+	MinResonanceAvoidance   string   `json:"min_resonance_avoidance,omitempty"`
 }
 
 func GenerateMachines() ([]Machine, error) {
@@ -78,10 +81,10 @@ func GenerateMachines() ([]Machine, error) {
 			DeretractionSpeed:       []string{"40"},
 			ZHop:                    []string{"0.2"}, // TODO Maybe *2 or = layer height
 			ZHopTypes:               []string{"Auto Lift"},
-			Thumbnails:              []string{"32x32", "400x300"},
+			Thumbnails:              []string{"32x32/PNG", "400x300/PNG"},
 			RetractLiftAbove:        []string{"0"},
 			NozzleType:              "brass",
-			PrintHost:               "https://192.168.0.35:7130",
+			PrintHost:               "https://moonraker.agravelot.eu",
 			PrintHostWebui:          "https://fluidd.agravelot.eu",
 			PrintHostAPIKey:         "", // TODO
 			ChangeFilamentGcode:     "M600",
@@ -104,6 +107,10 @@ func GenerateMachines() ([]Machine, error) {
 			MachineMaxJerkY:        []string{"20", "12"}, // 20
 			MachineMaxJerkZ:        []string{"3", "0.4"},
 			MachineMaxJerkE:        []string{"2.5", "2.5"},
+
+			ResonanceAvoidance:    "1",
+			MaxResonanceAvoidance: "170",
+			MinResonanceAvoidance: "70",
 		}
 
 		printableHeight, _ := strconv.Atoi(m.PrintableHeight)
