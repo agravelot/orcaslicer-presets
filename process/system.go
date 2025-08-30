@@ -17,9 +17,28 @@ var (
 	systemProcessesRaw = make(map[string]map[string]any)
 )
 
+// isWSL checks if running inside WSL
+func isWSL() bool {
+	data, err := os.ReadFile("/proc/version")
+	if err != nil {
+		return false
+	}
+
+	return strings.Contains(string(data), "microsoft")
+}
+
 func init() {
 	// if runtime.GOOS == "windows" {
 	// }
+
+	if isWSL() {
+		pwd, err := os.Getwd()
+		if err != nil {
+			panic(err)
+		}
+		sysDir = pwd + "/system/Voron"
+		return
+	}
 
 	// TODO find a better solution for this
 	if runtime.GOOS == "linux" {
@@ -28,6 +47,7 @@ func init() {
 			panic(err)
 		}
 		sysDir = homeDir + "/lab/OrcaSlicer/resources/profiles/Voron"
+		return
 	}
 
 	if runtime.GOOS == "darwin" {
