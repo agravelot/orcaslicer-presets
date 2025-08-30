@@ -93,7 +93,7 @@ func GenerateMachines() ([]Machine, error) {
 			RetractionMinimumTravel: []string{"1.5"},
 			Wipe:                    []string{"1"},
 			RetractBeforeWipe:       []string{"70%"},
-			FanSpeedupTime:          "0.6",
+			FanSpeedupTime:          "0.8",
 
 			MachineMaxSpeedE: []string{"30", "25"},
 			MachineMaxSpeedZ: []string{"20", "12"},
