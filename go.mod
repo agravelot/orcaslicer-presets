@@ -1,6 +1,6 @@
 module github.com/agravelot/genrator
 
-go 1.21.4
+go 1.23
 
 require (
 	github.com/kr/pretty v0.3.1
