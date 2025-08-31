@@ -150,7 +150,7 @@ func getPostProcess(t string) []string {
 
 	return []string{
 		// TODO Change path
-		fmt.Sprintf("/Users/agravelot/test.sh %s", mode),
+		// fmt.Sprintf("/Users/agravelot/test.sh %s", mode),
 	}
 }
 
