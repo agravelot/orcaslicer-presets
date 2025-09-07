@@ -17,8 +17,8 @@
 		"12"
 	],
 	"machine_max_jerk_e": [
-		"2.5",
-		"2.5"
+		"10",
+		"10"
 	],
 	"machine_max_jerk_z": [
 		"3",
@@ -47,7 +47,7 @@
 		"400x300/PNG"
 	],
 	"z_hop": [
-		"0.2"
+		"0.1"
 	],
 	"z_hop_types": [
 		"Auto Lift"
@@ -75,5 +75,20 @@
 	],
 	"resonance_avoidance": "1",
 	"max_resonance_avoidance": "170",
-	"min_resonance_avoidance": "70"
+	"min_resonance_avoidance": "70",
+	"bed_exclude_area": [
+		"5x300",
+		"5x0",
+		"0x0",
+		"0x300",
+		"0x290",
+		"41x290",
+		"41x300",
+		"278x300",
+		"278x290",
+		"300x290",
+		"300x300"
+	],
+	"time_cost": "0,05",
+	"z_hop_type": "Slope Lift"
 }

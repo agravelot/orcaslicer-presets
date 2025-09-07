@@ -51,6 +51,9 @@ type Machine struct {
 	ResonanceAvoidance      string   `json:"resonance_avoidance,omitempty"`
 	MaxResonanceAvoidance   string   `json:"max_resonance_avoidance,omitempty"`
 	MinResonanceAvoidance   string   `json:"min_resonance_avoidance,omitempty"`
+	BedExcludeArea          []string `json:"bed_exclude_area,omitempty"`
+	TimeCost                string   `json:"time_cost,omitempty"`
+	ZHopType                string   `json:"z_hop_type,omitempty"`
 }
 
 func GenerateMachines() ([]Machine, error) {
@@ -79,7 +82,7 @@ func GenerateMachines() ([]Machine, error) {
 			RetractionLength:        []string{"0.4"},
 			RetractionSpeed:         []string{"60"},
 			DeretractionSpeed:       []string{"40"},
-			ZHop:                    []string{"0.2"}, // TODO Maybe *2 or = layer height
+			ZHop:                    []string{"0.1"}, // TODO Maybe *2 or = layer height
 			ZHopTypes:               []string{"Auto Lift"},
 			Thumbnails:              []string{"32x32/PNG", "400x300/PNG"},
 			RetractLiftAbove:        []string{"0"},
@@ -106,11 +109,25 @@ func GenerateMachines() ([]Machine, error) {
 			MachineMaxJerkX:        []string{"20", "12"}, // 20
 			MachineMaxJerkY:        []string{"20", "12"}, // 20
 			MachineMaxJerkZ:        []string{"3", "0.4"},
-			MachineMaxJerkE:        []string{"2.5", "2.5"},
+			MachineMaxJerkE:        []string{"10", "10"},
 
 			ResonanceAvoidance:    "1",
 			MaxResonanceAvoidance: "170",
 			MinResonanceAvoidance: "70",
+
+			BedExcludeArea: []string{
+				"5x300", "5x0", "0x0",
+				"0x300",
+				"0x290",
+				"41x290",
+				"41x300",
+				"278x300",
+				"278x290",
+				"300x290",
+				"300x300",
+			},
+			TimeCost: "0,05",
+			ZHopType: "Slope Lift",
 		}
 
 		printableHeight, _ := strconv.Atoi(m.PrintableHeight)

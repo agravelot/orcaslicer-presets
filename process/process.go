@@ -367,17 +367,20 @@ func GenerateProcess() ([]Process, error) {
 				InitialLayerSpeed:       "50",
 				SkirtSpeed:              "50",
 				InitialLayerInfillSpeed: "100",
-				InternalBridgeSpeed:     "50",
-				BridgeSpeed:             "35",
-				Overhang14Speed:         "65",
-				Overhang24Speed:         "50",
+				InternalBridgeSpeed:     "150%",
+				BridgeSpeed:             "50",
+				Overhang14Speed:         "45",
+				Overhang24Speed:         "40",
 				Overhang34Speed:         "30",
-				Overhang44Speed:         "10",
+				Overhang44Speed:         "15",
 
 				PreciseOuterWall:           "1",
 				ReverseOnEven:              "0",
 				InfillWallOverlap:          "15%",
 				TopBottomInfillWallOverlap: "15%",
+				GapInfillSpeed:             "120",
+				InternalSolidInfillSpeed:   "250",
+				OuterWallSpeed:             "200",
 
 				AccelToDecelEnable: "0",
 
@@ -433,6 +436,8 @@ func GenerateProcess() ([]Process, error) {
 
 				m.SparseInfillPattern = "gyroid"
 				m.SparseInfillDensity = "40%"
+				m.PreciseOuterWall = "0"
+
 			}
 
 			if strings.Contains(profile, "SPEED") {
