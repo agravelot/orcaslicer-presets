@@ -53,7 +53,7 @@ type Machine struct {
 	MinResonanceAvoidance   string   `json:"min_resonance_avoidance,omitempty"`
 	BedExcludeArea          []string `json:"bed_exclude_area,omitempty"`
 	TimeCost                string   `json:"time_cost,omitempty"`
-	ZHopType                string   `json:"z_hop_type,omitempty"`
+	ZHopType                []string `json:"z_hop_type,omitempty"`
 }
 
 func GenerateMachines() ([]Machine, error) {
@@ -127,7 +127,7 @@ func GenerateMachines() ([]Machine, error) {
 				"300x300",
 			},
 			TimeCost: "0,05",
-			ZHopType: "Slope Lift",
+			ZHopType: []string{"Slope Lift"},
 		}
 
 		printableHeight, _ := strconv.Atoi(m.PrintableHeight)

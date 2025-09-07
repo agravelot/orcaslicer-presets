@@ -90,5 +90,7 @@
 		"300x300"
 	],
 	"time_cost": "0,05",
-	"z_hop_type": "Slope Lift"
+	"z_hop_type": [
+		"Slope Lift"
+	]
 }
