@@ -50,7 +50,7 @@
 		"0.1"
 	],
 	"z_hop_types": [
-		"Auto Lift"
+		"Slope Lift"
 	],
 	"support_multi_bed_types": "1",
 	"printable_height": "255",
@@ -89,8 +89,5 @@
 		"300x290",
 		"300x300"
 	],
-	"time_cost": "0,05",
-	"z_hop_type": [
-		"Slope Lift"
-	]
+	"time_cost": "0.05"
 }
