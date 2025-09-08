@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	_ "github.com/joho/godotenv/autoload"
+
 	"github.com/agravelot/genrator/machine"
 	"github.com/agravelot/genrator/process"
 )

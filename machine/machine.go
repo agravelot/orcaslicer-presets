@@ -3,6 +3,8 @@ package machine
 import (
 	"fmt"
 	"strconv"
+
+	"github.com/agravelot/genrator/utils"
 )
 
 // Machine represents a 3D printer machine
@@ -64,6 +66,7 @@ func GenerateMachines() ([]Machine, error) {
 
 	var machines []Machine
 
+	// TODO add variants, HF, Hardnozzle, etc
 	for _, inherit := range inherits {
 		name := fmt.Sprintf("%s - %s", "Gen", inherit)
 
@@ -78,16 +81,17 @@ func GenerateMachines() ([]Machine, error) {
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
-			RetractionLength:        []string{"0.4"},
-			RetractionSpeed:         []string{"60"},
-			DeretractionSpeed:       []string{"40"},
-			ZHop:                    []string{"0.1"}, // TODO Maybe *2 or = layer height
-			Thumbnails:              []string{"32x32/PNG", "400x300/PNG"},
-			RetractLiftAbove:        []string{"0"},
-			NozzleType:              "brass",
-			PrintHost:               "https://moonraker.agravelot.eu",
-			PrintHostWebui:          "https://fluidd.agravelot.eu",
-			PrintHostAPIKey:         "", // TODO
+			RetractionLength:  []string{"0.4"},
+			RetractionSpeed:   []string{"60"},
+			DeretractionSpeed: []string{"40"},
+			ZHop:              []string{"0.2"}, // TODO Maybe *2 or = layer height
+			Thumbnails:        []string{"32x32/PNG", "400x300/PNG"},
+			RetractLiftAbove:  []string{"0"},
+			NozzleType:        "brass",
+			PrintHost:         "https://moonraker.agravelot.eu",
+			PrintHostWebui:    "https://fluidd.agravelot.eu",
+			PrintHostAPIKey:   utils.GetApiKeyFromEnv("VORON_API_KEY"),
+
 			ChangeFilamentGcode:     "M600",
 			SupportMultiBedTypes:    "1",
 			PrintableHeight:         "255",

@@ -1,2 +1,3 @@
 log/
 user_backup-*/
+.env

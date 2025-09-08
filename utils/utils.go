@@ -1,7 +1,9 @@
 package utils
 
 import (
+	"log"
 	"math"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -37,4 +39,12 @@ func EllipticalExtrusionRate(lineWidth float64, layerHeight float64, printSpeed 
 
 	// Calculate the volumetric extrusion rate
 	return crossSectionalArea * printSpeed
+}
+
+func GetApiKeyFromEnv(s string) string {
+	env := os.Getenv(s)
+	if env == "" {
+		log.Fatalf("Environment variable %s is not set", s)
+	}
+	return env
 }
