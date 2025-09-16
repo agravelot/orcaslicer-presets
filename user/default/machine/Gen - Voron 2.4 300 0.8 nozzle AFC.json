@@ -1,0 +1,18 @@
+{
+	"name": "Gen - Voron 2.4 300 0.8 nozzle AFC",
+	"from": "User",
+	"inherits": "Gen - Voron 2.4 300 0.8 nozzle",
+	"version": "1.9.0.2",
+	"is_custom_defined": "0",
+	"change_filament_gcode": "T[next_extruder] PURGE_LENGTH=[flush_length]\\n;FLUSH_START\\n;EXTERNAL_PURGE {flush_length}\\n;FLUSH_END",
+	"machine_start_gcode": "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]} TOOL={initial_tool}",
+	"enable_filament_ramming": "0",
+	"purge_in_prime_tower": "1",
+	"retract_length_toolchange": [
+		"0"
+	],
+	"parking_pos_retraction": "0",
+	"extra_loading_move": "0",
+	"cooling_tube_length": "0",
+	"cooling_tube_retraction": "0"
+}

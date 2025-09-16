@@ -55,6 +55,13 @@ type Machine struct {
 	MinResonanceAvoidance   string   `json:"min_resonance_avoidance,omitempty"`
 	BedExcludeArea          []string `json:"bed_exclude_area,omitempty"`
 	TimeCost                string   `json:"time_cost,omitempty"`
+	EnableFilamentRamming   string   `json:"enable_filament_ramming,omitempty"`
+	PurgeInPrimeTower       string   `json:"purge_in_prime_tower,omitempty"`
+	RetractLengthToolchange []string `json:"retract_length_toolchange,omitempty"`
+	ParkingPosRetraction    string   `json:"parking_pos_retraction,omitempty"`
+	ExtraLoadingMove        string   `json:"extra_loading_move,omitempty"`
+	CoolingTubeLength       string   `json:"cooling_tube_length,omitempty"`
+	CoolingTubeRetraction   string   `json:"cooling_tube_retraction,omitempty"`
 }
 
 func GenerateMachines() ([]Machine, error) {
@@ -138,6 +145,26 @@ func GenerateMachines() ([]Machine, error) {
 		m.RetractLiftBelow = []string{strconv.Itoa(printableHeight - zhop*2)}
 
 		machines = append(machines, m)
+	}
+
+	// Generate AFC variants
+	for _, m := range machines {
+		machines = append(machines, Machine{
+			Name:                    m.Name + " AFC",
+			Version:                 "1.9.0.2",
+			From:                    "User",
+			Inherits:                m.Name,
+			ChangeFilamentGcode:     `T[next_extruder] PURGE_LENGTH=[flush_length]\n;FLUSH_START\n;EXTERNAL_PURGE {flush_length}\n;FLUSH_END`,
+			IsCustomDefined:         "0",
+			EnableFilamentRamming:   "0",
+			MachineStartGcode:       m.MachineStartGcode + " TOOL={initial_tool}",
+			PurgeInPrimeTower:       "1",
+			RetractLengthToolchange: []string{"0"},
+			ParkingPosRetraction:    "0",
+			ExtraLoadingMove:        "0",
+			CoolingTubeLength:       "0",
+			CoolingTubeRetraction:   "0",
+		})
 	}
 
 	return machines, nil
