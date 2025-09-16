@@ -126,7 +126,11 @@ type Process struct {
 	InfillWallOverlap          string `json:"infill_wall_overlap,omitempty"`
 	TopBottomInfillWallOverlap string `json:"top_bottom_infill_wall_overlap,omitempty"`
 
-	ExtrusionRateSmoothing string `json:"max_volumetric_extrusion_rate_slope,omitempty"`
+	ExtrusionRateSmoothing                       string `json:"max_volumetric_extrusion_rate_slope,omitempty"`
+	MaxVolumetricExtrusionRateSlopeSegmentLength string `json:"max_volumetric_extrusion_rate_slope_segment_length,omitempty"`
+
+	SmallPerimeterSpeed     string `json:"small_perimeter_speed,omitempty"`
+	SmallPerimeterThreshold string `json:"small_perimeter_threshold,omitempty"`
 }
 
 func getMode(t string) string {
@@ -369,18 +373,19 @@ func GenerateProcess() ([]Process, error) {
 				InitialLayerInfillSpeed: "100",
 				InternalBridgeSpeed:     "150%",
 				BridgeSpeed:             "50",
-				Overhang14Speed:         "45",
-				Overhang24Speed:         "40",
+				Overhang14Speed:         "70%",
+				Overhang24Speed:         "50",
 				Overhang34Speed:         "30",
 				Overhang44Speed:         "15",
 
-				PreciseOuterWall:           "1",
+				PreciseOuterWall:           "0",
 				ReverseOnEven:              "0",
 				InfillWallOverlap:          "15%",
 				TopBottomInfillWallOverlap: "15%",
 				GapInfillSpeed:             "120",
 				InternalSolidInfillSpeed:   "250",
 				OuterWallSpeed:             "200",
+				InnerWallSpeed:             "250",
 
 				AccelToDecelEnable: "0",
 
@@ -392,6 +397,11 @@ func GenerateProcess() ([]Process, error) {
 			if err != nil {
 				log.Println(err)
 				continue
+			}
+
+			if !strings.Contains(profile, "SPEED") {
+				m.SmallPerimeterSpeed = "80%"
+				m.SmallPerimeterThreshold = "6.5"
 			}
 
 			if strings.Contains(profile, "SILENT") {
@@ -442,7 +452,7 @@ func GenerateProcess() ([]Process, error) {
 
 			if strings.Contains(profile, "SPEED") {
 				// Velocity
-				m.OuterWallSpeed = "200"
+				m.OuterWallSpeed = "300"
 				m.InnerWallSpeed = "500"
 				m.TravelSpeed = "500"
 				m.SparseInfillSpeed = "400"
@@ -595,6 +605,8 @@ func GenerateProcess() ([]Process, error) {
 		extrusionRateChange := deltaExtrusion / t
 
 		p.ExtrusionRateSmoothing = strconv.FormatFloat(math.Floor(-extrusionRateChange*0.8), 'f', 0, 64)
+		// Reduce if TTC
+		p.MaxVolumetricExtrusionRateSlopeSegmentLength = "0.5"
 
 		process = append(process, p)
 	}
