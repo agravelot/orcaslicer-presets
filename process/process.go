@@ -17,13 +17,12 @@ type Process struct {
 	LayerHeight float64 `json:"-"`
 
 	// Mandatory
-	Name              string `json:"name"`
-	From              string `json:"from"`
-	Inherits          string `json:"inherits"`
-	PrinterSettingsID string `json:"printer_settings_id"`
-	Version           string `json:"version"`
-	IsCustomDefined   string `json:"is_custom_defined"`
-	InfoFile          string `json:"-"`
+	Name            string `json:"name"`
+	From            string `json:"from"`
+	Inherits        string `json:"inherits"`
+	Version         string `json:"version"`
+	IsCustomDefined string `json:"is_custom_defined"`
+	InfoFile        string `json:"-"`
 
 	// Optional
 	SkirtLoops string `json:"skirt_loops"`
@@ -336,12 +335,11 @@ func GenerateProcess() ([]Process, error) {
 			name := fmt.Sprintf("%s - %s - %s", "Gen", profile, inherit)
 
 			m := Process{
-				From:              "User",
-				Inherits:          inherit,
-				IsCustomDefined:   "0",
-				Name:              name,
-				PrinterSettingsID: name,
-				Version:           "2.2.0.1",
+				From:            "User",
+				Inherits:        inherit,
+				IsCustomDefined: "0",
+				Name:            name,
+				Version:         "2.2.0.1",
 
 				// TODO dynamic update_time ?
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
