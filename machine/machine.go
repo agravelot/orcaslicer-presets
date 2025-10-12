@@ -149,22 +149,17 @@ func GenerateMachines() ([]Machine, error) {
 
 	// Generate AFC variants
 	for _, m := range machines {
-		machines = append(machines, Machine{
-			Name:                    m.Name + " AFC",
-			Version:                 "1.9.0.2",
-			From:                    "User",
-			Inherits:                m.Name,
-			ChangeFilamentGcode:     `T[next_extruder] PURGE_LENGTH=[flush_length]\n;FLUSH_START\n;EXTERNAL_PURGE {flush_length}\n;FLUSH_END`,
-			IsCustomDefined:         "0",
-			EnableFilamentRamming:   "0",
-			MachineStartGcode:       m.MachineStartGcode + " TOOL={initial_tool}",
-			PurgeInPrimeTower:       "1",
-			RetractLengthToolchange: []string{"0"},
-			ParkingPosRetraction:    "0",
-			ExtraLoadingMove:        "0",
-			CoolingTubeLength:       "0",
-			CoolingTubeRetraction:   "0",
-		})
+		m.Name = m.Name + " AFC"
+		m.ChangeFilamentGcode = `T[next_extruder] PURGE_LENGTH=[flush_length]\n;FLUSH_START\n;EXTERNAL_PURGE {flush_length}\n;FLUSH_END`
+		m.EnableFilamentRamming = "0"
+		m.MachineStartGcode = m.MachineStartGcode + " TOOL={initial_tool}"
+		m.PurgeInPrimeTower = "1"
+		m.RetractLengthToolchange = []string{"0"}
+		m.ParkingPosRetraction = "0"
+		m.ExtraLoadingMove = "0"
+		m.CoolingTubeLength = "0"
+		m.CoolingTubeRetraction = "0"
+		machines = append(machines, m)
 	}
 
 	return machines, nil
