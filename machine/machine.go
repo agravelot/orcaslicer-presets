@@ -88,7 +88,7 @@ func GenerateMachines() ([]Machine, error) {
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
-			RetractionLength:  []string{"0.4"},
+			RetractionLength:  []string{"0.6"},
 			RetractionSpeed:   []string{"60"},
 			DeretractionSpeed: []string{"40"},
 			ZHop:              []string{"0.2"}, // TODO Maybe *2 or = layer height
@@ -103,8 +103,8 @@ func GenerateMachines() ([]Machine, error) {
 			SupportMultiBedTypes:    "1",
 			PrintableHeight:         "255",
 			RetractionMinimumTravel: []string{"1.5"},
-			Wipe:                    []string{"1"},
-			RetractBeforeWipe:       []string{"70%"},
+			Wipe:                    []string{"2"},
+			RetractBeforeWipe:       []string{"0%"},
 			FanSpeedupTime:          "0.8",
 
 			MachineMaxSpeedE: []string{"30", "25"},
