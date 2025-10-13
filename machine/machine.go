@@ -43,25 +43,27 @@ type Machine struct {
 	FanSpeedupTime         string   `json:"fan_speedup_time,omitempty"`
 
 	// Extruder
-	RetractionMinimumTravel []string `json:"retraction_minimum_travel,omitempty"`
-	WipeDistance            []string `json:"wipe_distance,omitempty"`
-	RetractBeforeWipe       []string `json:"retract_before_wipe,omitempty"`
-	Wipe                    []string `json:"wipe,omitempty"`
-	DeretractionSpeed       []string `json:"deretraction_speed,omitempty"`
-	RetractionSpeed         []string `json:"retraction_speed,omitempty"`
-	RetractLiftBelow        []string `json:"retract_lift_below,omitempty"`
-	ResonanceAvoidance      string   `json:"resonance_avoidance,omitempty"`
-	MaxResonanceAvoidance   string   `json:"max_resonance_avoidance,omitempty"`
-	MinResonanceAvoidance   string   `json:"min_resonance_avoidance,omitempty"`
-	BedExcludeArea          []string `json:"bed_exclude_area,omitempty"`
-	TimeCost                string   `json:"time_cost,omitempty"`
-	EnableFilamentRamming   string   `json:"enable_filament_ramming,omitempty"`
-	PurgeInPrimeTower       string   `json:"purge_in_prime_tower,omitempty"`
-	RetractLengthToolchange []string `json:"retract_length_toolchange,omitempty"`
-	ParkingPosRetraction    string   `json:"parking_pos_retraction,omitempty"`
-	ExtraLoadingMove        string   `json:"extra_loading_move,omitempty"`
-	CoolingTubeLength       string   `json:"cooling_tube_length,omitempty"`
-	CoolingTubeRetraction   string   `json:"cooling_tube_retraction,omitempty"`
+	RetractionMinimumTravel  []string `json:"retraction_minimum_travel,omitempty"`
+	WipeDistance             []string `json:"wipe_distance,omitempty"`
+	TravelSlope              []string `json:"travel_slope,omitempty"`
+	RetractBeforeWipe        []string `json:"retract_before_wipe,omitempty"`
+	Wipe                     []string `json:"wipe,omitempty"`
+	RetractWhenChangingLayer []string `json:"retract_when_changing_layer,omitempty"`
+	DeretractionSpeed        []string `json:"deretraction_speed,omitempty"`
+	RetractionSpeed          []string `json:"retraction_speed,omitempty"`
+	RetractLiftBelow         []string `json:"retract_lift_below,omitempty"`
+	ResonanceAvoidance       string   `json:"resonance_avoidance,omitempty"`
+	MaxResonanceAvoidance    string   `json:"max_resonance_avoidance,omitempty"`
+	MinResonanceAvoidance    string   `json:"min_resonance_avoidance,omitempty"`
+	BedExcludeArea           []string `json:"bed_exclude_area,omitempty"`
+	TimeCost                 string   `json:"time_cost,omitempty"`
+	EnableFilamentRamming    string   `json:"enable_filament_ramming,omitempty"`
+	PurgeInPrimeTower        string   `json:"purge_in_prime_tower,omitempty"`
+	RetractLengthToolchange  []string `json:"retract_length_toolchange,omitempty"`
+	ParkingPosRetraction     string   `json:"parking_pos_retraction,omitempty"`
+	ExtraLoadingMove         string   `json:"extra_loading_move,omitempty"`
+	CoolingTubeLength        string   `json:"cooling_tube_length,omitempty"`
+	CoolingTubeRetraction    string   `json:"cooling_tube_retraction,omitempty"`
 }
 
 func GenerateMachines() ([]Machine, error) {
@@ -88,24 +90,30 @@ func GenerateMachines() ([]Machine, error) {
 			// TODO dynamic update_time ?
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
-			RetractionLength:  []string{"0.6"},
-			RetractionSpeed:   []string{"60"},
-			DeretractionSpeed: []string{"40"},
-			ZHop:              []string{"0.2"}, // TODO Maybe *2 or = layer height
-			Thumbnails:        []string{"32x32/PNG", "400x300/PNG"},
-			RetractLiftAbove:  []string{"0"},
-			NozzleType:        "brass",
-			PrintHost:         "https://moonraker.agravelot.eu",
-			PrintHostWebui:    "https://fluidd.agravelot.eu",
-			PrintHostAPIKey:   utils.GetApiKeyFromEnv("VORON_API_KEY"),
+			// Retaction, zhops and wipes
+			RetractionLength:         []string{"0.6"},
+			RetractionSpeed:          []string{"45"},
+			DeretractionSpeed:        []string{"25"},
+			ZHop:                     []string{"0.4"}, // low travel slope (angle) allows higher ZHop
+			TravelSlope:              []string{"1"},
+			RetractLiftAbove:         []string{"0"},
+			RetractionMinimumTravel:  []string{"1"},
+			RetractWhenChangingLayer: []string{"1"},
+			Wipe:                     []string{"0"}, // disable wipe, use wipe on loops (inwards) instead
+			WipeDistance:             []string{"1"},
+			RetractBeforeWipe:        []string{"30%"},
 
-			ChangeFilamentGcode:     "M600",
-			SupportMultiBedTypes:    "1",
-			PrintableHeight:         "255",
-			RetractionMinimumTravel: []string{"1.5"},
-			Wipe:                    []string{"2"},
-			RetractBeforeWipe:       []string{"0%"},
-			FanSpeedupTime:          "0.8",
+			NozzleType:      "brass",
+			Thumbnails:      []string{"32x32/PNG", "400x300/PNG"},
+			PrintHost:       "https://moonraker.agravelot.eu",
+			PrintHostWebui:  "https://fluidd.agravelot.eu",
+			PrintHostAPIKey: utils.GetApiKeyFromEnv("VORON_API_KEY"),
+
+			ChangeFilamentGcode:  "M600",
+			SupportMultiBedTypes: "1",
+			PrintableHeight:      "255",
+
+			// FanSpeedupTime: "0.5",
 
 			MachineMaxSpeedE: []string{"30", "25"},
 			MachineMaxSpeedZ: []string{"20", "12"},
@@ -115,10 +123,10 @@ func GenerateMachines() ([]Machine, error) {
 			MachineEndGcode:        "PRINT_END\n; total layers count = [total_layer_count]",
 			BeforeLayerChangeGcode: ";BEFORE_LAYER_CHANGE\n;[layer_z]\nG92 E0\nON_LAYER_CHANGE\n",
 			LayerChangeGcode:       ";AFTER_LAYER_CHANGE\n;[layer_z]\nAFTER_LAYER_CHANGE\nSET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}",
-			MachineMaxJerkX:        []string{"20", "12"}, // 20
-			MachineMaxJerkY:        []string{"20", "12"}, // 20
-			MachineMaxJerkZ:        []string{"3", "0.4"},
-			MachineMaxJerkE:        []string{"10", "10"},
+			MachineMaxJerkX:        []string{"12", "12"}, // 20
+			MachineMaxJerkY:        []string{"12", "12"}, // 20
+			MachineMaxJerkZ:        []string{"3", "3"},
+			MachineMaxJerkE:        []string{"2.5", "2.5"},
 
 			ResonanceAvoidance:    "1",
 			MaxResonanceAvoidance: "170",

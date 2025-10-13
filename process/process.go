@@ -103,6 +103,7 @@ type Process struct {
 	InternalSolidInfillAcceleration string `json:"internal_solid_infill_acceleration,omitempty"`
 	InitialLayerSpeed               string `json:"initial_layer_speed,omitempty"`
 	InitialLayerInfillSpeed         string `json:"initial_layer_infill_speed,omitempty"`
+	WipeOnLoops                     string `json:"wipe_on_loops,omitempty"`
 
 	TopSurfacePattern   string `json:"top_surface_pattern,omitempty"`
 	BridgeSpeed         string `json:"bridge_speed,omitempty"`
@@ -384,6 +385,7 @@ func GenerateProcess() ([]Process, error) {
 				InternalSolidInfillSpeed:   "250",
 				OuterWallSpeed:             "200",
 				InnerWallSpeed:             "250",
+				WipeOnLoops:                "1",
 
 				AccelToDecelEnable: "0",
 
@@ -400,6 +402,10 @@ func GenerateProcess() ([]Process, error) {
 			if !strings.Contains(profile, "SPEED") {
 				m.SmallPerimeterSpeed = "80%"
 				m.SmallPerimeterThreshold = "6.5"
+
+				// scraf can be tricy at time
+				m.SeamSlopeType = "all" // Scarf joint
+				m.SeamSlopeConditional = "1"
 			}
 
 			if strings.Contains(profile, "SILENT") {
@@ -430,11 +436,6 @@ func GenerateProcess() ([]Process, error) {
 				// m.TravelJerk = minSpeed(m.TravelJerk, silentSCV)
 			}
 
-			if !strings.Contains(profile, "SPEED") {
-				m.SeamSlopeType = "all" // Scarf joint
-				m.SeamSlopeConditional = "1"
-			}
-
 			if strings.Contains(profile, "STRUCTURAL") {
 				m.WallLoops = fmt.Sprintf("%.0f", math.Ceil(1.6/m.NozzleSize))        // 1.6mm
 				m.TopShellLayers = fmt.Sprintf("%.0f", math.Ceil(1/m.LayerHeight))    // 1mm
@@ -445,7 +446,6 @@ func GenerateProcess() ([]Process, error) {
 				m.SparseInfillPattern = "gyroid"
 				m.SparseInfillDensity = "40%"
 				m.PreciseOuterWall = "0"
-
 			}
 
 			if strings.Contains(profile, "SPEED") {
