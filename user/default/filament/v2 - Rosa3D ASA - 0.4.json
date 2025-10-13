@@ -6,7 +6,7 @@
         "0"
     ],
     "adaptive_pressure_advance": [
-        "1"
+        "0"
     ],
     "adaptive_pressure_advance_bridges": [
         "0.025"
@@ -34,10 +34,10 @@
         "70"
     ],
     "cool_plate_temp": [
-        "110"
+        "100"
     ],
     "cool_plate_temp_initial_layer": [
-        "110"
+        "100"
     ],
     "default_filament_colour": [
         ""
@@ -55,10 +55,10 @@
         "1"
     ],
     "eng_plate_temp": [
-        "110"
+        "100"
     ],
     "eng_plate_temp_initial_layer": [
-        "110"
+        "100"
     ],
     "fan_cooling_layer_time": [
         "30"
@@ -193,7 +193,7 @@
         "100"
     ],
     "filament_vendor": [
-        "Generic"
+        "Rosa3D"
     ],
     "filament_wipe": [
         "nil"
@@ -212,10 +212,10 @@
         "6"
     ],
     "hot_plate_temp": [
-        "110"
+        "100"
     ],
     "hot_plate_temp_initial_layer": [
-        "110"
+        "100"
     ],
     "idle_temperature": [
         "0"
@@ -227,13 +227,12 @@
     "ironing_fan_speed": [
         "-1"
     ],
-    "is_custom_defined": "0",
     "name": "v2 - Rosa3D ASA - 0.4",
     "nozzle_temperature": [
-        "250"
+        "260"
     ],
     "nozzle_temperature_initial_layer": [
-        "250"
+        "260"
     ],
     "nozzle_temperature_range_high": [
         "280"
@@ -251,7 +250,7 @@
         "0.4157"
     ],
     "pressure_advance": [
-        "0.03"
+        "0.07"
     ],
     "reduce_fan_stop_start_freq": [
         "1"
@@ -263,7 +262,7 @@
         "1"
     ],
     "slow_down_layer_time": [
-        "5"
+        "15"
     ],
     "slow_down_min_speed": [
         "10"
@@ -287,10 +286,10 @@
         "40"
     ],
     "textured_plate_temp": [
-        "110"
+        "100"
     ],
     "textured_plate_temp_initial_layer": [
-        "110"
+        "100"
     ],
-    "version": "1.5.1.2"
+    "version": "2.3.0.1"
 }
