@@ -5,6 +5,9 @@ on:
       - main
     paths:
       - "resources/profiles/**"
+      - "printers/**"
+      - "system/**"
+      - "user/**"
       - ".github/workflows/check_profiles.yml"
 
   workflow_dispatch:
