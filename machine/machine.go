@@ -79,7 +79,7 @@ func GenerateMachines() ([]Machine, error) {
 	for _, inherit := range inherits {
 		name := fmt.Sprintf("%s - %s", "Gen", inherit)
 
-		// nozzleSize := getNozzleSize(inherit)
+		nozzleSize := utils.GetNozzleSize(inherit)
 
 		m := Machine{
 			From:            "User",
@@ -91,7 +91,7 @@ func GenerateMachines() ([]Machine, error) {
 			InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GM001\nupdated_time = 1682282966\n",
 
 			// Retaction, zhops and wipes
-			RetractionLength:         []string{"0.6"},
+			RetractionLength:         []string{fmt.Sprintf("%f", nozzleSize+0.3)},
 			RetractionSpeed:          []string{"45"},
 			DeretractionSpeed:        []string{"25"},
 			ZHop:                     []string{"0.4"}, // low travel slope (angle) allows higher ZHop
@@ -119,7 +119,7 @@ func GenerateMachines() ([]Machine, error) {
 			MachineMaxSpeedZ: []string{"20", "12"},
 
 			// TODO Extract it in file?
-			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
+			MachineStartGcode:      "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[initial_extruder]} MATERIAL=[filament_type[initial_extruder]]",
 			MachineEndGcode:        "PRINT_END\n; total layers count = [total_layer_count]",
 			BeforeLayerChangeGcode: ";BEFORE_LAYER_CHANGE\n;[layer_z]\nG92 E0\nON_LAYER_CHANGE\n",
 			LayerChangeGcode:       ";AFTER_LAYER_CHANGE\n;[layer_z]\nAFTER_LAYER_CHANGE\nSET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}",
@@ -158,10 +158,10 @@ func GenerateMachines() ([]Machine, error) {
 	// Generate AFC variants
 	for _, m := range machines {
 		m.Name = m.Name + " AFC"
-		m.ChangeFilamentGcode = `T[next_extruder] PURGE_LENGTH=[flush_length]\n;FLUSH_START\n;EXTERNAL_PURGE {flush_length}\n;FLUSH_END`
+		m.ChangeFilamentGcode = `T[next_extruder] PURGE_LENGTH=[flush_length] BYPASS_AFC_BRUSH=1\n;FLUSH_START\n;EXTERNAL_PURGE {flush_length}\n;FLUSH_END`
 		m.EnableFilamentRamming = "0"
-		m.MachineStartGcode = m.MachineStartGcode + " TOOL={initial_tool}"
-		m.PurgeInPrimeTower = "1"
+		m.MachineStartGcode = m.MachineStartGcode + " TOOL={initial_tool}" // purge with GBP
+		m.PurgeInPrimeTower = "0"                                          // purge with GBP
 		m.RetractLengthToolchange = []string{"0"}
 		m.ParkingPosRetraction = "0"
 		m.ExtraLoadingMove = "0"

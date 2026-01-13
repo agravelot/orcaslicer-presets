@@ -242,10 +242,10 @@
         "220"
     ],
     "overhang_fan_speed": [
-        "65"
+        "80"
     ],
     "overhang_fan_threshold": [
-        "95%"
+        "25%"
     ],
     "pellet_flow_coefficient": [
         "0.4157"

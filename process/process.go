@@ -131,6 +131,15 @@ type Process struct {
 
 	SmallPerimeterSpeed     string `json:"small_perimeter_speed,omitempty"`
 	SmallPerimeterThreshold string `json:"small_perimeter_threshold,omitempty"`
+
+	// Prime
+	PrimeTowerBrimWidth     string `json:"prime_tower_brim_width,omitempty"`
+	EnablePrimeTower        string `json:"enable_prime_tower,omitempty"`
+	WipeTowerNoSparseLayers string `json:"wipe_tower_no_sparse_layers,omitempty"`
+	WipeTowerConeAngle      string `json:"wipe_tower_cone_angle,omitempty"`
+	WipeTowerWallType       string `json:"wipe_tower_wall_type,omitempty"`
+	PrimeTowerWidth         string `json:"prime_tower_width,omitempty"`
+	PrimeVolume             string `json:"prime_volume,omitempty"`
 }
 
 func getMode(t string) string {
@@ -348,7 +357,7 @@ func GenerateProcess() ([]Process, error) {
 				LayerHeight:                  utils.GetLayerHeight(inherit),
 				NozzleSize:                   utils.GetNozzleSize(inherit),
 				SkirtLoops:                   "2",
-				TravelSpeed:                  "400",
+				TravelSpeed:                  "500",
 				TravelAcceleration:           "10000",
 				TopSurfaceAcceleration:       "2000",
 				InnerWallAcceleration:        "4000",
@@ -388,6 +397,15 @@ func GenerateProcess() ([]Process, error) {
 				WipeOnLoops:                "1",
 
 				AccelToDecelEnable: "0",
+
+				// Prime
+				PrimeTowerBrimWidth:     "5",
+				EnablePrimeTower:        "1",
+				WipeTowerNoSparseLayers: "0",
+				WipeTowerConeAngle:      "15",
+				WipeTowerWallType:       "cone",
+				PrimeTowerWidth:         "35",
+				PrimeVolume:             "15",
 
 				PostProcess:    getPostProcess(profile),
 				FilenameFormat: fmt.Sprintf("{input_filename_base}_{filament_type[initial_tool]}_{print_time}_%s.gcode", profile),
@@ -452,7 +470,7 @@ func GenerateProcess() ([]Process, error) {
 				// Velocity
 				m.OuterWallSpeed = "300"
 				m.InnerWallSpeed = "500"
-				m.TravelSpeed = "500"
+				m.TravelSpeed = "600"
 				m.SparseInfillSpeed = "400"
 				m.InternalSolidInfillSpeed = "400"
 				m.TopSurfaceSpeed = "150"

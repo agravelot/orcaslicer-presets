@@ -52,6 +52,7 @@ func main() {
 	}
 
 	for _, m := range machines {
+		println("Writing machine:", m.Name)
 		err = writeMachine(m)
 		if err != nil {
 			panic(err)

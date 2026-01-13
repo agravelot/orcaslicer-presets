@@ -34,10 +34,10 @@
         "70"
     ],
     "cool_plate_temp": [
-        "100"
+        "105"
     ],
     "cool_plate_temp_initial_layer": [
-        "100"
+        "105"
     ],
     "default_filament_colour": [
         ""
@@ -55,19 +55,19 @@
         "1"
     ],
     "eng_plate_temp": [
-        "100"
+        "105"
     ],
     "eng_plate_temp_initial_layer": [
-        "100"
+        "105"
     ],
     "fan_cooling_layer_time": [
         "30"
     ],
     "fan_max_speed": [
-        "80"
+        "20"
     ],
     "fan_min_speed": [
-        "30"
+        "15"
     ],
     "filament_cooling_final_speed": [
         "3.4"
@@ -94,7 +94,7 @@
         "; filament end gcode\n"
     ],
     "filament_flow_ratio": [
-        "0.945"
+        "0.95"
     ],
     "filament_is_support": [
         "0"
@@ -109,7 +109,7 @@
         "nil"
     ],
     "filament_max_volumetric_speed": [
-        "22"
+        "40"
     ],
     "filament_minimal_purge_on_wipe_tower": [
         "15"
@@ -212,17 +212,17 @@
         "6"
     ],
     "hot_plate_temp": [
-        "100"
+        "110"
     ],
     "hot_plate_temp_initial_layer": [
-        "100"
+        "110"
     ],
     "idle_temperature": [
         "0"
     ],
     "inherits": "Voron Generic ABS",
     "internal_bridge_fan_speed": [
-        "80"
+        "20"
     ],
     "ironing_fan_speed": [
         "-1"
@@ -241,7 +241,7 @@
         "240"
     ],
     "overhang_fan_speed": [
-        "100"
+        "25"
     ],
     "overhang_fan_threshold": [
         "10%"
@@ -250,10 +250,10 @@
         "0.4157"
     ],
     "pressure_advance": [
-        "0.07"
+        "0.032"
     ],
     "reduce_fan_stop_start_freq": [
-        "1"
+        "0"
     ],
     "required_nozzle_HRC": [
         "3"
@@ -262,7 +262,7 @@
         "1"
     ],
     "slow_down_layer_time": [
-        "15"
+        "20"
     ],
     "slow_down_min_speed": [
         "10"
@@ -286,10 +286,10 @@
         "40"
     ],
     "textured_plate_temp": [
-        "100"
+        "105"
     ],
     "textured_plate_temp_initial_layer": [
-        "100"
+        "105"
     ],
     "version": "2.3.0.1"
 }

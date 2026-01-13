@@ -78,5 +78,12 @@
 	"max_volumetric_extrusion_rate_slope": "237",
 	"max_volumetric_extrusion_rate_slope_segment_length": "0.5",
 	"small_perimeter_speed": "80%",
-	"small_perimeter_threshold": "6.5"
+	"small_perimeter_threshold": "6.5",
+	"prime_tower_brim_width": "5",
+	"enable_prime_tower": "1",
+	"wipe_tower_no_sparse_layers": "0",
+	"wipe_tower_cone_angle": "15",
+	"wipe_tower_wall_type": "cone",
+	"prime_tower_width": "35",
+	"prime_volume": "15"
 }

@@ -6,7 +6,7 @@
 	"is_custom_defined": "0",
 	"skirt_loops": "2",
 	"skirt_speed": "50",
-	"travel_speed": "500",
+	"travel_speed": "600",
 	"brim_type": "no_brim",
 	"only_one_wall_top": "1",
 	"wall_loops": "4",
@@ -75,5 +75,12 @@
 	"precise_outer_wall": "0",
 	"overhang_reverse": "0",
 	"infill_wall_overlap": "15%",
-	"top_bottom_infill_wall_overlap": "15%"
+	"top_bottom_infill_wall_overlap": "15%",
+	"prime_tower_brim_width": "5",
+	"enable_prime_tower": "1",
+	"wipe_tower_no_sparse_layers": "0",
+	"wipe_tower_cone_angle": "15",
+	"wipe_tower_wall_type": "cone",
+	"prime_tower_width": "35",
+	"prime_volume": "15"
 }
