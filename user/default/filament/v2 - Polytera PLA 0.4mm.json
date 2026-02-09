@@ -43,14 +43,11 @@
     "inherits": "Generic PLA",
     "is_custom_defined": "0",
     "name": "v2 - Polytera PLA 0.4mm",
-    "overhang_fan_speed": [
-        "90"
-    ],
     "overhang_fan_threshold": [
         "25%"
     ],
     "pressure_advance": [
-        "0.025"
+        "0.035"
     ],
     "slow_down_layer_time": [
         "5"
