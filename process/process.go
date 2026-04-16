@@ -665,14 +665,20 @@ func GenerateProcess() ([]Process, error) {
 				// TODO dynamic update_time ?
 				InfoFile: "sync_info = update\nuser_id = \nsetting_id = \nbase_id = GP004\nupdated_time = 1703950786\n",
 
-				LayerHeight:                  utils.GetLayerHeight(inherit),
-				NozzleSize:                   utils.GetNozzleSize(inherit),
-				SkirtLoops:                   "2",
-				TravelSpeed:                  "500",
-				TravelAcceleration:           "10000",
-				TopSurfaceAcceleration:       "2000",
-				InnerWallAcceleration:        "4000",
-				DefaultAcceleration:          "4000",
+				LayerHeight: utils.GetLayerHeight(inherit),
+				NozzleSize:  utils.GetNozzleSize(inherit),
+				SkirtLoops:  "2",
+
+				// Accels
+				TravelAcceleration:              "10000",
+				TopSurfaceAcceleration:          "2000",
+				InnerWallAcceleration:           "5000",
+				DefaultAcceleration:             "6000",
+				InitialLayerAcceleration:        "5000",
+				SparseInfillAcceleration:        "10000",
+				InternalSolidInfillAcceleration: "5000", // to avoid curling and hit curlings
+				BridgeAcceleration:              "2000",
+
 				BrimType:                     "no_brim",
 				OnlyOneWallTop:               "1",
 				Resolution:                   "0.008",
@@ -687,12 +693,17 @@ func GenerateProcess() ([]Process, error) {
 
 				TopSurfacePattern: "monotonicline",
 
+				// Speeds
+				TravelSpeed:             "500",
 				InitialLayerSpeed:       "50",
 				SkirtSpeed:              "50",
+				SparseInfillSpeed:       "250",
 				InitialLayerInfillSpeed: "100",
 				InternalBridgeSpeed:     "150%",
+				OuterWallSpeed:          "200",
+				InnerWallSpeed:          "250",
 				BridgeSpeed:             "50",
-				Overhang14Speed:         "70%",
+				Overhang14Speed:         "65",
 				Overhang24Speed:         "50",
 				Overhang34Speed:         "30",
 				Overhang44Speed:         "15",
@@ -703,9 +714,8 @@ func GenerateProcess() ([]Process, error) {
 				TopBottomInfillWallOverlap: "15%",
 				GapInfillSpeed:             "120",
 				InternalSolidInfillSpeed:   "250",
-				OuterWallSpeed:             "200",
-				InnerWallSpeed:             "250",
-				WipeOnLoops:                "1",
+
+				WipeOnLoops: "1",
 
 				AccelToDecelEnable: "0",
 
@@ -785,7 +795,7 @@ func GenerateProcess() ([]Process, error) {
 				m.SparseInfillSpeed = "400"
 				m.InternalSolidInfillSpeed = "400"
 				m.TopSurfaceSpeed = "150"
-				m.GapInfillSpeed = "400"
+				m.GapInfillSpeed = "200"
 
 				// Accel
 				m.DefaultAcceleration = "20000"
