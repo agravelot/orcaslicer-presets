@@ -2,7 +2,6 @@ package process
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 )
@@ -67,7 +66,6 @@ func avoidNoisySpeeds(speed string) (string, error) {
 
 	speedInt, err := strconv.Atoi(speed)
 	if err != nil {
-		log.Printf("speed %s is not a number", speed)
 		return speed, fmt.Errorf("speed %s is not a number", speed)
 	}
 
@@ -104,13 +102,11 @@ func minSpeed(a string, b string) string {
 
 	ai, err := strconv.Atoi(a)
 	if err != nil {
-		log.Printf("speed %s is not a number", a)
 		return a
 	}
 
 	bi, err := strconv.Atoi(b)
 	if err != nil {
-		log.Printf("speed %s is not a number", b)
 		return b
 	}
 

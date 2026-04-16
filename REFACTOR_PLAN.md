@@ -61,3 +61,8 @@ This plan keeps behavior stable while improving structure and maintainability.
 
 - Add tests for happy-path parent-chain merge behavior.
 - Add test coverage for missing parent errors.
+
+### Step F4: Remove debug/noisy helper logging [x]
+
+- Remove debug print from `withInherits`.
+- Remove helper log spam from speed parsing paths.

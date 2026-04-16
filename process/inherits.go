@@ -9,8 +9,6 @@ import (
 func withInherits(p *Process) error {
 	tree := make([]map[string]any, 0)
 
-	fmt.Printf("%s\n", p.Name)
-
 	tt := make(map[string]any)
 
 	// TODO error
