@@ -2,6 +2,8 @@ package filament
 
 // Filament represents an OrcaSlicer filament profile.
 type Filament struct {
+	InfoFile string `json:"-"`
+
 	// Stable inferred types from Orca profile samples
 	AdaptivePressureAdvance                  []string         `json:"adaptive_pressure_advance,omitempty"`
 	AdaptivePressureAdvanceBridges           []string         `json:"adaptive_pressure_advance_bridges,omitempty"`

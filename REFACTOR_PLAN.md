@@ -44,5 +44,15 @@ This plan keeps behavior stable while improving structure and maintainability.
 
 ## Follow-up items
 
-- Consider adding tests for `process` helpers (`minSpeed`, `avoidNoisySpeeds`, inheritance merge).
-- Consider wiring filament generation in `cmd/main/main.go` using `internal/output` helper.
+- Add tests for `process` inheritance merge helper.
+
+## Follow-up execution
+
+### Step F1: Add tests for `process` speed helpers [x]
+
+- Add tests for `minSpeed`, `avoidNoisySpeeds`, and `getMode`.
+
+### Step F2: Wire filament generation into main pipeline [x]
+
+- Add `filament.GenerateFilaments()`.
+- Write filament outputs through `internal/output.WriteProfile`.

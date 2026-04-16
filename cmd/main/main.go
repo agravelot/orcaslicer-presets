@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 
+	"github.com/agravelot/genrator/filament"
 	"github.com/agravelot/genrator/internal/output"
 	"github.com/agravelot/genrator/machine"
 	"github.com/agravelot/genrator/process"
@@ -38,6 +39,19 @@ func main() {
 	for _, m := range machines {
 		println("Writing machine:", m.Name)
 		err = output.WriteProfile(generatedFolder, "machine", m.Name, m.InfoFile, m)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	filaments, err := filament.GenerateFilaments()
+	if err != nil {
+		panic(err)
+	}
+
+	for _, f := range filaments {
+		println("Writing filament:", f.Name)
+		err = output.WriteProfile(generatedFolder, "filament", f.Name, f.InfoFile, f)
 		if err != nil {
 			panic(err)
 		}
