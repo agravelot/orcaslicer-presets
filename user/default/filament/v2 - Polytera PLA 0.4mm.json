@@ -1,16 +1,22 @@
 {
     "compatible_printers": [],
+    "dont_slow_down_outer_wall": [
+        "1"
+    ],
     "enable_pressure_advance": [
         "1"
     ],
     "fan_cooling_layer_time": [
-        "30"
+        "40"
     ],
     "fan_min_speed": [
-        "60"
+        "85"
     ],
     "filament_end_gcode": [
         "; filament end gcode\n"
+    ],
+    "filament_extruder_variant": [
+        "Direct Drive Standard"
     ],
     "filament_flow_ratio": [
         "0.978"
@@ -18,17 +24,14 @@
     "filament_max_volumetric_speed": [
         "34"
     ],
-    "filament_retract_when_changing_layer": [
-        "0"
-    ],
     "filament_settings_id": [
         "v2 - Polytera PLA 0.4mm"
     ],
     "filament_start_gcode": [
         "; Filament gcode\n"
     ],
-    "filament_wipe": [
-        "0"
+    "filament_vendor": [
+        "Polymaker"
     ],
     "from": "User",
     "full_fan_speed_layer": [
@@ -41,19 +44,12 @@
         "60"
     ],
     "inherits": "Generic PLA",
-    "is_custom_defined": "0",
     "name": "v2 - Polytera PLA 0.4mm",
     "overhang_fan_threshold": [
         "25%"
     ],
     "pressure_advance": [
         "0.03"
-    ],
-    "slow_down_layer_time": [
-        "5"
-    ],
-    "slow_down_min_speed": [
-        "15"
     ],
     "version": "1.5.1.2"
 }

@@ -9,20 +9,20 @@
 	"layer_change_gcode": ";AFTER_LAYER_CHANGE\n;[layer_z]\nAFTER_LAYER_CHANGE\nSET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}",
 	"machine_end_gcode": "PRINT_END\n; total layers count = [total_layer_count]",
 	"machine_max_jerk_x": [
-		"20",
+		"12",
 		"12"
 	],
 	"machine_max_jerk_y": [
-		"20",
+		"12",
 		"12"
 	],
 	"machine_max_jerk_e": [
-		"10",
-		"10"
+		"2.5",
+		"2.5"
 	],
 	"machine_max_jerk_z": [
 		"3",
-		"0.4"
+		"3"
 	],
 	"machine_max_speed_e": [
 		"30",
@@ -32,7 +32,7 @@
 		"20",
 		"12"
 	],
-	"machine_start_gcode": "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[0]}",
+	"machine_start_gcode": "SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]\n\nPRINT_START EXTRUDER=[nozzle_temperature_initial_layer] BED=[bed_temperature_initial_layer_single] CHAMBER=[chamber_temperature] PRINT_MIN={first_layer_print_min[0]},{first_layer_print_min[1]} PRINT_MAX={first_layer_print_max[0]},{first_layer_print_max[1]} NOZZLE_DIAMETER={nozzle_diameter[initial_extruder]} MATERIAL=[filament_type[initial_extruder]]",
 	"nozzle_type": "brass",
 	"print_host": "https://moonraker.agravelot.eu",
 	"print_host_webui": "https://fluidd.agravelot.eu",
@@ -40,35 +40,43 @@
 		"0"
 	],
 	"retraction_length": [
-		"0.4"
+		"0.900000"
 	],
 	"thumbnails": [
 		"32x32/PNG",
 		"400x300/PNG"
 	],
 	"z_hop": [
-		"0.1"
+		"0.4"
 	],
 	"z_hop_types": [
 		"Slope Lift"
 	],
 	"support_multi_bed_types": "1",
 	"printable_height": "255",
-	"fan_speedup_time": "0.8",
 	"retraction_minimum_travel": [
-		"1.5"
+		"1"
+	],
+	"wipe_distance": [
+		"1"
+	],
+	"travel_slope": [
+		"1"
 	],
 	"retract_before_wipe": [
-		"70%"
+		"30%"
 	],
 	"wipe": [
+		"0"
+	],
+	"retract_when_changing_layer": [
 		"1"
 	],
 	"deretraction_speed": [
-		"40"
+		"25"
 	],
 	"retraction_speed": [
-		"60"
+		"45"
 	],
 	"retract_lift_below": [
 		"255"
