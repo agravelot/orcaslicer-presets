@@ -56,3 +56,8 @@ This plan keeps behavior stable while improving structure and maintainability.
 
 - Add `filament.GenerateFilaments()`.
 - Write filament outputs through `internal/output.WriteProfile`.
+
+### Step F3: Add tests for `process` inheritance merge helper [x]
+
+- Add tests for happy-path parent-chain merge behavior.
+- Add test coverage for missing parent errors.
