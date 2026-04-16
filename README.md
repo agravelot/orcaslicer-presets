@@ -19,6 +19,8 @@ Run profile generation:
 go run ./cmd/main
 ```
 
+The command prints a summary with generated profile counts by type.
+
 This writes generated files under:
 
 - `user/default/machine/*.json` + `.info`

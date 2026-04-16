@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
@@ -37,7 +38,6 @@ func main() {
 	}
 
 	for _, m := range machines {
-		println("Writing machine:", m.Name)
 		err = output.WriteProfile(generatedFolder, "machine", m.Name, m.InfoFile, m)
 		if err != nil {
 			panic(err)
@@ -50,10 +50,17 @@ func main() {
 	}
 
 	for _, f := range filaments {
-		println("Writing filament:", f.Name)
 		err = output.WriteProfile(generatedFolder, "filament", f.Name, f.InfoFile, f)
 		if err != nil {
 			panic(err)
 		}
 	}
+
+	fmt.Printf(
+		"Generated %d process, %d machine, %d filament profiles in %s\n",
+		len(processes),
+		len(machines),
+		len(filaments),
+		generatedFolder,
+	)
 }

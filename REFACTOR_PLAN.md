@@ -66,3 +66,7 @@ This plan keeps behavior stable while improving structure and maintainability.
 
 - Remove debug print from `withInherits`.
 - Remove helper log spam from speed parsing paths.
+
+### Step F5: Improve CLI generation feedback [x]
+
+- Print a concise generation summary with profile counts by type.
