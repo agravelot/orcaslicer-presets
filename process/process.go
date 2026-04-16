@@ -13,51 +13,62 @@ import (
 
 // Process is the struct for the process
 type Process struct {
+	// Internal/computed
 	NozzleSize  float64 `json:"-"`
 	LayerHeight float64 `json:"-"`
+	InfoFile    string  `json:"-"`
 
-	// Mandatory
+	// Required identity
 	Name            string `json:"name"`
 	From            string `json:"from"`
 	Inherits        string `json:"inherits"`
 	Version         string `json:"version"`
 	IsCustomDefined string `json:"is_custom_defined"`
-	InfoFile        string `json:"-"`
 
-	// Optional
-	SkirtLoops string `json:"skirt_loops"`
-	SkirtSpeed string `json:"skirt_speed"`
-
-	TravelSpeed             string `json:"travel_speed"`
+	// General print behavior
+	PrintSettingsId         string `json:"print_settings_id,omitempty"`
 	BrimType                string `json:"brim_type"`
+	SkirtLoops              string `json:"skirt_loops"`
+	SkirtSpeed              string `json:"skirt_speed"`
 	OnlyOneWallTop          string `json:"only_one_wall_top,omitempty"`
 	WallLoops               string `json:"wall_loops,omitempty"`
 	BottomShellLayers       string `json:"bottom_shell_layers,omitempty"`
-	PrintSettingsId         string `json:"print_settings_id,omitempty"`
-	SparseInfillDensity     string `json:"sparse_infill_density,omitempty"`
-	SparseInfillPattern     string `json:"sparse_infill_pattern,omitempty"`
 	TopShellLayers          string `json:"top_shell_layers,omitempty"`
+	BottomShellThickness    string `json:"bottom_shell_thickness,omitempty"`
+	TopShellThickness       string `json:"top_shell_thickness,omitempty"`
 	Resolution              string `json:"resolution,omitempty"`
 	RaftContactDistance     string `json:"raft_contact_distance,omitempty"`
 	RaftLayers              string `json:"raft_layers,omitempty"`
 	ElefantFootCompensation string `json:"elefant_foot_compensation,omitempty"`
-	// Used for scarf joint
-	SeamSlopeType        string `json:"seam_slope_type,omitempty"`
-	SeamSlopeConditional string `json:"seam_slope_conditional,omitempty"`
-	AccelToDecelEnable   string `json:"accel_to_decel_enable,omitempty"`
+	PreciseOuterWall        string `json:"precise_outer_wall,omitempty"`
+	ReverseOnEven           string `json:"overhang_reverse,omitempty"`
+	XyHoleCompensation      string `json:"xy_hole_compensation,omitempty"`
+
+	// Seam / flow tuning
+	SeamSlopeType                                string `json:"seam_slope_type,omitempty"`
+	SeamSlopeConditional                         string `json:"seam_slope_conditional,omitempty"`
+	AccelToDecelEnable                           string `json:"accel_to_decel_enable,omitempty"`
+	ExtrusionRateSmoothing                       string `json:"max_volumetric_extrusion_rate_slope,omitempty"`
+	MaxVolumetricExtrusionRateSlopeSegmentLength string `json:"max_volumetric_extrusion_rate_slope_segment_length,omitempty"`
 
 	// Infill
-	InfillAnchor    string `json:"infill_anchor,omitempty"`
-	InfillAnchorMax string `json:"infill_anchor_max,omitempty"`
+	SparseInfillDensity        string `json:"sparse_infill_density,omitempty"`
+	SparseInfillPattern        string `json:"sparse_infill_pattern,omitempty"`
+	InfillAnchor               string `json:"infill_anchor,omitempty"`
+	InfillAnchorMax            string `json:"infill_anchor_max,omitempty"`
+	InfillWallOverlap          string `json:"infill_wall_overlap,omitempty"`
+	TopBottomInfillWallOverlap string `json:"top_bottom_infill_wall_overlap,omitempty"`
 
 	// Support
-	SupportBasePatternSpacing     string `json:"support_base_pattern_spacing,omitempty"`
-	SupportBottomInterfaceSpacing string `json:"support_bottom_interface_spacing,omitempty"`
-	SupportBottomZDistance        string `json:"support_bottom_z_distance,omitempty"`
-	SupportInterfaceSpacing       string `json:"support_interface_spacing,omitempty"`
-	SupportTopZDistance           string `json:"support_top_z_distance,omitempty"`
-	SupportBasePattern            string `json:"support_base_pattern,omitempty"`
-	// Preferred Branch Angle
+	SupportAngle                        string `json:"support_angle,omitempty"`
+	SupportBasePattern                  string `json:"support_base_pattern,omitempty"`
+	SupportBasePatternSpacing           string `json:"support_base_pattern_spacing,omitempty"`
+	SupportBottomInterfaceSpacing       string `json:"support_bottom_interface_spacing,omitempty"`
+	SupportBottomZDistance              string `json:"support_bottom_z_distance,omitempty"`
+	SupportInterfaceSpacing             string `json:"support_interface_spacing,omitempty"`
+	SupportTopZDistance                 string `json:"support_top_z_distance,omitempty"`
+	SupportInterfaceBottomLayers        string `json:"support_interface_bottom_layers,omitempty"`
+	SupportInterfaceTopLayers           string `json:"support_interface_top_layers,omitempty"`
 	TreeSupportAngleSlow                string `json:"tree_support_angle_slow,omitempty"`
 	TreeSupportBranchAngleOrganic       string `json:"tree_support_branch_angle_organic,omitempty"`
 	TreeSupportBranchDiameterAngle      string `json:"tree_support_branch_diameter_angle,omitempty"`
@@ -67,72 +78,62 @@ type Process struct {
 	TreeSupportTipDiameter              string `json:"tree_support_tip_diameter,omitempty"`
 	TreeSupportTopRate                  string `json:"tree_support_top_rate,omitempty"`
 
-	// Layer width
-	InitialLayerLineWidth        string `json:"initial_layer_line_width,omitempty"`
-	InnerWallLineWidth           string `json:"inner_wall_line_width,omitempty"`
-	InternalSolidInfillLineWidth string `json:"internal_solid_infill_line_width,omitempty"`
+	// Line widths
 	LineWidth                    string `json:"line_width,omitempty"`
+	InitialLayerLineWidth        string `json:"initial_layer_line_width,omitempty"`
 	OuterWallLineWidth           string `json:"outer_wall_line_width,omitempty"`
+	InnerWallLineWidth           string `json:"inner_wall_line_width,omitempty"`
 	SparseInfillLineWidth        string `json:"sparse_infill_line_width,omitempty"`
-	SupportLineWidth             string `json:"support_line_width,omitempty"`
+	InternalSolidInfillLineWidth string `json:"internal_solid_infill_line_width,omitempty"`
 	TopSurfaceLineWidth          string `json:"top_surface_line_width,omitempty"`
-	TravelAcceleration           string `json:"travel_acceleration,omitempty"`
-	XyHoleCompensation           string `json:"xy_hole_compensation,omitempty"`
-	BottomShellThickness         string `json:"bottom_shell_thickness,omitempty"`
-	TopShellThickness            string `json:"top_shell_thickness,omitempty"`
+	SupportLineWidth             string `json:"support_line_width,omitempty"`
 
-	OuterWallAcceleration           string `json:"outer_wall_acceleration,omitempty"`
-	OuterWallJerk                   string `json:"outer_wall_jerk,omitempty"`
-	OuterWallSpeed                  string `json:"outer_wall_speed,omitempty"`
-	InitialLayerAcceleration        string `json:"initial_layer_acceleration,omitempty"`
-	InitialLayerJerk                string `json:"initial_layer_jerk,omitempty"`
-	InnerWallAcceleration           string `json:"inner_wall_acceleration,omitempty"`
-	InnerWallJerk                   string `json:"inner_wall_jerk,omitempty"`
-	InnerWallSpeed                  string `json:"inner_wall_speed,omitempty"`
-	InternalSolidInfillSpeed        string `json:"internal_solid_infill_speed,omitempty"`
+	// Speeds
+	TravelSpeed              string `json:"travel_speed"`
+	OuterWallSpeed           string `json:"outer_wall_speed,omitempty"`
+	InnerWallSpeed           string `json:"inner_wall_speed,omitempty"`
+	SparseInfillSpeed        string `json:"sparse_infill_speed,omitempty"`
+	InternalSolidInfillSpeed string `json:"internal_solid_infill_speed,omitempty"`
+	TopSurfaceSpeed          string `json:"top_surface_speed,omitempty"`
+	InitialLayerSpeed        string `json:"initial_layer_speed,omitempty"`
+	InitialLayerInfillSpeed  string `json:"initial_layer_infill_speed,omitempty"`
+	BridgeSpeed              string `json:"bridge_speed,omitempty"`
+	InternalBridgeSpeed      string `json:"internal_bridge_speed,omitempty"`
+	GapInfillSpeed           string `json:"gap_infill_speed,omitempty"`
+	Overhang14Speed          string `json:"overhang_1_4_speed,omitempty"`
+	Overhang24Speed          string `json:"overhang_2_4_speed,omitempty"`
+	Overhang34Speed          string `json:"overhang_3_4_speed,omitempty"`
+	Overhang44Speed          string `json:"overhang_4_4_speed,omitempty"`
+	SmallPerimeterSpeed      string `json:"small_perimeter_speed,omitempty"`
+	SmallPerimeterThreshold  string `json:"small_perimeter_threshold,omitempty"`
+
+	// Accelerations
 	DefaultAcceleration             string `json:"default_acceleration,omitempty"`
-	SparseInfillSpeed               string `json:"sparse_infill_speed,omitempty"`
-	TopSurfaceAcceleration          string `json:"top_surface_acceleration,omitempty"`
-	TopSurfaceJerk                  string `json:"top_surface_jerk,omitempty"`
-	TopSurfaceSpeed                 string `json:"top_surface_speed,omitempty"`
-	DefaultJerk                     string `json:"default_jerk,omitempty"`
-	GapInfillSpeed                  string `json:"gap_infill_speed,omitempty"`
-	InfillJerk                      string `json:"infill_jerk,omitempty"`
-	TravelJerk                      string `json:"travel_jerk,omitempty"`
+	TravelAcceleration              string `json:"travel_acceleration,omitempty"`
+	OuterWallAcceleration           string `json:"outer_wall_acceleration,omitempty"`
+	InnerWallAcceleration           string `json:"inner_wall_acceleration,omitempty"`
 	SparseInfillAcceleration        string `json:"sparse_infill_acceleration,omitempty"`
 	InternalSolidInfillAcceleration string `json:"internal_solid_infill_acceleration,omitempty"`
-	InitialLayerSpeed               string `json:"initial_layer_speed,omitempty"`
-	InitialLayerInfillSpeed         string `json:"initial_layer_infill_speed,omitempty"`
-	WipeOnLoops                     string `json:"wipe_on_loops,omitempty"`
+	TopSurfaceAcceleration          string `json:"top_surface_acceleration,omitempty"`
+	InitialLayerAcceleration        string `json:"initial_layer_acceleration,omitempty"`
+	BridgeAcceleration              string `json:"bridge_acceleration,omitempty"`
 
-	TopSurfacePattern   string `json:"top_surface_pattern,omitempty"`
-	BridgeSpeed         string `json:"bridge_speed,omitempty"`
-	InternalBridgeSpeed string `json:"internal_bridge_speed,omitempty"`
-	BridgeAcceleration  string `json:"bridge_acceleration,omitempty"`
+	// Jerk
+	DefaultJerk      string `json:"default_jerk,omitempty"`
+	TravelJerk       string `json:"travel_jerk,omitempty"`
+	OuterWallJerk    string `json:"outer_wall_jerk,omitempty"`
+	InnerWallJerk    string `json:"inner_wall_jerk,omitempty"`
+	InfillJerk       string `json:"infill_jerk,omitempty"`
+	TopSurfaceJerk   string `json:"top_surface_jerk,omitempty"`
+	InitialLayerJerk string `json:"initial_layer_jerk,omitempty"`
 
-	Overhang14Speed              string `json:"overhang_1_4_speed,omitempty"`
-	Overhang24Speed              string `json:"overhang_2_4_speed,omitempty"`
-	Overhang34Speed              string `json:"overhang_3_4_speed,omitempty"`
-	Overhang44Speed              string `json:"overhang_4_4_speed,omitempty"`
-	SupportInterfaceBottomLayers string `json:"support_interface_bottom_layers,omitempty"`
-	SupportInterfaceTopLayers    string `json:"support_interface_top_layers,omitempty"`
-	SupportAngle                 string `json:"support_angle,omitempty"`
+	// Surface / output
+	TopSurfacePattern string   `json:"top_surface_pattern,omitempty"`
+	WipeOnLoops       string   `json:"wipe_on_loops,omitempty"`
+	PostProcess       []string `json:"post_process,omitempty"`
+	FilenameFormat    string   `json:"filename_format,omitempty"`
 
-	PostProcess    []string `json:"post_process,omitempty"`
-	FilenameFormat string   `json:"filename_format,omitempty"`
-
-	PreciseOuterWall           string `json:"precise_outer_wall,omitempty"`
-	ReverseOnEven              string `json:"overhang_reverse,omitempty"`
-	InfillWallOverlap          string `json:"infill_wall_overlap,omitempty"`
-	TopBottomInfillWallOverlap string `json:"top_bottom_infill_wall_overlap,omitempty"`
-
-	ExtrusionRateSmoothing                       string `json:"max_volumetric_extrusion_rate_slope,omitempty"`
-	MaxVolumetricExtrusionRateSlopeSegmentLength string `json:"max_volumetric_extrusion_rate_slope_segment_length,omitempty"`
-
-	SmallPerimeterSpeed     string `json:"small_perimeter_speed,omitempty"`
-	SmallPerimeterThreshold string `json:"small_perimeter_threshold,omitempty"`
-
-	// Prime
+	// Prime tower
 	PrimeTowerBrimWidth     string `json:"prime_tower_brim_width,omitempty"`
 	EnablePrimeTower        string `json:"enable_prime_tower,omitempty"`
 	WipeTowerNoSparseLayers string `json:"wipe_tower_no_sparse_layers,omitempty"`
