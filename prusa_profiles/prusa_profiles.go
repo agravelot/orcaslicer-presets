@@ -1,9 +1,7 @@
 package prusa_profiles
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/kr/pretty"
 	"io"
 	"net/http"
 	"strings"
@@ -17,24 +15,19 @@ type Result struct {
 func Load(version string) (Result, error) {
 	url := fmt.Sprintf("https://raw.githubusercontent.com/prusa3d/PrusaSlicer-settings/master/live/PrusaResearch/%s.ini", version)
 	res, err := http.Get(url)
-
 	if err != nil {
 		return Result{}, err
 	}
+	defer res.Body.Close()
 
-	//pretty.Log(res.Body)
-
-	var test any
-
-	err = json.NewDecoder(res.Body).Decode(&test)
-
-	pretty.Log(res.StatusCode)
+	if res.StatusCode < 200 || res.StatusCode >= 300 {
+		return Result{}, fmt.Errorf("unexpected status code: %d", res.StatusCode)
+	}
 
 	bodyBytes, err := io.ReadAll(res.Body)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//bodyString := string(bodyBytes)
+	if err != nil {
+		return Result{}, fmt.Errorf("failed to read response body: %w", err)
+	}
 
 	inidata, err := ini.Load(bodyBytes)
 
@@ -49,16 +42,8 @@ func Load(version string) (Result, error) {
 		if s.Name() != "printer:Original Prusa XL 0.4 nozzle" {
 			continue
 		}
-		pretty.Log(s.Name())
-		//for _, key := range s.Keys() {
-		//	pretty.Log(key.Name())
-		//}
-
-		pretty.Log(s.Key("inherits"))
+		_ = s.Key("inherits")
 	}
-
-	//pretty.Log(inidata.SectionStrings())
-	//pretty.Log(inidata.Sections())
 
 	return Result{}, nil
 }

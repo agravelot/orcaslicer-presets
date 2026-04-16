@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/agravelot/genrator/prusa_profiles"
-	"github.com/kr/pretty"
 )
 
 func main() {
@@ -13,5 +12,5 @@ func main() {
 		panic(err)
 	}
 
-	pretty.Log(res)
+	_ = res
 }
