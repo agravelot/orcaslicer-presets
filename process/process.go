@@ -7,6 +7,9 @@ type Process struct {
 	LayerHeight float64 `json:"-"`
 	InfoFile    string  `json:"-"`
 
+	// Metadata
+	InheritedFrom map[string]string `json:"_inherited_from,omitempty"`
+
 	// Required identity
 	Name            string `json:"name"`
 	From            string `json:"from"`
