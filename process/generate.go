@@ -41,6 +41,8 @@ func GenerateProcess() ([]Process, error) {
 		for _, inherit := range inherits {
 			name := fmt.Sprintf("%s - %s - %s", "Gen", profile, inherit)
 
+			outterwallSpeed := 200
+
 			m := Process{
 				From:            "User",
 				Inherits:        inherit,
@@ -80,26 +82,28 @@ func GenerateProcess() ([]Process, error) {
 				TopSurfacePattern: "monotonicline",
 
 				// Speeds
-				TravelSpeed:             "500",
-				InitialLayerSpeed:       "50",
-				SkirtSpeed:              "50",
-				SparseInfillSpeed:       "250",
-				InitialLayerInfillSpeed: "100",
-				InternalBridgeSpeed:     "150%",
-				OuterWallSpeed:          "200",
-				InnerWallSpeed:          "250",
-				BridgeSpeed:             "50",
-				Overhang14Speed:         "65",
-				Overhang24Speed:         "50",
-				Overhang34Speed:         "30",
-				Overhang44Speed:         "15",
+				TravelSpeed:              "500",
+				InitialLayerSpeed:        "50",
+				SkirtSpeed:               "50",
+				SparseInfillSpeed:        "250",
+				InitialLayerInfillSpeed:  "100",
+				InternalBridgeSpeed:      "150%",
+				OuterWallSpeed:           fmt.Sprintf("%d", outterwallSpeed),
+				InnerWallSpeed:           "250",
+				BridgeSpeed:              "50",
+				Overhang14Speed:          fmt.Sprintf("%d", int(float64(outterwallSpeed)*0.8)), // Outterwall * 0.8
+				Overhang24Speed:          "50",
+				Overhang34Speed:          "30",
+				Overhang44Speed:          "15",
+				SupportSpeed:             "120",
+				SupportInterfaceSpeed:    "60",
+				GapInfillSpeed:           "120",
+				InternalSolidInfillSpeed: "250",
 
 				PreciseOuterWall:           "0",
 				ReverseOnEven:              "0",
 				InfillWallOverlap:          "15%",
 				TopBottomInfillWallOverlap: "15%",
-				GapInfillSpeed:             "120",
-				InternalSolidInfillSpeed:   "250",
 
 				WipeOnLoops: "1",
 

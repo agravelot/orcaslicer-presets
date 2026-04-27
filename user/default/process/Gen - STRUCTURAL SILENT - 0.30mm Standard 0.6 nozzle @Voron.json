@@ -55,11 +55,9 @@
 		"support_interface_filament": "fdm_process_voron_common",
 		"support_interface_loop_pattern": "fdm_process_voron_common",
 		"support_interface_spacing": "fdm_process_voron_common",
-		"support_interface_speed": "fdm_process_voron_common",
 		"support_line_width": "fdm_process_voron_common_0_6",
 		"support_object_xy_distance": "fdm_process_voron_common",
 		"support_on_build_plate_only": "fdm_process_voron_common",
-		"support_speed": "fdm_process_voron_common",
 		"support_style": "fdm_process_voron_common",
 		"support_threshold_angle": "fdm_process_voron_common",
 		"support_top_z_distance": "fdm_process_voron_common",
@@ -134,7 +132,7 @@
 	"bridge_speed": "50",
 	"internal_bridge_speed": "150%",
 	"gap_infill_speed": "94",
-	"overhang_1_4_speed": "65",
+	"overhang_1_4_speed": "94",
 	"overhang_2_4_speed": "50",
 	"overhang_3_4_speed": "24",
 	"overhang_4_4_speed": "15",
@@ -223,6 +221,6 @@
 		"Voron Trident 350 0.6 nozzle",
 		"Voron Switchwire 250 0.6 nozzle"
 	],
-	"support_interface_speed": "80",
-	"support_speed": "150"
+	"support_interface_speed": "60",
+	"support_speed": "120"
 }
