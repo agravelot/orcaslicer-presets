@@ -117,6 +117,7 @@
 	"setting_id": "GP004",
 	"skirt_distance": "2",
 	"skirt_height": "1",
+	"slowdown_for_curled_perimeters": "0",
 	"spiral_mode": "0",
 	"standby_temperature_delta": "-5",
 	"support_filament": "0",

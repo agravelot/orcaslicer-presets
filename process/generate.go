@@ -105,6 +105,8 @@ func GenerateProcess() ([]Process, error) {
 				InfillWallOverlap:          "15%",
 				TopBottomInfillWallOverlap: "15%",
 
+				SlowdownForCurledPerimeters: "0", // Bugged in OS, too much slowdown compated to PS, diactived is closer to PS
+
 				WipeOnLoops: "1",
 
 				AccelToDecelEnable: "0",
