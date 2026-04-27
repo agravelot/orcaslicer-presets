@@ -8,7 +8,8 @@ type Process struct {
 	InfoFile    string  `json:"-"`
 
 	// Metadata
-	InheritedFrom map[string]string `json:"_inherited_from,omitempty"`
+	// InheritedFrom map[string]string `json:"_inherited_from,omitempty"`
+	InheritedFrom map[string]string `json:"-"`
 
 	// Required identity
 	Name            string `json:"name"`
