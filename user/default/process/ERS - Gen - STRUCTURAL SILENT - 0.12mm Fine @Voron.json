@@ -45,7 +45,7 @@
 	"sparse_infill_line_width": "0.45",
 	"internal_solid_infill_line_width": "0.45",
 	"top_surface_line_width": "0.4",
-	"support_line_width": "0.36",
+	"support_line_width": "0.4",
 	"travel_speed": "200",
 	"outer_wall_speed": "200",
 	"inner_wall_speed": "200",

@@ -229,7 +229,7 @@ func GenerateProcess() ([]Process, error) {
 				m.SparseInfillLineWidth = "0.45"
 				m.InnerWallLineWidth = "0.45"
 				m.InternalSolidInfillLineWidth = "0.45"
-				m.SupportLineWidth = "0.36"
+				m.SupportLineWidth = "0.4"
 				m.TopSurfaceLineWidth = "0.42"
 
 				if m.LayerHeight <= 0.15 {
