@@ -1,25 +1,28 @@
 {
-    "enable_pressure_advance": [
-        "1"
-    ],
-    "filament_max_volumetric_speed": [
-        "32"
-    ],
-    "filament_settings_id": [
-        "v2 - Voron Generic PLA 0.6mm"
-    ],
-    "from": "User",
-    "full_fan_speed_layer": [
-        "3"
-    ],
-    "inherits": "Voron Generic PLA",
-    "is_custom_defined": "0",
-    "name": "v2 - Voron Generic PLA 0.6mm",
-    "slow_down_layer_time": [
-        "4"
-    ],
-    "slow_down_min_speed": [
-        "15"
-    ],
-    "version": "1.5.1.2"
+	"description": "Tuned PLA profile for 0.6mm nozzle",
+	"filament_id": "v2 - Voron Generic PLA 0.6mm",
+	"filament_max_volumetric_speed": [
+		"32"
+	],
+	"filament_vendor": [
+		"Generic"
+	],
+	"from": "User",
+	"inherits": "Generic PLA @System",
+	"name": "v2 - Voron Generic PLA 0.6mm",
+	"setting_id": "v2 - Voron Generic PLA 0.6mm",
+	"version": "1.5.1.2",
+	"enable_pressure_advance": [
+		"1"
+	],
+	"filament_type": "PLA",
+	"full_fan_speed_layer": [
+		"3"
+	],
+	"slow_down_layer_time": [
+		"4"
+	],
+	"slow_down_min_speed": [
+		"15"
+	]
 }

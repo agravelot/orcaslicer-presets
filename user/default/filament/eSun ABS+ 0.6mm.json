@@ -36,7 +36,7 @@
     "hot_plate_temp_initial_layer": [
         "100"
     ],
-    "inherits": "Voron Generic ASA",
+    "inherits": "Generic ASA @System",
     "is_custom_defined": "0",
     "name": "eSun ABS+ 0.6mm",
     "nozzle_temperature": [

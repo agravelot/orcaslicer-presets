@@ -15,7 +15,7 @@
     "hot_plate_temp_initial_layer": [
         "100"
     ],
-    "inherits": "Voron Generic ABS",
+    "inherits": "Generic ABS @System",
     "is_custom_defined": "0",
     "name": "Voron Generic ABS - PA",
     "nozzle_temperature": [

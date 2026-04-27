@@ -117,6 +117,7 @@ type Filament struct {
 	TexturedCoolPlateTempInitialLayer        []string         `json:"textured_cool_plate_temp_initial_layer,omitempty"`
 	Total                                    int              `json:"total,omitempty"`
 	Type                                     string           `json:"type,omitempty"`
+	Version                                  string           `json:"version,omitempty"`
 	VolumetricSpeedCoefficients              []string         `json:"volumetric_speed_coefficients,omitempty"`
 
 	// Mixed-shape keys across profiles (kept flexible)

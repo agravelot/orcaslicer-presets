@@ -15,7 +15,7 @@
     "full_fan_speed_layer": [
         "3"
     ],
-    "inherits": "Voron Generic PLA",
+    "inherits": "Generic PLA @System",
     "is_custom_defined": "0",
     "name": "PLA Silk",
     "pressure_advance": [
